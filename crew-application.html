@@ -1,34 +1,692 @@
 <!DOCTYPE html>
-<html>
-<head><title>Crew Application</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff / Crew Application | The Adventures of Gaylord</title>
+  <style>
+    :root{
+      --bg1:#6c5ce7;
+      --bg2:#ff7675;
+      --bg3:#fdcb6e;
+      --bg4:#74b9ff;
+      --bg5:#55efc4;
+      --ink:#1e1834;
+      --paper:#fffaf2;
+      --card:rgba(255,255,255,.93);
+      --accent:#ff2d55;
+      --accent2:#00cec9;
+      --accent3:#ffe66d;
+      --good:#7bed9f;
+      --bad:#ff8fab;
+      --shadow:0 18px 50px rgba(30,24,52,.22);
+      --radius:28px;
+      --max:920px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:"Trebuchet MS","Comic Sans MS",Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.55), transparent 20%),
+        radial-gradient(circle at 80% 10%, rgba(255,255,255,.45), transparent 16%),
+        radial-gradient(circle at 70% 80%, rgba(255,255,255,.3), transparent 18%),
+        linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4),var(--bg5));
+      background-size:100% 100%,100% 100%,100% 100%,300% 300%;
+      animation:bgShift 16s ease infinite;
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+
+    @keyframes bgShift{
+      0%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
+      50%{background-position:0% 0%,0% 0%,0% 0%,100% 50%}
+      100%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
+    }
+
+    .star,.burst,.swirl{
+      position:fixed;
+      pointer-events:none;
+      z-index:0;
+      opacity:.8;
+    }
+
+    .star{
+      width:18px;
+      height:18px;
+      background:#fff8b2;
+      clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+      animation:floaty 8s ease-in-out infinite;
+    }
+
+    .burst{
+      width:80px;
+      height:80px;
+      background:rgba(255,255,255,.35);
+      clip-path:polygon(50% 0%,60% 25%,85% 15%,75% 40%,100% 50%,75% 60%,85% 85%,60% 75%,50% 100%,40% 75%,15% 85%,25% 60%,0% 50%,25% 40%,15% 15%,40% 25%);
+      animation:spinSlow 16s linear infinite;
+    }
+
+    .swirl{
+      width:110px;
+      height:110px;
+      border:10px dashed rgba(255,255,255,.42);
+      border-radius:50%;
+      animation:spinSlow 20s linear infinite;
+    }
+
+    @keyframes floaty{
+      0%,100%{transform:translateY(0) rotate(0)}
+      50%{transform:translateY(-18px) rotate(12deg)}
+    }
+
+    @keyframes spinSlow{
+      from{transform:rotate(0)}
+      to{transform:rotate(360deg)}
+    }
+
+    .wrap{
+      position:relative;
+      z-index:2;
+      width:min(var(--max),calc(100% - 24px));
+      margin:28px auto 40px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      font-weight:900;
+      font-size:1rem;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      background:var(--paper);
+      border:3px solid var(--ink);
+      border-radius:999px;
+      padding:10px 16px;
+      box-shadow:6px 6px 0 rgba(30,24,52,.16);
+      transform:rotate(-1deg);
+    }
+
+    .back-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      color:var(--ink);
+      background:#fff;
+      border:3px solid var(--ink);
+      border-radius:999px;
+      padding:10px 16px;
+      font-weight:900;
+      box-shadow:0 8px 0 rgba(30,24,52,.12);
+      transition:transform .16s ease;
+    }
+
+    .back-btn:hover{transform:translateY(-2px) rotate(-1deg)}
+
+    .hero-card,.form-card,.note-card{
+      background:var(--card);
+      border:4px solid rgba(30,24,52,.12);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-card{
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+      margin-bottom:18px;
+    }
+
+    .hero-card::after{
+      content:"ABSURD EMPLOYMENT OPPORTUNITY";
+      position:absolute;
+      top:16px;
+      right:-34px;
+      background:var(--accent);
+      color:#fff;
+      padding:10px 18px;
+      border-radius:999px;
+      border:3px solid rgba(255,255,255,.5);
+      font-weight:900;
+      transform:rotate(10deg);
+      box-shadow:0 10px 20px rgba(255,45,85,.25);
+      font-size:.85rem;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      background:#fff;
+      border:3px solid var(--ink);
+      border-radius:999px;
+      padding:8px 14px;
+      font-weight:900;
+      font-size:.82rem;
+      transform:rotate(-3deg);
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(2.1rem,7vw,4.5rem);
+      line-height:.95;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+      text-shadow:3px 3px 0 rgba(255,255,255,.65);
+    }
+
+    .hero-card p{
+      margin:16px 0 0;
+      line-height:1.7;
+      font-size:1.05rem;
+      max-width:70ch;
+    }
+
+    .note-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:20px;
+    }
+
+    .note-card{
+      padding:16px;
+      background:linear-gradient(180deg,#fff,#fff6dc);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+
+    .note-card:hover{
+      transform:rotate(-2deg) translateY(-5px);
+      box-shadow:0 14px 24px rgba(30,24,52,.14);
+    }
+
+    .note-card h3{
+      margin:0 0 8px;
+      text-transform:uppercase;
+      font-size:1rem;
+    }
+
+    .form-card{
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .form-card::before{
+      content:"CLIPBOARD OF DESTINY";
+      position:absolute;
+      top:14px;
+      left:18px;
+      background:#fff;
+      border:2px solid var(--ink);
+      border-radius:999px;
+      padding:7px 12px;
+      font-size:.76rem;
+      font-weight:900;
+      transform:rotate(-3deg);
+    }
+
+    .section-title{
+      margin:30px 0 8px;
+      font-size:1.8rem;
+      text-transform:uppercase;
+      line-height:1;
+    }
+
+    .section-sub{
+      margin:0 0 18px;
+      line-height:1.65;
+      font-size:1rem;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    label{
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      font-size:.84rem;
+    }
+
+    input,select,textarea{
+      width:100%;
+      border:3px solid rgba(30,24,52,.14);
+      border-radius:18px;
+      padding:14px 14px;
+      font:inherit;
+      color:var(--ink);
+      background:rgba(255,255,255,.95);
+      outline:none;
+      transition:border-color .16s ease, transform .16s ease, box-shadow .16s ease;
+      box-shadow:0 8px 16px rgba(30,24,52,.05);
+    }
+
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--accent2);
+      transform:translateY(-1px);
+      box-shadow:0 12px 22px rgba(30,24,52,.08);
+    }
+
+    textarea{
+      min-height:140px;
+      resize:vertical;
+    }
+
+    .helper{
+      font-size:.86rem;
+      opacity:.8;
+      line-height:1.5;
+    }
+
+    .submit-row{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+
+    .submit-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      color:var(--ink);
+      background:linear-gradient(135deg,#ffef66,#ff9f43);
+      border:3px solid var(--ink);
+      border-radius:999px;
+      padding:14px 22px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      box-shadow:0 8px 0 rgba(30,24,52,.12);
+      cursor:pointer;
+      transition:transform .16s ease, box-shadow .16s ease, filter .16s ease;
+    }
+
+    .submit-btn:hover{
+      transform:translateY(-3px) scale(1.03) rotate(-1deg);
+      box-shadow:0 12px 0 rgba(30,24,52,.11);
+      filter:saturate(1.08);
+    }
+
+    .status{
+      font-weight:900;
+      font-size:.98rem;
+      padding:12px 16px;
+      border-radius:999px;
+      border:3px solid var(--ink);
+      background:#fff;
+      display:none;
+    }
+
+    .status.show{display:inline-block}
+    .status.success{background:linear-gradient(135deg,#d8ffd0,#7bed9f); color:#10301d}
+    .status.error{background:linear-gradient(135deg,#ffd4de,#ff8fab); color:#4c1321}
+
+    .floating-popup{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:min(320px,calc(100% - 24px));
+      background:linear-gradient(135deg,#fff,#fff4b8);
+      color:var(--ink);
+      border:3px solid var(--ink);
+      border-radius:22px;
+      box-shadow:0 18px 40px rgba(30,24,52,.2);
+      padding:16px 16px 16px 16px;
+      z-index:2000;
+      transform:translateY(20px) scale(.96);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .25s ease, transform .25s ease;
+    }
+
+    .floating-popup.show{
+      opacity:1;
+      transform:translateY(0) scale(1);
+    }
+
+    .floating-popup h4{
+      margin:0 0 8px;
+      text-transform:uppercase;
+      font-size:1rem;
+    }
+
+    .floating-popup p{
+      margin:0;
+      line-height:1.55;
+      font-size:.96rem;
+    }
+
+    .popup-badge{
+      display:inline-block;
+      margin-bottom:8px;
+      background:#fff;
+      border:2px solid var(--ink);
+      border-radius:999px;
+      padding:5px 10px;
+      font-size:.72rem;
+      font-weight:900;
+      transform:rotate(-3deg);
+    }
+
+    .explosion{
+      position:fixed;
+      width:12px;
+      height:12px;
+      pointer-events:none;
+      z-index:3000;
+    }
+
+    .particle{
+      position:absolute;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      left:0;
+      top:0;
+      animation:explode 650ms ease-out forwards;
+    }
+
+    @keyframes explode{
+      0%{transform:translate(0,0) scale(1);opacity:1}
+      100%{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}
+    }
+
+    @media (max-width: 760px){
+      .grid,.note-grid{
+        grid-template-columns:1fr;
+      }
+      .hero-card::after{
+        position:static;
+        display:inline-block;
+        margin-top:14px;
+        transform:rotate(-2deg);
+      }
+      .wrap{
+        width:min(var(--max),calc(100% - 14px));
+      }
+      .hero-card,.form-card{
+        padding:18px;
+      }
+    }
+  </style>
+</head>
 <body>
-<h1>Staff / Crew Application</h1>
-<form id="form">
-<input placeholder="Name" id="name" required><br>
-<input placeholder="Phone" id="phone" required><br>
-<input placeholder="Email" id="email" required><br>
-<select id="grade"><option>9</option><option>10</option><option>11</option><option>12</option></select><br>
-<input placeholder="Role Requests" id="role"><br>
-<textarea placeholder="Reason for wanting to join" id="reason"></textarea><br>
-<button type="submit">Submit</button>
-</form>
-<p id="msg"></p>
-<script type="module">
-import { db } from './firebase-config.js';
-import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
-form.addEventListener('submit', async (e)=>{
- e.preventDefault();
- await addDoc(collection(db, "crewApplications"),{
- name:name.value,
- phone:phone.value,
- email:email.value,
- grade:grade.value,
- role:role.value,
- reason:reason.value,
- createdAt: serverTimestamp()
- });
- msg.textContent="Submitted!";
-});
-</script>
+  <div class="star" style="top:10%;left:6%;"></div>
+  <div class="star" style="top:24%;left:88%;animation-delay:1s;"></div>
+  <div class="star" style="top:74%;left:12%;animation-delay:2s;"></div>
+  <div class="burst" style="top:14%;right:10%;"></div>
+  <div class="burst" style="bottom:18%;left:4%;animation-duration:20s;"></div>
+  <div class="swirl" style="top:52%;right:4%;"></div>
+
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">The Adventures of Gaylord</div>
+      <a class="back-btn" href="index.html">← Back to Main Site</a>
+    </div>
+
+    <section class="hero-card">
+      <div class="eyebrow">Employment? No. Chaos recruitment.</div>
+      <h1>Staff / Crew<br>Application</h1>
+      <p>
+        So. You have decided to volunteer yourself for this cinematic nonsense. That is either deeply admirable or wildly suspicious. Fill out the form below and present your credentials to the invisible clipboard of destiny.
+      </p>
+
+      <div class="note-grid">
+        <div class="note-card">
+          <h3>What this is</h3>
+          <p>A themed application page for joining the staff or crew side of the project.</p>
+        </div>
+        <div class="note-card">
+          <h3>What this is not</h3>
+          <p>A calm and emotionally neutral hiring experience.</p>
+        </div>
+        <div class="note-card">
+          <h3>Fair warning</h3>
+          <p>The form may comment on your bravery in mildly judgmental, theatrical ways.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-card">
+      <h2 class="section-title">Submit thy questionable credentials</h2>
+      <p class="section-sub">
+        Enter your details carefully. The production team, the cosmos, and at least one dramatic clipboard may be watching.
+      </p>
+
+      <form id="crewForm">
+        <div class="grid">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your full name" required />
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" type="tel" placeholder="Your phone number" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+
+          <div class="field">
+            <label for="grade">Grade Number</label>
+            <select id="grade" name="grade" required>
+              <option value="">Select your grade</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="roleRequests">Role Requests</label>
+            <input id="roleRequests" name="roleRequests" type="text" placeholder="What roles are you hoping for?" required />
+            <div class="helper">Example: acting, costumes, background, set help, filming, editing, makeup, random cinematic greatness.</div>
+          </div>
+
+          <div class="field full">
+            <label for="reason">Reason for wanting to join</label>
+            <textarea id="reason" name="reason" placeholder="Explain why you wish to enter this realm of film-related absurdity." required></textarea>
+          </div>
+        </div>
+
+        <div class="submit-row">
+          <button class="submit-btn" type="submit">Submit Application</button>
+          <div id="statusMessage" class="status"></div>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div id="popup" class="floating-popup" aria-live="polite">
+    <div class="popup-badge">FORM COMMENTARY</div>
+    <h4 id="popupTitle">Interesting.</h4>
+    <p id="popupText">The clipboard has noticed your existence.</p>
+  </div>
+
+  <script type="module">
+    import { db } from './firebase-config.js';
+    import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+    const form = document.getElementById("crewForm");
+    const statusMessage = document.getElementById("statusMessage");
+    const popup = document.getElementById("popup");
+    const popupTitle = document.getElementById("popupTitle");
+    const popupText = document.getElementById("popupText");
+
+    const popups = [
+      {
+        title: "Bold choice.",
+        text: "You are really filling this out as if the production clipboard will not remember this forever."
+      },
+      {
+        title: "Suspicious confidence detected.",
+        text: "Interesting. Very interesting. You seem alarmingly willing to join this nonsense."
+      },
+      {
+        title: "Administrative drama intensifies.",
+        text: "The form is pretending to be professional, but it is absolutely talking about you."
+      },
+      {
+        title: "The clipboard remains unconvinced.",
+        text: "Continue. We are all curious to see where this confidence is coming from."
+      },
+      {
+        title: "Remarkable behavior.",
+        text: "You looked at this chaotic application and said, yes, I belong here."
+      },
+      {
+        title: "Cinematic bravery.",
+        text: "Some would call this ambition. Others would call it a fascinating lapse in judgment."
+      },
+      {
+        title: "Very serious paperwork moment.",
+        text: "Please proceed with dignity, even if the form itself clearly has none."
+      },
+      {
+        title: "Noted.",
+        text: "The production spirits have scribbled something mysterious in the margins."
+      }
+    ];
+
+    let popupTimeout = null;
+    let popupCooldown = false;
+
+    function showPopup() {
+      if (popupCooldown) return;
+      popupCooldown = true;
+
+      const item = popups[Math.floor(Math.random() * popups.length)];
+      popupTitle.textContent = item.title;
+      popupText.textContent = item.text;
+      popup.classList.add("show");
+
+      clearTimeout(popupTimeout);
+      popupTimeout = setTimeout(() => {
+        popup.classList.remove("show");
+      }, 2800);
+
+      setTimeout(() => {
+        popupCooldown = false;
+      }, 4500);
+    }
+
+    function createExplosion(x, y) {
+      const explosion = document.createElement("div");
+      explosion.className = "explosion";
+      explosion.style.left = x + "px";
+      explosion.style.top = y + "px";
+
+      const colors = ["#ff2d55", "#ff9f43", "#ffe66d", "#00cec9", "#ffffff", "#74b9ff"];
+      const particleCount = 16;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement("span");
+        particle.className = "particle";
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+        const angle = (Math.PI * 2 * i) / particleCount;
+        const distance = 35 + Math.random() * 45;
+        const dx = Math.cos(angle) * distance + "px";
+        const dy = Math.sin(angle) * distance + "px";
+
+        particle.style.setProperty("--dx", dx);
+        particle.style.setProperty("--dy", dy);
+
+        explosion.appendChild(particle);
+      }
+
+      document.body.appendChild(explosion);
+      setTimeout(() => explosion.remove(), 700);
+    }
+
+    document.querySelectorAll("input, textarea, select").forEach((el) => {
+      el.addEventListener("focus", showPopup);
+      el.addEventListener("input", () => {
+        if (Math.random() < 0.18) showPopup();
+      });
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector("button[type='submit']");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting to the cinematic void...";
+
+      statusMessage.className = "status";
+      statusMessage.textContent = "";
+
+      try {
+        await addDoc(collection(db, "crewApplications"), {
+          name: document.getElementById("name").value.trim(),
+          phone: document.getElementById("phone").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          grade: document.getElementById("grade").value,
+          roleRequests: document.getElementById("roleRequests").value.trim(),
+          reason: document.getElementById("reason").value.trim(),
+          createdAt: serverTimestamp()
+        });
+
+        statusMessage.textContent = "Application submitted. The clipboard has accepted your offering.";
+        statusMessage.className = "status show success";
+        form.reset();
+
+        popupTitle.textContent = "Submission complete.";
+        popupText.textContent = "Against all odds, your application has entered the official chaos records.";
+        popup.classList.add("show");
+        clearTimeout(popupTimeout);
+        popupTimeout = setTimeout(() => popup.classList.remove("show"), 3200);
+      } catch (error) {
+        console.error(error);
+        statusMessage.textContent = "Submission failed. The paperwork spirits are acting up.";
+        statusMessage.className = "status show error";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit Application";
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        e.target.closest(".submit-btn") ||
+        e.target.closest(".back-btn") ||
+        e.target.closest(".brand")
+      ) {
+        createExplosion(e.clientX, e.clientY);
+      }
+    });
+  </script>
 </body>
 </html>
