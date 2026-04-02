@@ -19,7 +19,7 @@
       --accent2:#00cec9;
       --accent3:#ffe66d;
       --good:#7bed9f;
-      --bad:#ff6b81;
+      --bad:#ff5f6d;
       --card:rgba(255,255,255,.92);
       --shadow:0 18px 50px rgba(30,24,52,.22);
       --radius:28px;
@@ -41,6 +41,8 @@
       animation:bgShift 16s ease infinite;
       overflow-x:hidden;
     }
+
+    body.loading{overflow:hidden}
 
     @keyframes bgShift{
       0%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
@@ -417,9 +419,7 @@
       transition:transform .2s ease;
     }
 
-    .poster-card:hover .poster-title{
-      transform:rotate(-5deg) scale(1.05);
-    }
+    .poster-card:hover .poster-title{transform:rotate(-5deg) scale(1.05)}
 
     .countdown-shell{
       margin-top:28px;
@@ -447,19 +447,29 @@
       transform:rotate(-3deg);
     }
 
-    .countdown-shell::after{
-      content:"TOMORROW • 3:30 PM CST";
+    .badge-button{
       position:absolute;
       right:14px;
-      top:16px;
-      font-size:.75rem;
-      font-weight:900;
-      background:var(--accent2);
+      top:14px;
+      border:none;
+      background:linear-gradient(135deg,#16e0d0,#06c7b9);
       color:white;
       border-radius:999px;
-      padding:7px 12px;
-      transform:rotate(3deg);
-      border:2px solid rgba(255,255,255,.6);
+      padding:13px 18px;
+      font-size:.82rem;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      cursor:pointer;
+      border:3px solid rgba(255,255,255,.55);
+      transform:rotate(2deg);
+      box-shadow:0 10px 22px rgba(0,0,0,.12);
+      transition:transform .16s ease,filter .16s ease;
+    }
+
+    .badge-button:hover{
+      transform:rotate(-1deg) scale(1.04);
+      filter:saturate(1.08);
     }
 
     .countdown-heading{
@@ -672,9 +682,7 @@
       transform-style:preserve-3d;
     }
 
-    .flip-card:hover .flip-card-inner{
-      transform:rotateY(180deg);
-    }
+    .flip-card:hover .flip-card-inner{transform:rotateY(180deg)}
 
     .flip-face{
       position:absolute;
@@ -689,9 +697,7 @@
       box-shadow:0 10px 20px rgba(30,24,52,.08);
     }
 
-    .flip-front{
-      background:rgba(255,255,255,.9);
-    }
+    .flip-front{background:rgba(255,255,255,.9)}
 
     .flip-front strong{
       display:block;
@@ -730,9 +736,7 @@
       transition:transform .18s ease;
     }
 
-    .credit-box:hover{
-      transform:scale(1.03) rotate(.5deg);
-    }
+    .credit-box:hover{transform:scale(1.03) rotate(.5deg)}
 
     .credit-box h3{
       margin-top:0;
@@ -785,11 +789,141 @@
       color:#12311f;
     }
 
+    .secret-modal,
+    .global-fail-overlay{
+      position:fixed;
+      inset:0;
+      z-index:9998;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .28s ease;
+    }
+
+    .secret-modal.show,
+    .global-fail-overlay.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .secret-modal{
+      background:rgba(19,16,34,.68);
+      backdrop-filter:blur(8px);
+    }
+
+    .global-fail-overlay{
+      background:linear-gradient(135deg,#7a0012,#ff2d55);
+      text-align:center;
+      color:white;
+      z-index:10001;
+    }
+
+    .modal-card{
+      width:min(720px,100%);
+      background:rgba(255,255,255,.96);
+      border:4px solid rgba(30,24,52,.14);
+      border-radius:32px;
+      box-shadow:0 24px 60px rgba(30,24,52,.28);
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+      color:var(--ink);
+    }
+
+    .modal-card::after{
+      content:"SUPER DUPER SECRET";
+      position:absolute;
+      right:-28px;
+      top:14px;
+      background:var(--accent);
+      color:white;
+      border:3px solid rgba(255,255,255,.55);
+      border-radius:999px;
+      padding:10px 18px;
+      font-weight:900;
+      transform:rotate(10deg);
+      font-size:.82rem;
+    }
+
+    .modal-title{
+      margin:16px 0 10px;
+      font-size:clamp(2rem,6vw,3.6rem);
+      text-transform:uppercase;
+      line-height:.95;
+      text-shadow:2px 2px 0 rgba(255,255,255,.6);
+    }
+
+    .modal-text{
+      margin:0 0 16px;
+      line-height:1.7;
+      font-size:1.02rem;
+    }
+
+    .modal-grid{
+      display:grid;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .modal-grid input{
+      width:100%;
+      border:3px solid rgba(30,24,52,.14);
+      border-radius:18px;
+      padding:14px;
+      font:inherit;
+      background:#fff;
+      color:var(--ink);
+      outline:none;
+    }
+
+    .modal-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .modal-error{
+      display:none;
+      margin-top:14px;
+      border:3px solid #7a0012;
+      background:linear-gradient(135deg,#ffd5de,#ff9aad);
+      color:#5e1020;
+      border-radius:18px;
+      padding:12px 14px;
+      font-weight:900;
+    }
+
+    .modal-error.show{display:block}
+
+    .fail-big{
+      width:min(1100px,100%);
+      padding:30px;
+    }
+
+    .fail-big h2{
+      margin:0;
+      font-size:clamp(2.2rem,8vw,5.8rem);
+      line-height:.92;
+      text-transform:uppercase;
+      text-shadow:4px 4px 0 rgba(0,0,0,.22);
+    }
+
+    .fail-big p{
+      font-size:clamp(1rem,3vw,1.4rem);
+      margin:18px 0 0;
+      font-weight:800;
+      line-height:1.5;
+    }
+
     @media (max-width: 980px){
       .hero-inner,.cast-layout,.credits,.fun-grid{grid-template-columns:1fr}
       .hero{padding-top:34px}
       .countdown-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .hero-card::after,.poster-card::after,.countdown-shell::after{
+      .hero-card::after,.poster-card::after,.badge-button,.modal-card::after{
         position:static;
         display:inline-block;
         margin-top:12px;
@@ -807,16 +941,16 @@
       .countdown-grid{grid-template-columns:1fr 1fr}
       .topbar-inner{justify-content:center}
       .count-value{font-size:2.3rem}
-      .hero-card,.section-card,.poster-card{padding:20px}
+      .hero-card,.section-card,.poster-card,.modal-card{padding:20px}
     }
   </style>
 </head>
-<body>
+<body class="loading">
   <div class="loading-screen" id="loadingScreen">
     <div class="loading-content">
       <div class="loading-badge">Please stand by for cinematic nonsense</div>
       <h1 class="loading-title">Loading<br>The Adventures<br>of Gaylord</h1>
-      <p class="loading-subtitle">Preparing chaos, beans, destiny, and a completely responsible amount of drama...</p>
+      <p class="loading-subtitle">Preparing chaos, beans, destiny, and a totally reasonable amount of paperwork...</p>
       <div class="loading-bar-wrap">
         <div class="loading-bar"></div>
       </div>
@@ -844,7 +978,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="pageRoot">
     <section class="hero">
       <div class="hero-inner">
         <div class="hero-card">
@@ -855,35 +989,36 @@
           </p>
 
           <div class="countdown-shell" id="countdown">
-            <h2 class="countdown-heading">The Hilariously Serious Countdown to Pre-Release Viewing Signups</h2>
+            <button class="badge-button explode-on-click" id="secretBadge" type="button">Tomorrow • 3:30 PM CST</button>
+            <h2 class="countdown-heading">The hilariously serious countdown to pre-release viewing signups</h2>
             <p class="countdown-sub" id="countdownText">
-              Behold. The clock approaches tomorrow at 3:30 PM CST, the exact moment when destiny, paperwork, and pre-release viewing signups collide in a glorious administrative explosion.
+              The sacred hour is still over the horizon. The forms slumber, the bureaucracy dreams, and tomorrow waits in suspicious majesty.
             </p>
 
             <div class="countdown-grid">
               <div class="count-box">
-                <span class="count-value" id="days">0</span>
+                <span class="count-value" id="days">00</span>
                 <span class="count-label">Days</span>
               </div>
               <div class="count-box">
-                <span class="count-value" id="hours">0</span>
+                <span class="count-value" id="hours">00</span>
                 <span class="count-label">Hours</span>
               </div>
               <div class="count-box">
-                <span class="count-value" id="minutes">0</span>
+                <span class="count-value" id="minutes">00</span>
                 <span class="count-label">Minutes</span>
               </div>
               <div class="count-box">
-                <span class="count-value" id="seconds">0</span>
+                <span class="count-value" id="seconds">00</span>
                 <span class="count-label">Seconds</span>
               </div>
             </div>
 
             <div class="count-chaos">
-              <div class="chaos-pill" id="chaosOne">The forms are sleeping.</div>
-              <div class="chaos-pill" id="chaosTwo">The hype is legally binding.</div>
-              <div class="chaos-pill" id="chaosThree">Administrative destiny detected.</div>
-              <div class="chaos-pill" id="chaosFour">Please remain dramatically seated.</div>
+              <div class="chaos-pill" id="chaosOne">The gates of preview are creaking.</div>
+              <div class="chaos-pill" id="chaosTwo">The clock has become theatrical.</div>
+              <div class="chaos-pill" id="chaosThree">Humanity nears the forms.</div>
+              <div class="chaos-pill" id="chaosFour">Please clutch your pearls.</div>
             </div>
 
             <div class="status-banner" id="statusBanner">
@@ -946,214 +1081,46 @@
             <div class="team-card">
               <h3>Production & Crew</h3>
               <div class="flip-grid">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Ty Keeler</strong>
-                      <span>Production & Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Gaylord Queerston</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Christopher Shelley</strong>
-                      <span>Production & Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Catstopher Shelley, Christopher Shelley, Nazi Best Friend, Resurrected Person</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Hannah Myers</strong>
-                      <span>Production & Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Costumes, Make-up</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Blake Pitts</strong>
-                      <span>Production & Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">The Rabid Gay</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Makar Portniagin</strong>
-                      <span>Production & Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Vehicle Hitler</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Kate Miller</strong>
-                      <span>Production & Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Makeup, Costumes, Background Drag</div>
-                  </div>
-                </div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Ty Keeler</strong><span>Production & Crew</span></div><div class="flip-face flip-back">Gaylord Queerston</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Christopher Shelley</strong><span>Production & Crew</span></div><div class="flip-face flip-back">Catstopher Shelley, Christopher Shelley, Nazi Best Friend, Resurrected Person</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Hannah Myers</strong><span>Production & Crew</span></div><div class="flip-face flip-back">Costumes, Make-up</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Blake Pitts</strong><span>Production & Crew</span></div><div class="flip-face flip-back">The Rabid Gay</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Makar Portniagin</strong><span>Production & Crew</span></div><div class="flip-face flip-back">Vehicle Hitler</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Kate Miller</strong><span>Production & Crew</span></div><div class="flip-face flip-back">Makeup, Costumes, Background Drag</div></div></div>
               </div>
             </div>
 
             <div class="team-card">
               <h3>Production</h3>
               <div class="flip-grid">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Brad Nunn</strong>
-                      <span>Production</span>
-                    </div>
-                    <div class="flip-face flip-back">Director, Photographer</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Jonathan Myers</strong>
-                      <span>Production</span>
-                    </div>
-                    <div class="flip-face flip-back">Set Baker</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Shelby Finton</strong>
-                      <span>Production</span>
-                    </div>
-                    <div class="flip-face flip-back">Script Editor</div>
-                  </div>
-                </div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Brad Nunn</strong><span>Production</span></div><div class="flip-face flip-back">Director, Photographer</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Jonathan Myers</strong><span>Production</span></div><div class="flip-face flip-back">Set Baker</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Shelby Finton</strong><span>Production</span></div><div class="flip-face flip-back">Script Editor</div></div></div>
               </div>
             </div>
 
             <div class="team-card">
               <h3>Crew</h3>
               <div class="flip-grid">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Ziggy Holden</strong>
-                      <span>Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Drag King/Queen, Background</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Eden Anders</strong>
-                      <span>Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Drag King/Queen, Background</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Makenna Overholt</strong>
-                      <span>Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Drag King/Queen, Background</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Raiden P.</strong>
-                      <span>Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Unknown Narrator</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Lennnnayyyyyyyyy</strong>
-                      <span>Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Drag King/Queen, Background</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Julee Shelley</strong>
-                      <span>Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Drag King/Queen, Background</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Kylie Donderson</strong>
-                      <span>Crew</span>
-                    </div>
-                    <div class="flip-face flip-back">Drag King/Queen, Background</div>
-                  </div>
-                </div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Ziggy Holden</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Eden Anders</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Makenna Overholt</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Raiden P.</strong><span>Crew</span></div><div class="flip-face flip-back">Unknown Narrator</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Lennnnayyyyyyyyy</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Julee Shelley</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Kylie Donderson</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
               </div>
             </div>
 
             <div class="team-card">
               <h3>Project Highlights</h3>
               <div class="flip-grid">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Style</strong>
-                      <span>What to expect</span>
-                    </div>
-                    <div class="flip-face flip-back">Cartoony, dramatic, ridiculous, and fully committed to being way too much.</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Preview Access</strong>
-                      <span>Administrative Destiny</span>
-                    </div>
-                    <div class="flip-face flip-back">When the countdown ends, pre-release signups open and the forms stop pretending to be asleep.</div>
-                  </div>
-                </div>
-
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-face flip-front">
-                      <strong>Mission</strong>
-                      <span>Completely Reasonable Goal</span>
-                    </div>
-                    <div class="flip-face flip-back">Make this project feel like a historical event, a heroic saga, and a paperwork emergency all at once.</div>
-                  </div>
-                </div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Style</strong><span>What to expect</span></div><div class="flip-face flip-back">Cartoony, dramatic, ridiculous, and fully committed to being way too much.</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Preview Access</strong><span>Administrative Destiny</span></div><div class="flip-face flip-back">To unlock pre-release viewing, you must survive the Super Duper Secret Clipboard Challenge.</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Mission</strong><span>Completely Reasonable Goal</span></div><div class="flip-face flip-back">Make this project feel like a historical event, a heroic saga, and a paperwork emergency all at once.</div></div></div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -1169,7 +1136,7 @@
             </div>
             <div class="credit-box explode-on-click">
               <h3>Applications</h3>
-              <p>Pre-release applications go to the preview form. Staff and crew applications go to the crew form. Bureaucratic greatness has never looked this dramatic.</p>
+              <p>Pre-release applications remain locked until either the countdown ends or the Super Duper Secret Clipboard Challenge says otherwise.</p>
             </div>
           </div>
         </div>
@@ -1183,12 +1150,44 @@
     </div>
   </footer>
 
-  <script>
+  <div class="secret-modal" id="secretModal">
+    <div class="modal-card">
+      <div class="eyebrow">The Super Duper Secret Clipboard Challenge</div>
+      <h2 class="modal-title">Prove thyself,<br>paperwork pilgrim</h2>
+      <p class="modal-text">
+        Enter your name and the super duper secret code. If you succeed, the pre-release application unlocks for you. If you fail... the clipboard may make an incredibly public scene about it.
+      </p>
+      <div class="modal-grid">
+        <input id="secretName" type="text" placeholder="Enter your name" />
+        <input id="secretCode" type="password" placeholder="Enter the secret code" />
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="submitSecret" type="button">Challenge The Clipboard</button>
+        <button class="btn" id="cancelSecret" type="button">Retreat With Dignity</button>
+      </div>
+      <div class="modal-error" id="modalError">
+        Incorrect code. The clipboard has narrowed its eyes and is preparing consequences.
+      </div>
+    </div>
+  </div>
+
+  <div class="global-fail-overlay" id="failOverlay">
+    <div class="fail-big">
+      <h2 id="failTitle">SOMEONE HAS FAILED THE CLIPBOARD CHALLENGE</h2>
+      <p id="failText">The internet trembles. The paperwork screams. Everyone will now be dramatically refreshed.</p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { db } from './firebase-config.js';
+    import { doc, setDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
     const loadingScreen = document.getElementById("loadingScreen");
 
     window.addEventListener("load", () => {
       setTimeout(() => {
         loadingScreen.classList.add("hidden");
+        document.body.classList.remove("loading");
       }, 2800);
     });
 
@@ -1219,10 +1218,7 @@
       }
 
       document.body.appendChild(explosion);
-
-      setTimeout(() => {
-        explosion.remove();
-      }, 750);
+      setTimeout(() => explosion.remove(), 750);
     }
 
     document.querySelectorAll(".explode-on-click").forEach((el) => {
@@ -1245,6 +1241,24 @@
     const chaosTwo = document.getElementById("chaosTwo");
     const chaosThree = document.getElementById("chaosThree");
     const chaosFour = document.getElementById("chaosFour");
+
+    const secretBadge = document.getElementById("secretBadge");
+    const secretModal = document.getElementById("secretModal");
+    const secretName = document.getElementById("secretName");
+    const secretCode = document.getElementById("secretCode");
+    const submitSecret = document.getElementById("submitSecret");
+    const cancelSecret = document.getElementById("cancelSecret");
+    const modalError = document.getElementById("modalError");
+
+    const failOverlay = document.getElementById("failOverlay");
+    const failTitle = document.getElementById("failTitle");
+    const failText = document.getElementById("failText");
+
+    const SECRET_CODE = "THE CLOCK HAS FALLEN";
+    const SIGNAL_DOC = doc(db, "siteSignals", "clipboardChallenge");
+
+    const localUnlockKey = "gaylord_preview_unlocked";
+    const localSignalSeenKey = "gaylord_last_signal_seen";
 
     const chaosMessages = [
       [
@@ -1273,25 +1287,37 @@
       ]
     ];
 
-    function getTomorrowTargetCST() {
+    function getChicagoTargetForTomorrow() {
       const now = new Date();
 
-      const cstNow = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
-      const targetCST = new Date(cstNow);
-      targetCST.setDate(cstNow.getDate() + 1);
-      targetCST.setHours(15, 30, 0, 0);
+      const chicagoNowString = now.toLocaleString("en-US", { timeZone: "America/Chicago" });
+      const chicagoNow = new Date(chicagoNowString);
 
-      const chicagoString = targetCST.toLocaleString("sv-SE", { timeZone: "America/Chicago" }).replace(" ", "T");
-      return new Date(chicagoString + "-05:00");
+      const offset = chicagoNow.getTime() - now.getTime();
+
+      const chicagoTargetWall = new Date(chicagoNow);
+      chicagoTargetWall.setDate(chicagoTargetWall.getDate() + 1);
+      chicagoTargetWall.setHours(15, 30, 0, 0);
+
+      return new Date(chicagoTargetWall.getTime() - offset);
     }
 
-    const targetDate = getTomorrowTargetCST();
+    const targetDate = getChicagoTargetForTomorrow();
 
     function pad(num) {
       return String(num).padStart(2, "0");
     }
 
-    function unlockPreview() {
+    function setPreviewUnlocked() {
+      sessionStorage.setItem(localUnlockKey, "true");
+      previewButton.classList.remove("btn-locked");
+      previewButton.textContent = "Apply for Pre-Release Viewing";
+      previewButton.setAttribute("aria-disabled", "false");
+      statusBanner.textContent = "THE CLIPBOARD HAS GRANTED YOU PERSONAL PRE-RELEASE ACCESS.";
+      countdownText.textContent = "Against all odds, the clipboard looked upon your code and said, fine. The pre-release application is now unlocked for you personally.";
+    }
+
+    function unlockPreviewByTime() {
       countdownShell.classList.add("open-mode");
       previewButton.classList.remove("btn-locked");
       previewButton.textContent = "Apply for Pre-Release Viewing";
@@ -1313,7 +1339,7 @@
       const diff = targetDate.getTime() - now.getTime();
 
       if (diff <= 0) {
-        unlockPreview();
+        unlockPreviewByTime();
         return;
       }
 
@@ -1348,17 +1374,110 @@
       chaosFour.textContent = lines[3];
     }
 
+    if (sessionStorage.getItem(localUnlockKey) === "true") {
+      setPreviewUnlocked();
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
     previewButton.addEventListener("click", (e) => {
       const locked = previewButton.classList.contains("btn-locked");
       if (locked) {
         e.preventDefault();
         createExplosion(e.clientX, e.clientY);
-        statusBanner.textContent = "NICE TRY. THE CLOCK STILL HOLDS ABSOLUTE POWER.";
+        statusBanner.textContent = "NICE TRY. THE CLOCK OR THE CLIPBOARD MUST GRANT PERMISSION.";
       }
     });
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    secretBadge.addEventListener("click", () => {
+      modalError.classList.remove("show");
+      secretName.value = "";
+      secretCode.value = "";
+      secretModal.classList.add("show");
+      setTimeout(() => secretName.focus(), 50);
+    });
+
+    cancelSecret.addEventListener("click", () => {
+      secretModal.classList.remove("show");
+    });
+
+    async function broadcastFailure(name) {
+      const eventId = "fail_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
+      await setDoc(SIGNAL_DOC, {
+        type: "failed",
+        name: name || "SOMEONE",
+        eventId,
+        createdAt: serverTimestamp(),
+        message: `${name || "SOMEONE"} HAS FAILED THE CLIPBOARD CHALLENGE`
+      });
+    }
+
+    submitSecret.addEventListener("click", async () => {
+      const enteredName = (secretName.value || "").trim();
+      const enteredCode = (secretCode.value || "").trim();
+
+      if (!enteredName || !enteredCode) {
+        modalError.textContent = "The clipboard requires both a name and a code. Bureaucracy is cruel like that.";
+        modalError.classList.add("show");
+        return;
+      }
+
+      if (enteredCode === SECRET_CODE) {
+        secretModal.classList.remove("show");
+        modalError.classList.remove("show");
+        createExplosion(window.innerWidth / 2, window.innerHeight / 2);
+        setPreviewUnlocked();
+        await setDoc(SIGNAL_DOC, {
+          type: "success",
+          name: enteredName,
+          eventId: "success_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8),
+          createdAt: serverTimestamp(),
+          message: `${enteredName} HAS CONQUERED THE CLIPBOARD`
+        });
+        return;
+      }
+
+      modalError.textContent = "Incorrect code. The clipboard has narrowed its eyes and is preparing consequences.";
+      modalError.classList.add("show");
+      secretModal.classList.remove("show");
+
+      try {
+        await broadcastFailure(enteredName);
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+    secretCode.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") submitSecret.click();
+    });
+
+    secretName.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") submitSecret.click();
+    });
+
+    onSnapshot(SIGNAL_DOC, (snap) => {
+      if (!snap.exists()) return;
+
+      const data = snap.data();
+      if (!data || !data.eventId) return;
+
+      const lastSeen = sessionStorage.getItem(localSignalSeenKey);
+      if (lastSeen === data.eventId) return;
+      sessionStorage.setItem(localSignalSeenKey, data.eventId);
+
+      if (data.type === "failed") {
+        const displayName = (data.name || "SOMEONE").toUpperCase();
+        failTitle.textContent = `${displayName} HAS FAILED THE CLIPBOARD CHALLENGE`;
+        failText.textContent = "THE PAPERWORK IS OFFENDED. EVERYONE WILL NOW BE DRAMATICALLY REFRESHED.";
+        failOverlay.classList.add("show");
+
+        setTimeout(() => {
+          location.reload();
+        }, 2600);
+      }
+    });
   </script>
 </body>
 </html>
