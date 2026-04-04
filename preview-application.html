@@ -6,31 +6,15 @@
   <title>Pre-Release Viewing Application | The Adventures of Gaylord</title>
   <style>
     :root{
-      --bg1:#6c5ce7;
-      --bg2:#ff7675;
-      --bg3:#fdcb6e;
-      --bg4:#74b9ff;
-      --bg5:#55efc4;
-      --ink:#1e1834;
-      --paper:#fffaf2;
-      --card:rgba(255,255,255,.93);
-      --accent:#ff2d55;
-      --accent2:#00cec9;
-      --accent3:#ffe66d;
-      --good:#7bed9f;
-      --bad:#ff8fab;
-      --shadow:0 18px 50px rgba(30,24,52,.22);
-      --radius:28px;
-      --max:920px;
+      --bg1:#6c5ce7; --bg2:#ff7675; --bg3:#fdcb6e; --bg4:#74b9ff; --bg5:#55efc4;
+      --ink:#1e1834; --paper:#fffaf2; --card:rgba(255,255,255,.93);
+      --accent:#ff2d55; --accent2:#00cec9; --good:#7bed9f; --bad:#ff8fab;
+      --shadow:0 18px 50px rgba(30,24,52,.22); --radius:28px; --max:920px;
     }
-
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-
     body{
-      margin:0;
-      font-family:"Trebuchet MS","Comic Sans MS",Arial,sans-serif;
-      color:var(--ink);
+      margin:0; min-height:100vh; overflow-x:hidden;
+      font-family:"Trebuchet MS","Comic Sans MS",Arial,sans-serif; color:var(--ink);
       background:
         radial-gradient(circle at 20% 20%, rgba(255,255,255,.55), transparent 20%),
         radial-gradient(circle at 80% 10%, rgba(255,255,255,.45), transparent 16%),
@@ -38,409 +22,70 @@
         linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4),var(--bg5));
       background-size:100% 100%,100% 100%,100% 100%,300% 300%;
       animation:bgShift 16s ease infinite;
-      overflow-x:hidden;
-      min-height:100vh;
     }
-
     @keyframes bgShift{
       0%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
       50%{background-position:0% 0%,0% 0%,0% 0%,100% 50%}
       100%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
     }
-
-    .star,.burst,.swirl{
-      position:fixed;
-      pointer-events:none;
-      z-index:0;
-      opacity:.8;
+    .wrap{width:min(var(--max),calc(100% - 24px));margin:28px auto 40px;position:relative;z-index:2}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+    .brand,.back-btn,.status-pill{
+      background:#fff;border:3px solid var(--ink);border-radius:999px;padding:10px 16px;
+      font-weight:900;box-shadow:6px 6px 0 rgba(30,24,52,.14);text-decoration:none;color:var(--ink)
     }
-
-    .star{
-      width:18px;
-      height:18px;
-      background:#fff8b2;
-      clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
-      animation:floaty 8s ease-in-out infinite;
-    }
-
-    .burst{
-      width:80px;
-      height:80px;
-      background:rgba(255,255,255,.35);
-      clip-path:polygon(50% 0%,60% 25%,85% 15%,75% 40%,100% 50%,75% 60%,85% 85%,60% 75%,50% 100%,40% 75%,15% 85%,25% 60%,0% 50%,25% 40%,15% 15%,40% 25%);
-      animation:spinSlow 16s linear infinite;
-    }
-
-    .swirl{
-      width:110px;
-      height:110px;
-      border:10px dashed rgba(255,255,255,.42);
-      border-radius:50%;
-      animation:spinSlow 20s linear infinite;
-    }
-
-    @keyframes floaty{
-      0%,100%{transform:translateY(0) rotate(0)}
-      50%{transform:translateY(-18px) rotate(12deg)}
-    }
-
-    @keyframes spinSlow{
-      from{transform:rotate(0)}
-      to{transform:rotate(360deg)}
-    }
-
-    .wrap{
-      position:relative;
-      z-index:2;
-      width:min(var(--max),calc(100% - 24px));
-      margin:28px auto 40px;
-    }
-
-    .topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-    }
-
-    .brand{
-      font-weight:900;
-      font-size:1rem;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-      background:var(--paper);
-      border:3px solid var(--ink);
-      border-radius:999px;
-      padding:10px 16px;
-      box-shadow:6px 6px 0 rgba(30,24,52,.16);
-      transform:rotate(-1deg);
-    }
-
-    .back-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      text-decoration:none;
-      color:var(--ink);
-      background:#fff;
-      border:3px solid var(--ink);
-      border-radius:999px;
-      padding:10px 16px;
-      font-weight:900;
-      box-shadow:0 8px 0 rgba(30,24,52,.12);
-      transition:transform .16s ease;
-    }
-
-    .back-btn:hover{transform:translateY(-2px) rotate(-1deg)}
-
+    .brand{transform:rotate(-1deg); text-transform:uppercase}
     .hero-card,.form-card,.note-card{
-      background:var(--card);
-      border:4px solid rgba(30,24,52,.12);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+      background:var(--card); border:4px solid rgba(30,24,52,.12); border-radius:var(--radius); box-shadow:var(--shadow);
     }
-
-    .hero-card{
-      padding:28px;
-      position:relative;
-      overflow:hidden;
-      margin-bottom:18px;
-    }
-
+    .hero-card{padding:28px; position:relative; overflow:hidden; margin-bottom:18px}
     .hero-card::after{
-      content:"PRE-RELEASE GLORY APPLICATION";
-      position:absolute;
-      top:16px;
-      right:-26px;
-      background:var(--accent);
-      color:#fff;
-      padding:10px 18px;
-      border-radius:999px;
-      border:3px solid rgba(255,255,255,.5);
-      font-weight:900;
-      transform:rotate(10deg);
-      box-shadow:0 10px 20px rgba(255,45,85,.25);
-      font-size:.85rem;
+      content:"FIRST FIVE ONLY"; position:absolute; top:16px; right:-20px; background:var(--accent); color:#fff;
+      padding:10px 18px; border-radius:999px; border:3px solid rgba(255,255,255,.5); font-weight:900; transform:rotate(10deg)
     }
-
-    .eyebrow{
-      display:inline-block;
-      background:#fff;
-      border:3px solid var(--ink);
-      border-radius:999px;
-      padding:8px 14px;
-      font-weight:900;
-      font-size:.82rem;
-      transform:rotate(-3deg);
-      margin-bottom:14px;
-    }
-
-    h1{
-      margin:0;
-      font-size:clamp(2.1rem,7vw,4.5rem);
-      line-height:.95;
-      text-transform:uppercase;
-      letter-spacing:.03em;
-      text-shadow:3px 3px 0 rgba(255,255,255,.65);
-    }
-
-    .hero-card p{
-      margin:16px 0 0;
-      line-height:1.7;
-      font-size:1.05rem;
-      max-width:70ch;
-    }
-
-    .note-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:14px;
-      margin-top:20px;
-    }
-
-    .note-card{
-      padding:16px;
-      background:linear-gradient(180deg,#fff,#fff6dc);
-      transition:transform .18s ease, box-shadow .18s ease;
-    }
-
-    .note-card:hover{
-      transform:rotate(-2deg) translateY(-5px);
-      box-shadow:0 14px 24px rgba(30,24,52,.14);
-    }
-
-    .note-card h3{
-      margin:0 0 8px;
-      text-transform:uppercase;
-      font-size:1rem;
-    }
-
-    .form-card{
-      padding:26px;
-      position:relative;
-      overflow:hidden;
-    }
-
+    .eyebrow{display:inline-block;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:8px 14px;font-weight:900;font-size:.82rem;transform:rotate(-3deg);margin-bottom:14px}
+    h1{margin:0;font-size:clamp(2.1rem,7vw,4.5rem);line-height:.95;text-transform:uppercase;text-shadow:3px 3px 0 rgba(255,255,255,.65)}
+    .hero-card p{margin:16px 0 0;line-height:1.7;font-size:1.05rem;max-width:70ch}
+    .note-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+    .note-card{padding:16px;background:linear-gradient(180deg,#fff,#fff6dc);transition:transform .18s ease, box-shadow .18s ease}
+    .note-card:hover{transform:rotate(-2deg) translateY(-5px);box-shadow:0 14px 24px rgba(30,24,52,.14)}
+    .note-card h3{margin:0 0 8px;text-transform:uppercase;font-size:1rem}
+    .form-card{padding:26px;position:relative;overflow:hidden}
     .form-card::before{
-      content:"THE VIEWING COUNCIL IS WATCHING";
-      position:absolute;
-      top:14px;
-      left:18px;
-      background:#fff;
-      border:2px solid var(--ink);
-      border-radius:999px;
-      padding:7px 12px;
-      font-size:.76rem;
-      font-weight:900;
-      transform:rotate(-3deg);
+      content:"THE VIEWING COUNCIL IS COUNTING"; position:absolute; top:14px; left:18px; background:#fff;
+      border:2px solid var(--ink); border-radius:999px; padding:7px 12px; font-size:.76rem; font-weight:900; transform:rotate(-3deg)
     }
-
-    .section-title{
-      margin:30px 0 8px;
-      font-size:1.8rem;
-      text-transform:uppercase;
-      line-height:1;
-    }
-
-    .section-sub{
-      margin:0 0 18px;
-      line-height:1.65;
-      font-size:1rem;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-
-    .field.full{
-      grid-column:1 / -1;
-    }
-
-    label{
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-      font-size:.84rem;
-    }
-
+    .section-title{margin:30px 0 8px;font-size:1.8rem;text-transform:uppercase;line-height:1}
+    .section-sub{margin:0 0 18px;line-height:1.65;font-size:1rem}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .field{display:flex;flex-direction:column;gap:8px}
+    .field.full{grid-column:1 / -1}
+    label{font-weight:900;text-transform:uppercase;letter-spacing:.04em;font-size:.84rem}
     input,select{
-      width:100%;
-      border:3px solid rgba(30,24,52,.14);
-      border-radius:18px;
-      padding:14px 14px;
-      font:inherit;
-      color:var(--ink);
-      background:rgba(255,255,255,.95);
-      outline:none;
-      transition:border-color .16s ease, transform .16s ease, box-shadow .16s ease;
-      box-shadow:0 8px 16px rgba(30,24,52,.05);
+      width:100%;border:3px solid rgba(30,24,52,.14);border-radius:18px;padding:14px 14px;font:inherit;color:var(--ink);
+      background:rgba(255,255,255,.95);outline:none;box-shadow:0 8px 16px rgba(30,24,52,.05)
     }
-
-    input:focus,select:focus{
-      border-color:var(--accent2);
-      transform:translateY(-1px);
-      box-shadow:0 12px 22px rgba(30,24,52,.08);
-    }
-
-    .helper{
-      font-size:.86rem;
-      opacity:.8;
-      line-height:1.5;
-    }
-
-    .submit-row{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      flex-wrap:wrap;
-      margin-top:20px;
-    }
-
+    .helper{font-size:.86rem;opacity:.8;line-height:1.5}
+    .submit-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:20px}
     .submit-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      text-decoration:none;
-      color:var(--ink);
-      background:linear-gradient(135deg,#ffef66,#ff9f43);
-      border:3px solid var(--ink);
-      border-radius:999px;
-      padding:14px 22px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-      box-shadow:0 8px 0 rgba(30,24,52,.12);
-      cursor:pointer;
-      transition:transform .16s ease, box-shadow .16s ease, filter .16s ease;
+      display:inline-flex;align-items:center;justify-content:center;color:var(--ink);background:linear-gradient(135deg,#ffef66,#ff9f43);
+      border:3px solid var(--ink);border-radius:999px;padding:14px 22px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;
+      box-shadow:0 8px 0 rgba(30,24,52,.12);cursor:pointer
     }
-
-    .submit-btn:hover{
-      transform:translateY(-3px) scale(1.03) rotate(-1deg);
-      box-shadow:0 12px 0 rgba(30,24,52,.11);
-      filter:saturate(1.08);
-    }
-
-    .status{
-      font-weight:900;
-      font-size:.98rem;
-      padding:12px 16px;
-      border-radius:999px;
-      border:3px solid var(--ink);
-      background:#fff;
-      display:none;
-    }
-
+    .submit-btn[disabled]{opacity:.6;cursor:not-allowed}
+    .status{font-weight:900;font-size:.98rem;padding:12px 16px;border-radius:999px;border:3px solid var(--ink);background:#fff;display:none}
     .status.show{display:inline-block}
     .status.success{background:linear-gradient(135deg,#d8ffd0,#7bed9f); color:#10301d}
     .status.error{background:linear-gradient(135deg,#ffd4de,#ff8fab); color:#4c1321}
-
-    .floating-popup{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      width:min(320px,calc(100% - 24px));
-      background:linear-gradient(135deg,#fff,#e8fff7);
-      color:var(--ink);
-      border:3px solid var(--ink);
-      border-radius:22px;
-      box-shadow:0 18px 40px rgba(30,24,52,.2);
-      padding:16px;
-      z-index:2000;
-      transform:translateY(20px) scale(.96);
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .25s ease, transform .25s ease;
-    }
-
-    .floating-popup.show{
-      opacity:1;
-      transform:translateY(0) scale(1);
-    }
-
-    .floating-popup h4{
-      margin:0 0 8px;
-      text-transform:uppercase;
-      font-size:1rem;
-    }
-
-    .floating-popup p{
-      margin:0;
-      line-height:1.55;
-      font-size:.96rem;
-    }
-
-    .popup-badge{
-      display:inline-block;
-      margin-bottom:8px;
-      background:#fff;
-      border:2px solid var(--ink);
-      border-radius:999px;
-      padding:5px 10px;
-      font-size:.72rem;
-      font-weight:900;
-      transform:rotate(-3deg);
-    }
-
-    .explosion{
-      position:fixed;
-      width:12px;
-      height:12px;
-      pointer-events:none;
-      z-index:3000;
-    }
-
-    .particle{
-      position:absolute;
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      left:0;
-      top:0;
-      animation:explode 650ms ease-out forwards;
-    }
-
-    @keyframes explode{
-      0%{transform:translate(0,0) scale(1);opacity:1}
-      100%{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}
-    }
-
-    @media (max-width: 760px){
-      .grid,.note-grid{
-        grid-template-columns:1fr;
-      }
-      .hero-card::after{
-        position:static;
-        display:inline-block;
-        margin-top:14px;
-        transform:rotate(-2deg);
-      }
-      .wrap{
-        width:min(var(--max),calc(100% - 14px));
-      }
-      .hero-card,.form-card{
-        padding:18px;
-      }
+    @media (max-width:760px){
+      .grid,.note-grid{grid-template-columns:1fr}
+      .hero-card::after{position:static;display:inline-block;margin-top:14px;transform:rotate(-2deg)}
+      .wrap{width:min(var(--max),calc(100% - 14px))}
+      .hero-card,.form-card{padding:18px}
     }
   </style>
 </head>
 <body>
-  <div class="star" style="top:10%;left:6%;"></div>
-  <div class="star" style="top:24%;left:88%;animation-delay:1s;"></div>
-  <div class="star" style="top:74%;left:12%;animation-delay:2s;"></div>
-  <div class="burst" style="top:14%;right:10%;"></div>
-  <div class="burst" style="bottom:18%;left:4%;animation-duration:20s;"></div>
-  <div class="swirl" style="top:52%;right:4%;"></div>
-
   <div class="wrap">
     <div class="topbar">
       <div class="brand">The Adventures of Gaylord</div>
@@ -448,24 +93,24 @@
     </div>
 
     <section class="hero-card">
-      <div class="eyebrow">A completely reasonable honor</div>
+      <div class="eyebrow">Pre-release glory has been unleashed</div>
       <h1>Pre-Release<br>Viewing Application</h1>
       <p>
-        So you wish to witness the cinematic chaos before the common masses. A bold move. Fill out this form and submit your name to the mysterious records of pre-release glory, prestige, and highly suspicious importance.
+        The gate is now open, but only for the first five brave souls who successfully get their names into the official records before the clipboard slams shut.
       </p>
 
       <div class="note-grid">
         <div class="note-card">
-          <h3>What this is</h3>
-          <p>Your chance to apply for early viewing access before everyone else starts pretending they were here from the beginning.</p>
+          <h3>Limit</h3>
+          <p>Only the first 5 successful signups make it in. After that, the gate closes.</p>
         </div>
         <div class="note-card">
           <h3>What this means</h3>
-          <p>You are volunteering to become part of the earliest wave of witnesses to this cinematic nonsense.</p>
+          <p>You are racing against the invisible machinery of paperwork and destiny.</p>
         </div>
         <div class="note-card">
-          <h3>What the form thinks</h3>
-          <p>It finds your confidence noteworthy, dramatic, and maybe a little suspicious.</p>
+          <h3>Current status</h3>
+          <p id="spotsText">Summoning the sacred signup count...</p>
         </div>
       </div>
     </section>
@@ -473,11 +118,13 @@
     <section class="form-card">
       <h2 class="section-title">Present thy credentials</h2>
       <p class="section-sub">
-        Enter your information below. The viewing council, the stars, and at least one invisible administrator are allegedly paying attention.
+        Enter your information below. The viewing council is counting and the clipboard is in a mood.
       </p>
 
+      <div class="status-pill" id="openStatus">Checking whether the gate is open...</div>
+
       <form id="previewForm">
-        <div class="grid">
+        <div class="grid" style="margin-top:16px;">
           <div class="field full">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" placeholder="Your full name" required />
@@ -501,172 +148,120 @@
         </div>
 
         <div class="helper" style="margin-top:14px;">
-          By submitting, you are effectively announcing to the universe that you wish to be considered for early viewing greatness.
+          By submitting, you are effectively announcing to the universe that you wish to be counted among the first five.
         </div>
 
         <div class="submit-row">
-          <button class="submit-btn" type="submit">Submit Application</button>
+          <button class="submit-btn" id="submitBtn" type="submit">Submit Application</button>
           <div id="statusMessage" class="status"></div>
         </div>
       </form>
     </section>
   </div>
 
-  <div id="popup" class="floating-popup" aria-live="polite">
-    <div class="popup-badge">VIEWING COUNCIL COMMENTARY</div>
-    <h4 id="popupTitle">Curious.</h4>
-    <p id="popupText">The pre-release records have noticed your presence.</p>
-  </div>
-
   <script type="module">
     import { db } from './firebase-config.js';
-    import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+    import {
+      collection, doc, getDoc, runTransaction, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+    const GATE_DOC = doc(db, "siteConfig", "previewGate");
+    const MAX_SIGNUPS = 5;
 
     const form = document.getElementById("previewForm");
+    const submitBtn = document.getElementById("submitBtn");
     const statusMessage = document.getElementById("statusMessage");
-    const popup = document.getElementById("popup");
-    const popupTitle = document.getElementById("popupTitle");
-    const popupText = document.getElementById("popupText");
+    const openStatus = document.getElementById("openStatus");
+    const spotsText = document.getElementById("spotsText");
 
-    const popups = [
-      {
-        title: "Interesting ambition.",
-        text: "You are applying for pre-release access with the confidence of someone who absolutely expects destiny to cooperate."
-      },
-      {
-        title: "The viewing council stirs.",
-        text: "Bold. Dramatic. Mildly suspicious. Continue."
-      },
-      {
-        title: "Administrative intrigue detected.",
-        text: "The form finds your enthusiasm impressive and perhaps a little theatrical."
-      },
-      {
-        title: "Noted.",
-        text: "Your presence has been recorded in the invisible scrolls of cinematic anticipation."
-      },
-      {
-        title: "Remarkable.",
-        text: "You saw an absurd application page and thought, yes, this is where I belong."
-      },
-      {
-        title: "Very official energy.",
-        text: "The paperwork now carries your aura, for better or worse."
-      },
-      {
-        title: "The council watches.",
-        text: "Remain calm. Or at least dramatically composed."
-      },
-      {
-        title: "This is becoming serious.",
-        text: "Well, as serious as a pre-release signup for this level of nonsense can possibly be."
-      }
-    ];
+    async function refreshGateView() {
+      const snap = await getDoc(GATE_DOC);
+      let total = 0;
+      let isOpen = true;
 
-    let popupTimeout = null;
-    let popupCooldown = false;
-
-    function showPopup() {
-      if (popupCooldown) return;
-      popupCooldown = true;
-
-      const item = popups[Math.floor(Math.random() * popups.length)];
-      popupTitle.textContent = item.title;
-      popupText.textContent = item.text;
-      popup.classList.add("show");
-
-      clearTimeout(popupTimeout);
-      popupTimeout = setTimeout(() => {
-        popup.classList.remove("show");
-      }, 2800);
-
-      setTimeout(() => {
-        popupCooldown = false;
-      }, 4500);
-    }
-
-    function createExplosion(x, y) {
-      const explosion = document.createElement("div");
-      explosion.className = "explosion";
-      explosion.style.left = x + "px";
-      explosion.style.top = y + "px";
-
-      const colors = ["#ff2d55", "#ff9f43", "#ffe66d", "#00cec9", "#ffffff", "#74b9ff"];
-      const particleCount = 16;
-
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement("span");
-        particle.className = "particle";
-        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-        const angle = (Math.PI * 2 * i) / particleCount;
-        const distance = 35 + Math.random() * 45;
-        const dx = Math.cos(angle) * distance + "px";
-        const dy = Math.sin(angle) * distance + "px";
-
-        particle.style.setProperty("--dx", dx);
-        particle.style.setProperty("--dy", dy);
-
-        explosion.appendChild(particle);
+      if (snap.exists()) {
+        const data = snap.data();
+        total = Number(data.total || 0);
+        isOpen = data.isOpen !== false && total < MAX_SIGNUPS;
       }
 
-      document.body.appendChild(explosion);
-      setTimeout(() => explosion.remove(), 700);
-    }
+      const remaining = Math.max(0, MAX_SIGNUPS - total);
 
-    document.querySelectorAll("input, select").forEach((el) => {
-      el.addEventListener("focus", showPopup);
-      el.addEventListener("input", () => {
-        if (Math.random() < 0.18) showPopup();
-      });
-    });
+      if (isOpen) {
+        openStatus.textContent = `PRE-RELEASE IS OPEN — ${remaining} SPOT${remaining === 1 ? "" : "S"} REMAIN`;
+        spotsText.textContent = `${remaining} spot${remaining === 1 ? "" : "s"} remain before the clipboard closes the gate.`;
+        submitBtn.disabled = false;
+      } else {
+        openStatus.textContent = "THE PRE-RELEASE GATE IS CLOSED";
+        spotsText.textContent = "All 5 spots have been claimed. The clipboard has ended the festivities.";
+        submitBtn.disabled = true;
+      }
+    }
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
-      const submitBtn = form.querySelector("button[type='submit']");
       submitBtn.disabled = true;
       submitBtn.textContent = "Submitting to the viewing council...";
-
       statusMessage.className = "status";
       statusMessage.textContent = "";
 
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const grade = document.getElementById("grade").value;
+
       try {
-        await addDoc(collection(db, "previewApplications"), {
-          name: document.getElementById("name").value.trim(),
-          email: document.getElementById("email").value.trim(),
-          grade: document.getElementById("grade").value,
-          createdAt: serverTimestamp()
+        const newRef = doc(collection(db, "previewApplications"));
+
+        await runTransaction(db, async (transaction) => {
+          const gateSnap = await transaction.get(GATE_DOC);
+
+          let total = 0;
+          let isOpen = true;
+
+          if (gateSnap.exists()) {
+            const gateData = gateSnap.data();
+            total = Number(gateData.total || 0);
+            isOpen = gateData.isOpen !== false;
+          }
+
+          if (!isOpen || total >= MAX_SIGNUPS) {
+            throw new Error("FULL");
+          }
+
+          const nextTotal = total + 1;
+          transaction.set(newRef, {
+            name,
+            email,
+            grade,
+            createdAt: serverTimestamp()
+          });
+
+          transaction.set(GATE_DOC, {
+            total: nextTotal,
+            max: MAX_SIGNUPS,
+            isOpen: nextTotal < MAX_SIGNUPS,
+            updatedAt: serverTimestamp()
+          }, { merge: true });
         });
 
-        statusMessage.textContent = "Application submitted. Your name now echoes through the pre-release records.";
+        statusMessage.textContent = "Application submitted. You have entered the official pre-release records.";
         statusMessage.className = "status show success";
         form.reset();
-
-        popupTitle.textContent = "Submission complete.";
-        popupText.textContent = "The viewing council has received your offering and filed it under dramatic importance.";
-        popup.classList.add("show");
-        clearTimeout(popupTimeout);
-        popupTimeout = setTimeout(() => popup.classList.remove("show"), 3200);
       } catch (error) {
         console.error(error);
-        statusMessage.textContent = "Submission failed. The council's paperwork spirits are misbehaving.";
+        if (error.message === "FULL") {
+          statusMessage.textContent = "Too late. The first 5 spots are gone and the clipboard has closed the gate.";
+        } else {
+          statusMessage.textContent = "Submission failed. Firestore is being dramatic.";
+        }
         statusMessage.className = "status show error";
       } finally {
-        submitBtn.disabled = false;
         submitBtn.textContent = "Submit Application";
+        await refreshGateView();
       }
     });
 
-    document.addEventListener("click", (e) => {
-      if (
-        e.target.closest(".submit-btn") ||
-        e.target.closest(".back-btn") ||
-        e.target.closest(".brand")
-      ) {
-        createExplosion(e.clientX, e.clientY);
-      }
-    });
+    refreshGateView();
   </script>
 </body>
 </html>
