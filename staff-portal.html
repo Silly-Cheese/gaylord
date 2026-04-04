@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Portal | The Adventures of Gaylord</title>
+  <style>
+    :root{
+      --bg1:#6c5ce7;
+      --bg2:#ff7675;
+      --bg3:#fdcb6e;
+      --bg4:#74b9ff;
+      --bg5:#55efc4;
+      --ink:#1e1834;
+      --paper:#fffaf2;
+      --card:rgba(255,255,255,.94);
+      --accent:#ff2d55;
+      --accent2:#00cec9;
+      --good:#7bed9f;
+      --bad:#ff8fab;
+      --shadow:0 18px 50px rgba(30,24,52,.22);
+      --radius:28px;
+      --max:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:"Trebuchet MS","Comic Sans MS",Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.55), transparent 20%),
+        radial-gradient(circle at 80% 10%, rgba(255,255,255,.45), transparent 16%),
+        radial-gradient(circle at 70% 80%, rgba(255,255,255,.3), transparent 18%),
+        linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4),var(--bg5));
+      background-size:100% 100%,100% 100%,100% 100%,300% 300%;
+      animation:bgShift 16s ease infinite;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    @keyframes bgShift{
+      0%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
+      50%{background-position:0% 0%,0% 0%,0% 0%,100% 50%}
+      100%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
+    }
+
+    .wrap{
+      width:min(var(--max),calc(100% - 20px));
+      margin:22px auto 40px;
+      position:relative;
+      z-index:2;
+    }
+
+    .star,.burst,.swirl{
+      position:fixed;
+      pointer-events:none;
+      z-index:0;
+      opacity:.75;
+    }
+
+    .star{
+      width:18px;height:18px;background:#fff8b2;
+      clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+      animation:floaty 8s ease-in-out infinite;
+    }
+    .burst{
+      width:80px;height:80px;background:rgba(255,255,255,.35);
+      clip-path:polygon(50% 0%,60% 25%,85% 15%,75% 40%,100% 50%,75% 60%,85% 85%,60% 75%,50% 100%,40% 75%,15% 85%,25% 60%,0% 50%,25% 40%,15% 15%,40% 25%);
+      animation:spinSlow 16s linear infinite;
+    }
+    .swirl{
+      width:110px;height:110px;border:10px dashed rgba(255,255,255,.42);border-radius:50%;
+      animation:spinSlow 20s linear infinite;
+    }
+    @keyframes floaty{
+      0%,100%{transform:translateY(0) rotate(0)}
+      50%{transform:translateY(-18px) rotate(12deg)}
+    }
+    @keyframes spinSlow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .brand,.back-btn,.pill{
+      background:#fff;
+      border:3px solid var(--ink);
+      border-radius:999px;
+      padding:10px 16px;
+      font-weight:900;
+      box-shadow:6px 6px 0 rgba(30,24,52,.14);
+      text-decoration:none;
+      color:var(--ink);
+    }
+
+    .brand{transform:rotate(-1deg); text-transform:uppercase}
+    .back-btn:hover{transform:translateY(-2px) rotate(-1deg)}
+
+    .hero,.panel,.card{
+      background:var(--card);
+      border:4px solid rgba(30,24,52,.12);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero{
+      padding:28px;
+      margin-bottom:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:"STAFF NONSENSE AUTHORIZED";
+      position:absolute;
+      top:16px;
+      right:-30px;
+      background:var(--accent);
+      color:#fff;
+      padding:10px 18px;
+      border-radius:999px;
+      border:3px solid rgba(255,255,255,.55);
+      transform:rotate(10deg);
+      font-weight:900;
+      font-size:.82rem;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      background:#fff;
+      border:3px solid var(--ink);
+      border-radius:999px;
+      padding:8px 14px;
+      font-weight:900;
+      transform:rotate(-3deg);
+      margin-bottom:14px;
+      font-size:.82rem;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(2.2rem,7vw,4.8rem);
+      line-height:.95;
+      text-transform:uppercase;
+      text-shadow:3px 3px 0 rgba(255,255,255,.65);
+    }
+
+    .hero p{
+      margin:16px 0 0;
+      line-height:1.7;
+      font-size:1.03rem;
+      max-width:75ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .panel{
+      padding:22px;
+    }
+
+    .panel h2{
+      margin:0 0 8px;
+      text-transform:uppercase;
+      line-height:1;
+    }
+
+    .panel p{
+      margin:0 0 14px;
+      line-height:1.6;
+    }
+
+    .card-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .card{
+      padding:16px;
+      background:linear-gradient(180deg,#fff,#fffaf0);
+    }
+
+    .card h3{
+      margin:0 0 8px;
+      text-transform:uppercase;
+      font-size:1rem;
+    }
+
+    .meta{
+      display:grid;
+      gap:8px;
+    }
+
+    .meta div{
+      background:rgba(255,255,255,.8);
+      border:2px solid rgba(30,24,52,.08);
+      border-radius:14px;
+      padding:10px 12px;
+      line-height:1.5;
+    }
+
+    .label{
+      display:block;
+      font-size:.75rem;
+      font-weight:900;
+      text-transform:uppercase;
+      opacity:.72;
+      margin-bottom:4px;
+      letter-spacing:.05em;
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .stat{
+      background:linear-gradient(180deg,#fff,#fff6dc);
+      border:3px solid rgba(30,24,52,.1);
+      border-radius:22px;
+      padding:16px;
+      text-align:center;
+    }
+
+    .stat-number{
+      display:block;
+      font-size:2rem;
+      font-weight:900;
+      line-height:1;
+    }
+
+    .stat-label{
+      display:block;
+      margin-top:8px;
+      text-transform:uppercase;
+      font-size:.8rem;
+      font-weight:900;
+      opacity:.75;
+    }
+
+    .form-grid{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .two{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    input,textarea,select{
+      width:100%;
+      border:3px solid rgba(30,24,52,.14);
+      border-radius:18px;
+      padding:13px 14px;
+      font:inherit;
+      color:var(--ink);
+      background:#fff;
+      outline:none;
+      box-shadow:0 8px 16px rgba(30,24,52,.05);
+    }
+
+    input:focus,textarea:focus,select:focus{
+      border-color:var(--accent2);
+    }
+
+    textarea{min-height:110px; resize:vertical}
+
+    .btn-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      font:inherit;
+      cursor:pointer;
+    }
+
+    .btn{
+      background:#fff;
+      color:var(--ink);
+      border:3px solid var(--ink);
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      box-shadow:0 8px 0 rgba(30,24,52,.12);
+      transition:transform .16s ease;
+    }
+
+    .btn:hover{transform:translateY(-2px) rotate(-1deg)}
+    .btn-primary{background:linear-gradient(135deg,#ffef66,#ff9f43)}
+    .btn-secondary{background:linear-gradient(135deg,#d8fff0,#8ef5ea)}
+    .btn-danger{background:linear-gradient(135deg,#ffd5de,#ff9aad)}
+    .btn-small{padding:9px 12px; font-size:.82rem}
+
+    .hidden{display:none !important}
+
+    .login-overlay{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,.1), transparent 30%),
+        linear-gradient(135deg,#ff7675,#6c5ce7);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+
+    .login-card{
+      width:min(760px,100%);
+      background:rgba(255,255,255,.96);
+      border:4px solid rgba(30,24,52,.14);
+      border-radius:32px;
+      box-shadow:0 24px 60px rgba(30,24,52,.28);
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+      text-align:center;
+    }
+
+    .login-card::after{
+      content:"PHONE OF DESTINY";
+      position:absolute;
+      top:16px;
+      right:-24px;
+      background:var(--accent);
+      color:#fff;
+      border-radius:999px;
+      padding:10px 18px;
+      border:3px solid rgba(255,255,255,.55);
+      font-weight:900;
+      transform:rotate(10deg);
+      font-size:.82rem;
+    }
+
+    .login-title{
+      margin:22px 0 10px;
+      font-size:clamp(2rem,7vw,4rem);
+      line-height:.95;
+      text-transform:uppercase;
+    }
+
+    .login-text{
+      margin:0 0 16px;
+      line-height:1.7;
+      font-size:1.02rem;
+    }
+
+    .status{
+      display:none;
+      margin-top:12px;
+      border:3px solid var(--ink);
+      border-radius:18px;
+      padding:12px 14px;
+      font-weight:900;
+    }
+
+    .status.show{display:block}
+    .status.ok{background:linear-gradient(135deg,#d8ffd0,#7bed9f); color:#10301d}
+    .status.err{background:linear-gradient(135deg,#ffd4de,#ff8fab); color:#4c1321}
+
+    .actions-inline{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    @media (max-width: 900px){
+      .grid,.mini-grid,.two{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="star" style="top:10%;left:6%;"></div>
+  <div class="star" style="top:24%;left:88%;animation-delay:1s;"></div>
+  <div class="star" style="top:74%;left:12%;animation-delay:2s;"></div>
+  <div class="burst" style="top:14%;right:10%;"></div>
+  <div class="burst" style="bottom:18%;left:4%;animation-duration:20s;"></div>
+  <div class="swirl" style="top:52%;right:4%;"></div>
+
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <div class="eyebrow">Staff nonsense access required</div>
+      <h1 class="login-title">Enter thy<br>phone number</h1>
+      <p class="login-text">
+        Only approved staff numbers may pass. If you are not authorized, the clipboard will stare at you in complete disappointment.
+      </p>
+      <div class="form-grid">
+        <input id="loginPhone" type="tel" placeholder="Enter your phone number" />
+      </div>
+      <div class="btn-row" style="justify-content:center">
+        <button id="loginBtn" class="btn btn-primary" type="button">Unlock The Portal</button>
+      </div>
+      <div id="loginStatus" class="status err"></div>
+    </div>
+  </div>
+
+  <div id="portal" class="hidden">
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">The Adventures of Gaylord Staff Portal</div>
+        <a class="back-btn" href="index.html">← Back to Main Site</a>
+      </div>
+
+      <section class="hero">
+        <div class="eyebrow">Authorized administrative foolishness</div>
+        <h1>Staff Portal</h1>
+        <p>
+          This is the secret-ish internal page for announcements, the production schedule, permissions, crew applications, and roster management. Your phone number has impressed the clipboard enough to let you in.
+        </p>
+
+        <div class="mini-grid">
+          <div class="stat">
+            <span class="stat-number" id="announcementCount">0</span>
+            <span class="stat-label">Announcements</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="scheduleCount">0</span>
+            <span class="stat-label">Schedule Items</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="crewApplicationCount">0</span>
+            <span class="stat-label">Crew Applications</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid">
+        <section class="panel">
+          <h2>Announcements</h2>
+          <p>Post updates for staff. These are visible here in the portal.</p>
+          <div id="announcementAdmin" class="hidden">
+            <div class="form-grid">
+              <input id="announcementTitle" type="text" placeholder="Announcement title" />
+              <textarea id="announcementBody" placeholder="Write the announcement"></textarea>
+            </div>
+            <div class="btn-row">
+              <button id="addAnnouncementBtn" class="btn btn-primary" type="button">Post Announcement</button>
+            </div>
+          </div>
+          <div id="announcementList" class="card-list"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Production Schedule</h2>
+          <p>This is ready now. Once you give me the real schedule, you can paste it here or I can format it for you.</p>
+          <div id="scheduleAdmin" class="hidden">
+            <div class="form-grid">
+              <input id="scheduleTitle" type="text" placeholder="Schedule item title" />
+              <div class="two">
+                <input id="scheduleTime" type="text" placeholder="Time / date" />
+                <input id="scheduleLocation" type="text" placeholder="Location" />
+              </div>
+              <textarea id="scheduleDetails" placeholder="Details / notes"></textarea>
+            </div>
+            <div class="btn-row">
+              <button id="addScheduleBtn" class="btn btn-primary" type="button">Add Schedule Item</button>
+            </div>
+          </div>
+          <div id="scheduleList" class="card-list"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Crew Applications</h2>
+          <p>Review staff / crew applications here.</p>
+          <div id="crewAppsList" class="card-list"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Crew Roster</h2>
+          <p>This is the managed list of people on the crew side. You can add people manually here.</p>
+          <div id="rosterAdmin" class="hidden">
+            <div class="form-grid">
+              <div class="two">
+                <input id="rosterName" type="text" placeholder="Name" />
+                <input id="rosterPhone" type="text" placeholder="Phone number" />
+              </div>
+              <div class="two">
+                <input id="rosterRole" type="text" placeholder="Role" />
+                <input id="rosterTeam" type="text" placeholder="Team" />
+              </div>
+              <textarea id="rosterNotes" placeholder="Notes"></textarea>
+            </div>
+            <div class="btn-row">
+              <button id="addRosterBtn" class="btn btn-primary" type="button">Add Person</button>
+            </div>
+          </div>
+          <div id="rosterList" class="card-list"></div>
+        </section>
+      </div>
+
+      <section class="panel hidden" id="permissionsPanel">
+        <h2>Permissions Management</h2>
+        <p>Only the owner number gets this panel. Add or update who can access the staff portal.</p>
+        <div class="form-grid">
+          <div class="two">
+            <input id="permName" type="text" placeholder="Person name" />
+            <input id="permPhone" type="text" placeholder="Phone number" />
+          </div>
+          <div class="two">
+            <input id="permRole" type="text" placeholder="Portal role" />
+            <select id="permAccess">
+              <option value="staff">Standard staff access</option>
+              <option value="manager">Manager access</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button id="savePermissionBtn" class="btn btn-primary" type="button">Save Permission</button>
+        </div>
+        <div id="permissionList" class="card-list" style="margin-top:14px;"></div>
+      </section>
+    </div>
+  </div>
+
+  <script type="module">
+    import { db } from './firebase-config.js';
+    import {
+      collection, doc, getDoc, getDocs, addDoc, setDoc, updateDoc, deleteDoc,
+      query, orderBy, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+    const OWNER_PHONE = "9182895779";
+
+    const loginOverlay = document.getElementById("loginOverlay");
+    const portal = document.getElementById("portal");
+    const loginPhone = document.getElementById("loginPhone");
+    const loginBtn = document.getElementById("loginBtn");
+    const loginStatus = document.getElementById("loginStatus");
+
+    const permissionsPanel = document.getElementById("permissionsPanel");
+
+    const announcementList = document.getElementById("announcementList");
+    const scheduleList = document.getElementById("scheduleList");
+    const crewAppsList = document.getElementById("crewAppsList");
+    const rosterList = document.getElementById("rosterList");
+    const permissionList = document.getElementById("permissionList");
+
+    const announcementCount = document.getElementById("announcementCount");
+    const scheduleCount = document.getElementById("scheduleCount");
+    const crewApplicationCount = document.getElementById("crewApplicationCount");
+
+    let currentUser = null;
+    let currentPhone = null;
+    let currentPermissions = {
+      canEditAnnouncements: false,
+      canEditSchedule: false,
+      canManageRoster: false,
+      canManagePermissions: false,
+      canReviewCrew: false
+    };
+
+    function normalizePhone(value) {
+      return String(value || "").replace(/\D/g, "");
+    }
+
+    function escapeHtml(text) {
+      return String(text ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function showLoginError(text) {
+      loginStatus.textContent = text;
+      loginStatus.className = "status err show";
+    }
+
+    function makeOwnerPermissions() {
+      return {
+        canEditAnnouncements: true,
+        canEditSchedule: true,
+        canManageRoster: true,
+        canManagePermissions: true,
+        canReviewCrew: true,
+        role: "Owner"
+      };
+    }
+
+    async function authenticate(phone) {
+      const normalized = normalizePhone(phone);
+      if (!normalized) {
+        showLoginError("The clipboard requires a phone number. It is stubborn like that.");
+        return;
+      }
+
+      if (normalized === OWNER_PHONE) {
+        currentPhone = normalized;
+        currentPermissions = makeOwnerPermissions();
+        currentUser = { name: "Christopher Shelley", role: "Owner" };
+        unlockPortal();
+        return;
+      }
+
+      const staffDocRef = doc(db, "staffPermissions", normalized);
+      const snap = await getDoc(staffDocRef);
+
+      if (!snap.exists()) {
+        showLoginError("That number is not authorized. The clipboard remains deeply unconvinced.");
+        return;
+      }
+
+      const data = snap.data();
+      if (data.active === false) {
+        showLoginError("That number exists, but its access is inactive. Bureaucracy strikes again.");
+        return;
+      }
+
+      currentPhone = normalized;
+      currentUser = data;
+      currentPermissions = {
+        canEditAnnouncements: !!data.canEditAnnouncements,
+        canEditSchedule: !!data.canEditSchedule,
+        canManageRoster: !!data.canManageRoster,
+        canManagePermissions: !!data.canManagePermissions,
+        canReviewCrew: !!data.canReviewCrew,
+        role: data.role || "Staff"
+      };
+      unlockPortal();
+    }
+
+    async function unlockPortal() {
+      loginOverlay.classList.add("hidden");
+      portal.classList.remove("hidden");
+
+      document.getElementById("announcementAdmin").classList.toggle("hidden", !currentPermissions.canEditAnnouncements);
+      document.getElementById("scheduleAdmin").classList.toggle("hidden", !currentPermissions.canEditSchedule);
+      document.getElementById("rosterAdmin").classList.toggle("hidden", !currentPermissions.canManageRoster);
+      permissionsPanel.classList.toggle("hidden", !currentPermissions.canManagePermissions);
+
+      await Promise.all([
+        loadAnnouncements(),
+        loadSchedule(),
+        loadCrewApplications(),
+        loadRoster(),
+        loadPermissions()
+      ]);
+    }
+
+    async function loadAnnouncements() {
+      const snap = await getDocs(query(collection(db, "announcements"), orderBy("createdAt", "desc")));
+      announcementCount.textContent = String(snap.size);
+
+      if (!snap.size) {
+        announcementList.innerHTML = `<div class="card"><h3>No announcements yet</h3><p>The clipboard is currently speechless.</p></div>`;
+        return;
+      }
+
+      announcementList.innerHTML = snap.docs.map(d => {
+        const a = d.data();
+        return `
+          <div class="card">
+            <h3>${escapeHtml(a.title || "Untitled announcement")}</h3>
+            <div class="meta">
+              <div><span class="label">Message</span>${escapeHtml(a.body || "")}</div>
+              <div><span class="label">Posted By</span>${escapeHtml(a.author || "Unknown")}</div>
+            </div>
+            ${currentPermissions.canEditAnnouncements ? `<div class="actions-inline"><button class="btn btn-danger btn-small delete-announcement" data-id="${d.id}">Delete</button></div>` : ""}
+          </div>
+        `;
+      }).join("");
+
+      document.querySelectorAll(".delete-announcement").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          await deleteDoc(doc(db, "announcements", btn.dataset.id));
+          loadAnnouncements();
+        });
+      });
+    }
+
+    async function loadSchedule() {
+      const snap = await getDocs(query(collection(db, "productionSchedule"), orderBy("createdAt", "asc")));
+      scheduleCount.textContent = String(snap.size);
+
+      if (!snap.size) {
+        scheduleList.innerHTML = `<div class="card"><h3>No schedule yet</h3><p>The production schedule awaits your glorious instructions.</p></div>`;
+        return;
+      }
+
+      scheduleList.innerHTML = snap.docs.map(d => {
+        const s = d.data();
+        return `
+          <div class="card">
+            <h3>${escapeHtml(s.title || "Untitled schedule item")}</h3>
+            <div class="meta">
+              <div><span class="label">Time / Date</span>${escapeHtml(s.time || "TBD")}</div>
+              <div><span class="label">Location</span>${escapeHtml(s.location || "TBD")}</div>
+              <div><span class="label">Details</span>${escapeHtml(s.details || "")}</div>
+            </div>
+            ${currentPermissions.canEditSchedule ? `<div class="actions-inline"><button class="btn btn-danger btn-small delete-schedule" data-id="${d.id}">Delete</button></div>` : ""}
+          </div>
+        `;
+      }).join("");
+
+      document.querySelectorAll(".delete-schedule").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          await deleteDoc(doc(db, "productionSchedule", btn.dataset.id));
+          loadSchedule();
+        });
+      });
+    }
+
+    async function loadCrewApplications() {
+      const snap = await getDocs(query(collection(db, "crewApplications"), orderBy("createdAt", "desc")));
+      crewApplicationCount.textContent = String(snap.size);
+
+      if (!snap.size) {
+        crewAppsList.innerHTML = `<div class="card"><h3>No crew applications yet</h3><p>The chaos has not yet received fresh volunteers.</p></div>`;
+        return;
+      }
+
+      crewAppsList.innerHTML = snap.docs.map(d => {
+        const c = d.data();
+        return `
+          <div class="card">
+            <h3>${escapeHtml(c.name || "Unnamed applicant")}</h3>
+            <div class="meta">
+              <div><span class="label">Phone</span>${escapeHtml(c.phone || "")}</div>
+              <div><span class="label">Email</span>${escapeHtml(c.email || "")}</div>
+              <div><span class="label">Grade</span>${escapeHtml(c.grade || "")}</div>
+              <div><span class="label">Role Requests</span>${escapeHtml(c.roleRequests || c.role || "")}</div>
+              <div><span class="label">Reason</span>${escapeHtml(c.reason || "")}</div>
+              <div><span class="label">Status</span>${escapeHtml(c.status || "Pending")}</div>
+            </div>
+            ${currentPermissions.canReviewCrew ? `
+              <div class="actions-inline">
+                <button class="btn btn-secondary btn-small approve-app" data-id="${d.id}">Approve</button>
+                <button class="btn btn-danger btn-small reject-app" data-id="${d.id}">Reject</button>
+              </div>
+            ` : ""}
+          </div>
+        `;
+      }).join("");
+
+      document.querySelectorAll(".approve-app").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          await updateDoc(doc(db, "crewApplications", btn.dataset.id), {
+            status: "Approved",
+            reviewedBy: currentUser?.name || "Unknown",
+            reviewedAt: serverTimestamp()
+          });
+          loadCrewApplications();
+        });
+      });
+
+      document.querySelectorAll(".reject-app").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          await updateDoc(doc(db, "crewApplications", btn.dataset.id), {
+            status: "Rejected",
+            reviewedBy: currentUser?.name || "Unknown",
+            reviewedAt: serverTimestamp()
+          });
+          loadCrewApplications();
+        });
+      });
+    }
+
+    async function loadRoster() {
+      const snap = await getDocs(query(collection(db, "crewRoster"), orderBy("name", "asc")));
+      if (!snap.size) {
+        rosterList.innerHTML = `<div class="card"><h3>No roster entries yet</h3><p>The crew roster is currently an empty monument to potential.</p></div>`;
+        return;
+      }
+
+      rosterList.innerHTML = snap.docs.map(d => {
+        const r = d.data();
+        return `
+          <div class="card">
+            <h3>${escapeHtml(r.name || "Unnamed person")}</h3>
+            <div class="meta">
+              <div><span class="label">Phone</span>${escapeHtml(r.phone || "")}</div>
+              <div><span class="label">Role</span>${escapeHtml(r.role || "")}</div>
+              <div><span class="label">Team</span>${escapeHtml(r.team || "")}</div>
+              <div><span class="label">Notes</span>${escapeHtml(r.notes || "")}</div>
+            </div>
+            ${currentPermissions.canManageRoster ? `<div class="actions-inline"><button class="btn btn-danger btn-small delete-roster" data-id="${d.id}">Remove</button></div>` : ""}
+          </div>
+        `;
+      }).join("");
+
+      document.querySelectorAll(".delete-roster").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          await deleteDoc(doc(db, "crewRoster", btn.dataset.id));
+          loadRoster();
+        });
+      });
+    }
+
+    async function loadPermissions() {
+      if (!currentPermissions.canManagePermissions) return;
+
+      const snap = await getDocs(query(collection(db, "staffPermissions"), orderBy("name", "asc")));
+      if (!snap.size) {
+        permissionList.innerHTML = `<div class="card"><h3>No saved permissions yet</h3><p>Only the owner number exists in pure clipboard legend form.</p></div>`;
+        return;
+      }
+
+      permissionList.innerHTML = snap.docs.map(d => {
+        const p = d.data();
+        return `
+          <div class="card">
+            <h3>${escapeHtml(p.name || "Unnamed staff person")}</h3>
+            <div class="meta">
+              <div><span class="label">Phone</span>${escapeHtml(d.id)}</div>
+              <div><span class="label">Role</span>${escapeHtml(p.role || "Staff")}</div>
+              <div><span class="label">Active</span>${p.active === false ? "No" : "Yes"}</div>
+            </div>
+            <div class="actions-inline">
+              <button class="btn btn-danger btn-small delete-permission" data-id="${d.id}">Remove Access</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      document.querySelectorAll(".delete-permission").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          await deleteDoc(doc(db, "staffPermissions", btn.dataset.id));
+          loadPermissions();
+        });
+      });
+    }
+
+    document.getElementById("addAnnouncementBtn").addEventListener("click", async () => {
+      const title = document.getElementById("announcementTitle").value.trim();
+      const body = document.getElementById("announcementBody").value.trim();
+      if (!title || !body) return;
+
+      await addDoc(collection(db, "announcements"), {
+        title,
+        body,
+        author: currentUser?.name || "Unknown",
+        createdAt: serverTimestamp()
+      });
+
+      document.getElementById("announcementTitle").value = "";
+      document.getElementById("announcementBody").value = "";
+      loadAnnouncements();
+    });
+
+    document.getElementById("addScheduleBtn").addEventListener("click", async () => {
+      const title = document.getElementById("scheduleTitle").value.trim();
+      const time = document.getElementById("scheduleTime").value.trim();
+      const location = document.getElementById("scheduleLocation").value.trim();
+      const details = document.getElementById("scheduleDetails").value.trim();
+      if (!title) return;
+
+      await addDoc(collection(db, "productionSchedule"), {
+        title,
+        time,
+        location,
+        details,
+        createdAt: serverTimestamp()
+      });
+
+      document.getElementById("scheduleTitle").value = "";
+      document.getElementById("scheduleTime").value = "";
+      document.getElementById("scheduleLocation").value = "";
+      document.getElementById("scheduleDetails").value = "";
+      loadSchedule();
+    });
+
+    document.getElementById("addRosterBtn").addEventListener("click", async () => {
+      const name = document.getElementById("rosterName").value.trim();
+      const phone = document.getElementById("rosterPhone").value.trim();
+      const role = document.getElementById("rosterRole").value.trim();
+      const team = document.getElementById("rosterTeam").value.trim();
+      const notes = document.getElementById("rosterNotes").value.trim();
+      if (!name) return;
+
+      await addDoc(collection(db, "crewRoster"), {
+        name, phone, role, team, notes,
+        createdAt: serverTimestamp()
+      });
+
+      document.getElementById("rosterName").value = "";
+      document.getElementById("rosterPhone").value = "";
+      document.getElementById("rosterRole").value = "";
+      document.getElementById("rosterTeam").value = "";
+      document.getElementById("rosterNotes").value = "";
+      loadRoster();
+    });
+
+    document.getElementById("savePermissionBtn").addEventListener("click", async () => {
+      const name = document.getElementById("permName").value.trim();
+      const phone = normalizePhone(document.getElementById("permPhone").value);
+      const role = document.getElementById("permRole").value.trim() || "Staff";
+      const access = document.getElementById("permAccess").value;
+      if (!name || !phone) return;
+
+      const manager = access === "manager";
+      await setDoc(doc(db, "staffPermissions", phone), {
+        name,
+        role,
+        active: true,
+        canEditAnnouncements: true,
+        canEditSchedule: manager,
+        canManageRoster: manager,
+        canManagePermissions: false,
+        canReviewCrew: true,
+        createdAt: serverTimestamp()
+      }, { merge: true });
+
+      document.getElementById("permName").value = "";
+      document.getElementById("permPhone").value = "";
+      document.getElementById("permRole").value = "";
+      document.getElementById("permAccess").value = "staff";
+      loadPermissions();
+    });
+
+    loginBtn.addEventListener("click", async () => {
+      loginStatus.classList.remove("show");
+      try {
+        await authenticate(loginPhone.value);
+      } catch (error) {
+        console.error(error);
+        showLoginError("Something went wrong while checking the phone number. The clipboard is having a moment.");
+      }
+    });
+
+    loginPhone.addEventListener("keydown", async (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        loginBtn.click();
+      }
+    });
+  </script>
+</body>
+</html>
