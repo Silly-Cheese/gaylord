@@ -14,7 +14,6 @@
       --bg5:#55efc4;
       --ink:#1e1834;
       --paper:#fffaf2;
-      --paper2:#fff4df;
       --accent:#ff2d55;
       --accent2:#00cec9;
       --accent3:#ffe66d;
@@ -359,11 +358,6 @@
     .btn-primary{background:linear-gradient(135deg,#ffef66,#ff9f43)}
     .btn-secondary{background:linear-gradient(135deg,#b2f7ef,#7ed6df)}
     .btn-pink{background:linear-gradient(135deg,#ffd1dc,#ff84a1)}
-    .btn-locked{
-      background:linear-gradient(135deg,#e0e0e0,#c6c6c6);
-      opacity:.72;
-      cursor:not-allowed;
-    }
 
     .poster-card{
       padding:24px;
@@ -424,8 +418,8 @@
     .countdown-shell{
       margin-top:28px;
       position:relative;
-      background:linear-gradient(135deg,#fff8cf,#ffe4ee);
-      border:4px solid rgba(30,24,52,.14);
+      background:linear-gradient(135deg,#dfffe8,#f6ffdb);
+      border:4px solid rgba(46,140,87,.28);
       border-radius:28px;
       padding:24px 18px 18px;
       box-shadow:0 16px 28px rgba(30,24,52,.12);
@@ -570,7 +564,8 @@
       font-weight:900;
       font-size:1rem;
       border:3px solid var(--ink);
-      background:linear-gradient(135deg,#fff,#ffeeb5);
+      background:linear-gradient(135deg,#d8ffd0,#7bed9f);
+      color:#12311f;
       box-shadow:0 8px 18px rgba(30,24,52,.12);
       animation:statusDance 2.6s ease-in-out infinite;
     }
@@ -779,151 +774,11 @@
       100%{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}
     }
 
-    .open-mode .countdown-shell{
-      background:linear-gradient(135deg,#dfffe8,#f6ffdb);
-      border-color:rgba(46,140,87,.28);
-    }
-
-    .open-mode .status-banner{
-      background:linear-gradient(135deg,#d8ffd0,#7bed9f);
-      color:#12311f;
-    }
-
-    .secret-modal,
-    .global-fail-overlay{
-      position:fixed;
-      inset:0;
-      z-index:9998;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .28s ease;
-    }
-
-    .secret-modal.show,
-    .global-fail-overlay.show{
-      opacity:1;
-      pointer-events:auto;
-    }
-
-    .secret-modal{
-      background:rgba(19,16,34,.68);
-      backdrop-filter:blur(8px);
-    }
-
-    .global-fail-overlay{
-      background:linear-gradient(135deg,#7a0012,#ff2d55);
-      text-align:center;
-      color:white;
-      z-index:10001;
-    }
-
-    .modal-card{
-      width:min(720px,100%);
-      background:rgba(255,255,255,.96);
-      border:4px solid rgba(30,24,52,.14);
-      border-radius:32px;
-      box-shadow:0 24px 60px rgba(30,24,52,.28);
-      padding:26px;
-      position:relative;
-      overflow:hidden;
-      color:var(--ink);
-    }
-
-    .modal-card::after{
-      content:"SUPER DUPER SECRET";
-      position:absolute;
-      right:-28px;
-      top:14px;
-      background:var(--accent);
-      color:white;
-      border:3px solid rgba(255,255,255,.55);
-      border-radius:999px;
-      padding:10px 18px;
-      font-weight:900;
-      transform:rotate(10deg);
-      font-size:.82rem;
-    }
-
-    .modal-title{
-      margin:16px 0 10px;
-      font-size:clamp(2rem,6vw,3.6rem);
-      text-transform:uppercase;
-      line-height:.95;
-      text-shadow:2px 2px 0 rgba(255,255,255,.6);
-    }
-
-    .modal-text{
-      margin:0 0 16px;
-      line-height:1.7;
-      font-size:1.02rem;
-    }
-
-    .modal-grid{
-      display:grid;
-      gap:12px;
-      margin-top:14px;
-    }
-
-    .modal-grid input{
-      width:100%;
-      border:3px solid rgba(30,24,52,.14);
-      border-radius:18px;
-      padding:14px;
-      font:inherit;
-      background:#fff;
-      color:var(--ink);
-      outline:none;
-    }
-
-    .modal-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:16px;
-    }
-
-    .modal-error{
-      display:none;
-      margin-top:14px;
-      border:3px solid #7a0012;
-      background:linear-gradient(135deg,#ffd5de,#ff9aad);
-      color:#5e1020;
-      border-radius:18px;
-      padding:12px 14px;
-      font-weight:900;
-    }
-
-    .modal-error.show{display:block}
-
-    .fail-big{
-      width:min(1100px,100%);
-      padding:30px;
-    }
-
-    .fail-big h2{
-      margin:0;
-      font-size:clamp(2.2rem,8vw,5.8rem);
-      line-height:.92;
-      text-transform:uppercase;
-      text-shadow:4px 4px 0 rgba(0,0,0,.22);
-    }
-
-    .fail-big p{
-      font-size:clamp(1rem,3vw,1.4rem);
-      margin:18px 0 0;
-      font-weight:800;
-      line-height:1.5;
-    }
-
     @media (max-width: 980px){
       .hero-inner,.cast-layout,.credits,.fun-grid{grid-template-columns:1fr}
       .hero{padding-top:34px}
       .countdown-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .hero-card::after,.poster-card::after,.badge-button,.modal-card::after{
+      .hero-card::after,.poster-card::after,.badge-button{
         position:static;
         display:inline-block;
         margin-top:12px;
@@ -941,7 +796,7 @@
       .countdown-grid{grid-template-columns:1fr 1fr}
       .topbar-inner{justify-content:center}
       .count-value{font-size:2.3rem}
-      .hero-card,.section-card,.poster-card,.modal-card{padding:20px}
+      .hero-card,.section-card,.poster-card{padding:20px}
     }
   </style>
 </head>
@@ -989,10 +844,10 @@
           </p>
 
           <div class="countdown-shell" id="countdown">
-            <button class="badge-button explode-on-click" id="secretBadge" type="button">Tomorrow • 3:30 PM CST</button>
-            <h2 class="countdown-heading">The hilariously serious countdown to pre-release viewing signups</h2>
+            <button class="badge-button explode-on-click" id="secretBadge" type="button">NOW OPEN • FIRST 5 ONLY</button>
+            <h2 class="countdown-heading">Pre-release viewing signups are now live</h2>
             <p class="countdown-sub" id="countdownText">
-              The sacred hour is still over the horizon. The forms slumber, the bureaucracy dreams, and tomorrow waits in suspicious majesty.
+              The sacred hour has passed. The forms are awake. The first five brave souls may now enter the pre-release application before the clipboard slams the gate shut.
             </p>
 
             <div class="countdown-grid">
@@ -1015,23 +870,26 @@
             </div>
 
             <div class="count-chaos">
-              <div class="chaos-pill" id="chaosOne">The gates of preview are creaking.</div>
-              <div class="chaos-pill" id="chaosTwo">The clock has become theatrical.</div>
-              <div class="chaos-pill" id="chaosThree">Humanity nears the forms.</div>
-              <div class="chaos-pill" id="chaosFour">Please clutch your pearls.</div>
+              <div class="chaos-pill" id="chaosOne">The forms are awake.</div>
+              <div class="chaos-pill" id="chaosTwo">The clipboard smells opportunity.</div>
+              <div class="chaos-pill" id="chaosThree">Only the first five survive.</div>
+              <div class="chaos-pill" id="chaosFour">Administrative destiny is upon us.</div>
             </div>
 
             <div class="status-banner" id="statusBanner">
-              PRE-RELEASE SIGNUPS ARE CURRENTLY LOCKED BY THE CLOCK
+              PRE-RELEASE SIGNUPS ARE NOW OPEN — FIRST 5 ONLY
             </div>
           </div>
 
           <div class="hero-actions">
-            <a class="btn btn-primary explode-on-click btn-locked" id="previewButton" href="preview-application.html" aria-disabled="true">
-              Pre-Release Signups Locked
+            <a class="btn btn-primary explode-on-click" id="previewButton" href="preview-application.html">
+              Apply for Pre-Release Viewing
             </a>
             <a class="btn btn-pink explode-on-click" href="crew-application.html">
               Apply for Staff / Crew
+            </a>
+            <a class="btn btn-secondary explode-on-click" href="staff-portal.html">
+              Staff Portal
             </a>
             <a class="btn btn-secondary explode-on-click" href="https://www.youtube.com/channel/UCioveEI2fUb76p97JselZ5w" target="_blank" rel="noopener noreferrer">
               Watch Trailer & Updates
@@ -1116,7 +974,7 @@
               <h3>Project Highlights</h3>
               <div class="flip-grid">
                 <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Style</strong><span>What to expect</span></div><div class="flip-face flip-back">Cartoony, dramatic, ridiculous, and fully committed to being way too much.</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Preview Access</strong><span>Administrative Destiny</span></div><div class="flip-face flip-back">To unlock pre-release viewing, you must survive the Super Duper Secret Clipboard Challenge.</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Preview Access</strong><span>Administrative Destiny</span></div><div class="flip-face flip-back">The gate is open right now, but only the first five brave souls make it through before the clipboard closes it.</div></div></div>
                 <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Mission</strong><span>Completely Reasonable Goal</span></div><div class="flip-face flip-back">Make this project feel like a historical event, a heroic saga, and a paperwork emergency all at once.</div></div></div>
               </div>
             </div>
@@ -1136,7 +994,7 @@
             </div>
             <div class="credit-box explode-on-click">
               <h3>Applications</h3>
-              <p>Pre-release applications remain locked until either the countdown ends or the Super Duper Secret Clipboard Challenge says otherwise.</p>
+              <p>Pre-release signups are live now and limited to the first five. Staff and crew applications remain open through the crew page, while the staff portal handles internal chaos.</p>
             </div>
           </div>
         </div>
@@ -1150,37 +1008,9 @@
     </div>
   </footer>
 
-  <div class="secret-modal" id="secretModal">
-    <div class="modal-card">
-      <div class="eyebrow">The Super Duper Secret Clipboard Challenge</div>
-      <h2 class="modal-title">Prove thyself,<br>paperwork pilgrim</h2>
-      <p class="modal-text">
-        Enter your name and the super duper secret code. If you succeed, the pre-release application unlocks for you. If you fail... the clipboard may make an incredibly public scene about it.
-      </p>
-      <div class="modal-grid">
-        <input id="secretName" type="text" placeholder="Enter your name" />
-        <input id="secretCode" type="password" placeholder="Enter the secret code" />
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-primary" id="submitSecret" type="button">Challenge The Clipboard</button>
-        <button class="btn" id="cancelSecret" type="button">Retreat With Dignity</button>
-      </div>
-      <div class="modal-error" id="modalError">
-        Incorrect code. The clipboard has narrowed its eyes and is preparing consequences.
-      </div>
-    </div>
-  </div>
-
-  <div class="global-fail-overlay" id="failOverlay">
-    <div class="fail-big">
-      <h2 id="failTitle">SOMEONE HAS FAILED THE CLIPBOARD CHALLENGE</h2>
-      <p id="failText">The internet trembles. The paperwork screams. Everyone will now be dramatically refreshed.</p>
-    </div>
-  </div>
-
   <script type="module">
     import { db } from './firebase-config.js';
-    import { doc, setDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+    import { doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
     const loadingScreen = document.getElementById("loadingScreen");
 
@@ -1227,11 +1057,56 @@
       });
     });
 
+    async function ensureDoc(pathParts, data) {
+      const ref = doc(db, ...pathParts);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) {
+        await setDoc(ref, {
+          ...data,
+          createdAt: serverTimestamp(),
+          autoBuilt: true
+        });
+      }
+    }
+
+    async function autoBuildFirestore() {
+      await ensureDoc(
+        ["siteConfig", "previewGate"],
+        {
+          total: 0,
+          max: 5,
+          isOpen: true
+        }
+      );
+
+      await ensureDoc(
+        ["siteConfig", "productionSettings"],
+        {
+          projectTitle: "The Adventures of Gaylord",
+          scheduleMode: "manual"
+        }
+      );
+
+      await ensureDoc(
+        ["staffPermissions", "9182895779"],
+        {
+          name: "Christopher Shelley",
+          role: "Owner",
+          active: true,
+          canEditAnnouncements: true,
+          canEditSchedule: true,
+          canManageRoster: true,
+          canManagePermissions: true,
+          canReviewCrew: true
+        }
+      );
+    }
+
+    autoBuildFirestore().catch(console.error);
+
     const previewButton = document.getElementById("previewButton");
-    const countdownShell = document.getElementById("countdown");
     const statusBanner = document.getElementById("statusBanner");
     const countdownText = document.getElementById("countdownText");
-
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minutesEl = document.getElementById("minutes");
@@ -1242,242 +1117,23 @@
     const chaosThree = document.getElementById("chaosThree");
     const chaosFour = document.getElementById("chaosFour");
 
-    const secretBadge = document.getElementById("secretBadge");
-    const secretModal = document.getElementById("secretModal");
-    const secretName = document.getElementById("secretName");
-    const secretCode = document.getElementById("secretCode");
-    const submitSecret = document.getElementById("submitSecret");
-    const cancelSecret = document.getElementById("cancelSecret");
-    const modalError = document.getElementById("modalError");
-
-    const failOverlay = document.getElementById("failOverlay");
-    const failTitle = document.getElementById("failTitle");
-    const failText = document.getElementById("failText");
-
-    const SECRET_CODE = "THE CLOCK HAS FALLEN";
-    const SIGNAL_DOC = doc(db, "siteSignals", "clipboardChallenge");
-
-    const localUnlockKey = "gaylord_preview_unlocked";
-    const localSignalSeenKey = "gaylord_last_signal_seen";
-
-    const chaosMessages = [
-      [
-        "The forms are sleeping.",
-        "The hype is legally binding.",
-        "Administrative destiny detected.",
-        "Please remain dramatically seated."
-      ],
-      [
-        "The clipboard senses movement.",
-        "The countdown has opinions.",
-        "Paperwork is approaching heroically.",
-        "Mild panic is optional."
-      ],
-      [
-        "Tomorrow grows stronger.",
-        "The signups crave daylight.",
-        "Destiny is filling out boxes.",
-        "This is absurdly official."
-      ],
-      [
-        "The gates of preview are creaking.",
-        "The clock has become theatrical.",
-        "Humanity nears the forms.",
-        "Please clutch your pearls."
-      ]
-    ];
-
-    function getChicagoTargetForTomorrow() {
-      const now = new Date();
-
-      const chicagoNowString = now.toLocaleString("en-US", { timeZone: "America/Chicago" });
-      const chicagoNow = new Date(chicagoNowString);
-
-      const offset = chicagoNow.getTime() - now.getTime();
-
-      const chicagoTargetWall = new Date(chicagoNow);
-      chicagoTargetWall.setDate(chicagoTargetWall.getDate() + 1);
-      chicagoTargetWall.setHours(15, 30, 0, 0);
-
-      return new Date(chicagoTargetWall.getTime() - offset);
-    }
-
-    const targetDate = getChicagoTargetForTomorrow();
-
-    function pad(num) {
-      return String(num).padStart(2, "0");
-    }
-
-    function setPreviewUnlocked() {
-      sessionStorage.setItem(localUnlockKey, "true");
-      previewButton.classList.remove("btn-locked");
-      previewButton.textContent = "Apply for Pre-Release Viewing";
-      previewButton.setAttribute("aria-disabled", "false");
-      statusBanner.textContent = "THE CLIPBOARD HAS GRANTED YOU PERSONAL PRE-RELEASE ACCESS.";
-      countdownText.textContent = "Against all odds, the clipboard looked upon your code and said, fine. The pre-release application is now unlocked for you personally.";
-    }
-
-    function unlockPreviewByTime() {
-      countdownShell.classList.add("open-mode");
-      previewButton.classList.remove("btn-locked");
-      previewButton.textContent = "Apply for Pre-Release Viewing";
-      previewButton.setAttribute("aria-disabled", "false");
-      statusBanner.textContent = "THE CLOCK HAS FALLEN. THE FORMS ARE NOW OPEN.";
-      countdownText.textContent = "The hour has arrived. The gate has opened. The paperwork rises. If you seek pre-release glory, this is your moment.";
-      chaosOne.textContent = "The forms are awake.";
-      chaosTwo.textContent = "The gate has opened.";
-      chaosThree.textContent = "Destiny loves a submit button.";
-      chaosFour.textContent = "Go forth with administrative courage.";
+    function updateOpenState() {
       daysEl.textContent = "00";
       hoursEl.textContent = "00";
       minutesEl.textContent = "00";
       secondsEl.textContent = "00";
+
+      countdownText.textContent = "The sacred hour has passed. The forms are awake. The first five brave souls may now enter the pre-release application before the clipboard slams the gate shut.";
+      chaosOne.textContent = "The forms are awake.";
+      chaosTwo.textContent = "The clipboard smells opportunity.";
+      chaosThree.textContent = "Only the first five survive.";
+      chaosFour.textContent = "Administrative destiny is upon us.";
+
+      previewButton.textContent = "Apply for Pre-Release Viewing";
+      statusBanner.textContent = "PRE-RELEASE SIGNUPS ARE NOW OPEN — FIRST 5 ONLY";
     }
 
-    function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate.getTime() - now.getTime();
-
-      if (diff <= 0) {
-        unlockPreviewByTime();
-        return;
-      }
-
-      const totalSeconds = Math.floor(diff / 1000);
-      const days = Math.floor(totalSeconds / 86400);
-      const hours = Math.floor((totalSeconds % 86400) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-
-      daysEl.textContent = pad(days);
-      hoursEl.textContent = pad(hours);
-      minutesEl.textContent = pad(minutes);
-      secondsEl.textContent = pad(seconds);
-
-      if (days >= 1) {
-        countdownText.textContent = "The sacred hour is still over the horizon. The forms slumber, the bureaucracy dreams, and tomorrow waits in suspicious majesty.";
-      } else if (hours >= 6) {
-        countdownText.textContent = "The countdown marches onward with wildly unnecessary importance. The pre-release forms remain locked behind the mighty wall of time itself.";
-      } else if (hours >= 1) {
-        countdownText.textContent = "The moment draws near. The forms tremble. The air thickens with destiny, paperwork, and deeply unreasonable suspense.";
-      } else if (minutes >= 10) {
-        countdownText.textContent = "This is no longer a casual wait. This is a high-stakes administrative showdown between humanity and the clock.";
-      } else {
-        countdownText.textContent = "WE ARE IN THE FINAL MINUTES. HISTORY, chaos, and submit buttons are approaching at dangerous speed.";
-      }
-
-      const rotationIndex = Math.floor((Date.now() / 4000) % chaosMessages.length);
-      const lines = chaosMessages[rotationIndex];
-      chaosOne.textContent = lines[0];
-      chaosTwo.textContent = lines[1];
-      chaosThree.textContent = lines[2];
-      chaosFour.textContent = lines[3];
-    }
-
-    if (sessionStorage.getItem(localUnlockKey) === "true") {
-      setPreviewUnlocked();
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    previewButton.addEventListener("click", (e) => {
-      const locked = previewButton.classList.contains("btn-locked");
-      if (locked) {
-        e.preventDefault();
-        createExplosion(e.clientX, e.clientY);
-        statusBanner.textContent = "NICE TRY. THE CLOCK OR THE CLIPBOARD MUST GRANT PERMISSION.";
-      }
-    });
-
-    secretBadge.addEventListener("click", () => {
-      modalError.classList.remove("show");
-      secretName.value = "";
-      secretCode.value = "";
-      secretModal.classList.add("show");
-      setTimeout(() => secretName.focus(), 50);
-    });
-
-    cancelSecret.addEventListener("click", () => {
-      secretModal.classList.remove("show");
-    });
-
-    async function broadcastFailure(name) {
-      const eventId = "fail_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
-      await setDoc(SIGNAL_DOC, {
-        type: "failed",
-        name: name || "SOMEONE",
-        eventId,
-        createdAt: serverTimestamp(),
-        message: `${name || "SOMEONE"} HAS FAILED THE CLIPBOARD CHALLENGE`
-      });
-    }
-
-    submitSecret.addEventListener("click", async () => {
-      const enteredName = (secretName.value || "").trim();
-      const enteredCode = (secretCode.value || "").trim();
-
-      if (!enteredName || !enteredCode) {
-        modalError.textContent = "The clipboard requires both a name and a code. Bureaucracy is cruel like that.";
-        modalError.classList.add("show");
-        return;
-      }
-
-      if (enteredCode === SECRET_CODE) {
-        secretModal.classList.remove("show");
-        modalError.classList.remove("show");
-        createExplosion(window.innerWidth / 2, window.innerHeight / 2);
-        setPreviewUnlocked();
-        await setDoc(SIGNAL_DOC, {
-          type: "success",
-          name: enteredName,
-          eventId: "success_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8),
-          createdAt: serverTimestamp(),
-          message: `${enteredName} HAS CONQUERED THE CLIPBOARD`
-        });
-        return;
-      }
-
-      modalError.textContent = "Incorrect code. The clipboard has narrowed its eyes and is preparing consequences.";
-      modalError.classList.add("show");
-      secretModal.classList.remove("show");
-
-      try {
-        await broadcastFailure(enteredName);
-      } catch (error) {
-        console.error(error);
-      }
-    });
-
-    secretCode.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") submitSecret.click();
-    });
-
-    secretName.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") submitSecret.click();
-    });
-
-    onSnapshot(SIGNAL_DOC, (snap) => {
-      if (!snap.exists()) return;
-
-      const data = snap.data();
-      if (!data || !data.eventId) return;
-
-      const lastSeen = sessionStorage.getItem(localSignalSeenKey);
-      if (lastSeen === data.eventId) return;
-      sessionStorage.setItem(localSignalSeenKey, data.eventId);
-
-      if (data.type === "failed") {
-        const displayName = (data.name || "SOMEONE").toUpperCase();
-        failTitle.textContent = `${displayName} HAS FAILED THE CLIPBOARD CHALLENGE`;
-        failText.textContent = "THE PAPERWORK IS OFFENDED. EVERYONE WILL NOW BE DRAMATICALLY REFRESHED.";
-        failOverlay.classList.add("show");
-
-        setTimeout(() => {
-          location.reload();
-        }, 2600);
-      }
-    });
+    updateOpenState();
   </script>
 </body>
 </html>
