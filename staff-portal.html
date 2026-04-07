@@ -6,30 +6,16 @@
   <title>Staff Portal | The Adventures of Gaylord</title>
   <style>
     :root{
-      --bg1:#6c5ce7;
-      --bg2:#ff7675;
-      --bg3:#fdcb6e;
-      --bg4:#74b9ff;
-      --bg5:#55efc4;
-      --ink:#1e1834;
-      --paper:#fffaf2;
-      --card:rgba(255,255,255,.94);
-      --accent:#ff2d55;
-      --accent2:#00cec9;
-      --good:#7bed9f;
-      --bad:#ff8fab;
-      --shadow:0 18px 50px rgba(30,24,52,.22);
-      --radius:28px;
-      --max:1200px;
+      --bg1:#6c5ce7; --bg2:#ff7675; --bg3:#fdcb6e; --bg4:#74b9ff; --bg5:#55efc4;
+      --ink:#1e1834; --paper:#fffaf2; --card:rgba(255,255,255,.94);
+      --accent:#ff2d55; --accent2:#00cec9; --shadow:0 18px 50px rgba(30,24,52,.22);
+      --radius:28px; --max:1200px;
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-
     body{
-      margin:0;
-      font-family:"Trebuchet MS","Comic Sans MS",Arial,sans-serif;
-      color:var(--ink);
+      margin:0; min-height:100vh; overflow-x:hidden;
+      font-family:"Trebuchet MS","Comic Sans MS",Arial,sans-serif; color:var(--ink);
       background:
         radial-gradient(circle at 20% 20%, rgba(255,255,255,.55), transparent 20%),
         radial-gradient(circle at 80% 10%, rgba(255,255,255,.45), transparent 16%),
@@ -37,8 +23,6 @@
         linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4),var(--bg5));
       background-size:100% 100%,100% 100%,100% 100%,300% 300%;
       animation:bgShift 16s ease infinite;
-      min-height:100vh;
-      overflow-x:hidden;
     }
 
     @keyframes bgShift{
@@ -47,62 +31,13 @@
       100%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
     }
 
-    .wrap{
-      width:min(var(--max),calc(100% - 20px));
-      margin:22px auto 40px;
-      position:relative;
-      z-index:2;
-    }
-
-    .star,.burst,.swirl{
-      position:fixed;
-      pointer-events:none;
-      z-index:0;
-      opacity:.75;
-    }
-
-    .star{
-      width:18px;height:18px;background:#fff8b2;
-      clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
-      animation:floaty 8s ease-in-out infinite;
-    }
-    .burst{
-      width:80px;height:80px;background:rgba(255,255,255,.35);
-      clip-path:polygon(50% 0%,60% 25%,85% 15%,75% 40%,100% 50%,75% 60%,85% 85%,60% 75%,50% 100%,40% 75%,15% 85%,25% 60%,0% 50%,25% 40%,15% 15%,40% 25%);
-      animation:spinSlow 16s linear infinite;
-    }
-    .swirl{
-      width:110px;height:110px;border:10px dashed rgba(255,255,255,.42);border-radius:50%;
-      animation:spinSlow 20s linear infinite;
-    }
-    @keyframes floaty{
-      0%,100%{transform:translateY(0) rotate(0)}
-      50%{transform:translateY(-18px) rotate(12deg)}
-    }
-    @keyframes spinSlow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-
-    .topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-    }
-
+    .wrap{width:min(var(--max),calc(100% - 20px));margin:22px auto 40px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
     .brand,.back-btn,.pill{
-      background:#fff;
-      border:3px solid var(--ink);
-      border-radius:999px;
-      padding:10px 16px;
-      font-weight:900;
-      box-shadow:6px 6px 0 rgba(30,24,52,.14);
-      text-decoration:none;
-      color:var(--ink);
+      background:#fff;border:3px solid var(--ink);border-radius:999px;padding:10px 16px;
+      font-weight:900;box-shadow:6px 6px 0 rgba(30,24,52,.14);text-decoration:none;color:var(--ink)
     }
-
     .brand{transform:rotate(-1deg); text-transform:uppercase}
-    .back-btn:hover{transform:translateY(-2px) rotate(-1deg)}
 
     .hero,.panel,.card{
       background:var(--card);
@@ -111,299 +46,97 @@
       box-shadow:var(--shadow);
     }
 
-    .hero{
-      padding:28px;
-      margin-bottom:18px;
-      position:relative;
-      overflow:hidden;
-    }
-
+    .hero{padding:28px;margin-bottom:18px;position:relative;overflow:hidden}
     .hero::after{
       content:"STAFF NONSENSE AUTHORIZED";
-      position:absolute;
-      top:16px;
-      right:-30px;
-      background:var(--accent);
-      color:#fff;
-      padding:10px 18px;
-      border-radius:999px;
-      border:3px solid rgba(255,255,255,.55);
-      transform:rotate(10deg);
-      font-weight:900;
-      font-size:.82rem;
+      position:absolute;top:16px;right:-30px;background:var(--accent);color:#fff;
+      padding:10px 18px;border-radius:999px;border:3px solid rgba(255,255,255,.55);
+      transform:rotate(10deg);font-weight:900;font-size:.82rem;
     }
 
-    .eyebrow{
-      display:inline-block;
-      background:#fff;
-      border:3px solid var(--ink);
-      border-radius:999px;
-      padding:8px 14px;
-      font-weight:900;
-      transform:rotate(-3deg);
-      margin-bottom:14px;
-      font-size:.82rem;
-    }
+    .eyebrow{display:inline-block;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:8px 14px;font-weight:900;transform:rotate(-3deg);margin-bottom:14px;font-size:.82rem}
+    h1{margin:0;font-size:clamp(2.2rem,7vw,4.8rem);line-height:.95;text-transform:uppercase;text-shadow:3px 3px 0 rgba(255,255,255,.65)}
+    .hero p{margin:16px 0 0;line-height:1.7;font-size:1.03rem;max-width:75ch}
 
-    h1{
-      margin:0;
-      font-size:clamp(2.2rem,7vw,4.8rem);
-      line-height:.95;
-      text-transform:uppercase;
-      text-shadow:3px 3px 0 rgba(255,255,255,.65);
-    }
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .panel{padding:22px}
+    .panel h2{margin:0 0 8px;text-transform:uppercase;line-height:1}
+    .panel p{margin:0 0 14px;line-height:1.6}
 
-    .hero p{
-      margin:16px 0 0;
-      line-height:1.7;
-      font-size:1.03rem;
-      max-width:75ch;
-    }
+    .card-list{display:grid;gap:12px}
+    .card{padding:16px;background:linear-gradient(180deg,#fff,#fffaf0)}
+    .card h3{margin:0 0 8px;text-transform:uppercase;font-size:1rem}
+    .meta{display:grid;gap:8px}
+    .meta div{background:rgba(255,255,255,.8);border:2px solid rgba(30,24,52,.08);border-radius:14px;padding:10px 12px;line-height:1.5}
+    .label{display:block;font-size:.75rem;font-weight:900;text-transform:uppercase;opacity:.72;margin-bottom:4px;letter-spacing:.05em}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:18px;
-    }
+    .mini-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+    .stat{background:linear-gradient(180deg,#fff,#fff6dc);border:3px solid rgba(30,24,52,.1);border-radius:22px;padding:16px;text-align:center}
+    .stat-number{display:block;font-size:2rem;font-weight:900;line-height:1}
+    .stat-label{display:block;margin-top:8px;text-transform:uppercase;font-size:.8rem;font-weight:900;opacity:.75}
 
-    .panel{
-      padding:22px;
-    }
-
-    .panel h2{
-      margin:0 0 8px;
-      text-transform:uppercase;
-      line-height:1;
-    }
-
-    .panel p{
-      margin:0 0 14px;
-      line-height:1.6;
-    }
-
-    .card-list{
-      display:grid;
-      gap:12px;
-    }
-
-    .card{
-      padding:16px;
-      background:linear-gradient(180deg,#fff,#fffaf0);
-    }
-
-    .card h3{
-      margin:0 0 8px;
-      text-transform:uppercase;
-      font-size:1rem;
-    }
-
-    .meta{
-      display:grid;
-      gap:8px;
-    }
-
-    .meta div{
-      background:rgba(255,255,255,.8);
-      border:2px solid rgba(30,24,52,.08);
-      border-radius:14px;
-      padding:10px 12px;
-      line-height:1.5;
-    }
-
-    .label{
-      display:block;
-      font-size:.75rem;
-      font-weight:900;
-      text-transform:uppercase;
-      opacity:.72;
-      margin-bottom:4px;
-      letter-spacing:.05em;
-    }
-
-    .mini-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:14px;
-      margin-top:16px;
-    }
-
-    .stat{
-      background:linear-gradient(180deg,#fff,#fff6dc);
-      border:3px solid rgba(30,24,52,.1);
-      border-radius:22px;
-      padding:16px;
-      text-align:center;
-    }
-
-    .stat-number{
-      display:block;
-      font-size:2rem;
-      font-weight:900;
-      line-height:1;
-    }
-
-    .stat-label{
-      display:block;
-      margin-top:8px;
-      text-transform:uppercase;
-      font-size:.8rem;
-      font-weight:900;
-      opacity:.75;
-    }
-
-    .form-grid{
-      display:grid;
-      gap:12px;
-      margin-top:12px;
-    }
-
-    .two{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
+    .form-grid{display:grid;gap:12px;margin-top:12px}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
     input,textarea,select{
-      width:100%;
-      border:3px solid rgba(30,24,52,.14);
-      border-radius:18px;
-      padding:13px 14px;
-      font:inherit;
-      color:var(--ink);
-      background:#fff;
-      outline:none;
-      box-shadow:0 8px 16px rgba(30,24,52,.05);
+      width:100%;border:3px solid rgba(30,24,52,.14);border-radius:18px;padding:13px 14px;font:inherit;color:var(--ink);
+      background:#fff;outline:none;box-shadow:0 8px 16px rgba(30,24,52,.05)
     }
+    textarea{min-height:110px;resize:vertical}
+    input:focus,textarea:focus,select:focus{border-color:var(--accent2)}
 
-    input:focus,textarea:focus,select:focus{
-      border-color:var(--accent2);
-    }
-
-    textarea{min-height:110px; resize:vertical}
-
-    .btn-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-
-    button{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border:none;
-      font:inherit;
-      cursor:pointer;
-    }
+    .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{display:inline-flex;align-items:center;justify-content:center;border:none;font:inherit;cursor:pointer}
 
     .btn{
-      background:#fff;
-      color:var(--ink);
-      border:3px solid var(--ink);
-      border-radius:999px;
-      padding:12px 16px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-      box-shadow:0 8px 0 rgba(30,24,52,.12);
-      transition:transform .16s ease;
+      background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:999px;padding:12px 16px;font-weight:900;
+      text-transform:uppercase;letter-spacing:.04em;box-shadow:0 8px 0 rgba(30,24,52,.12);transition:transform .16s ease
     }
-
     .btn:hover{transform:translateY(-2px) rotate(-1deg)}
     .btn-primary{background:linear-gradient(135deg,#ffef66,#ff9f43)}
     .btn-secondary{background:linear-gradient(135deg,#d8fff0,#8ef5ea)}
     .btn-danger{background:linear-gradient(135deg,#ffd5de,#ff9aad)}
-    .btn-small{padding:9px 12px; font-size:.82rem}
+    .btn-small{padding:9px 12px;font-size:.82rem}
 
     .hidden{display:none !important}
 
     .login-overlay{
-      position:fixed;
-      inset:0;
-      z-index:9999;
+      position:fixed;inset:0;z-index:9999;
       background:
         radial-gradient(circle at center, rgba(255,255,255,.1), transparent 30%),
         linear-gradient(135deg,#ff7675,#6c5ce7);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
+      display:flex;align-items:center;justify-content:center;padding:18px;
     }
 
     .login-card{
-      width:min(760px,100%);
-      background:rgba(255,255,255,.96);
-      border:4px solid rgba(30,24,52,.14);
-      border-radius:32px;
-      box-shadow:0 24px 60px rgba(30,24,52,.28);
-      padding:28px;
-      position:relative;
-      overflow:hidden;
-      text-align:center;
+      width:min(760px,100%);background:rgba(255,255,255,.96);border:4px solid rgba(30,24,52,.14);
+      border-radius:32px;box-shadow:0 24px 60px rgba(30,24,52,.28);padding:28px;position:relative;overflow:hidden;text-align:center;
     }
 
     .login-card::after{
       content:"PHONE OF DESTINY";
-      position:absolute;
-      top:16px;
-      right:-24px;
-      background:var(--accent);
-      color:#fff;
-      border-radius:999px;
-      padding:10px 18px;
-      border:3px solid rgba(255,255,255,.55);
-      font-weight:900;
-      transform:rotate(10deg);
-      font-size:.82rem;
+      position:absolute;top:16px;right:-24px;background:var(--accent);color:#fff;border-radius:999px;padding:10px 18px;
+      border:3px solid rgba(255,255,255,.55);font-weight:900;transform:rotate(10deg);font-size:.82rem;
     }
 
-    .login-title{
-      margin:22px 0 10px;
-      font-size:clamp(2rem,7vw,4rem);
-      line-height:.95;
-      text-transform:uppercase;
-    }
-
-    .login-text{
-      margin:0 0 16px;
-      line-height:1.7;
-      font-size:1.02rem;
-    }
-
-    .status{
-      display:none;
-      margin-top:12px;
-      border:3px solid var(--ink);
-      border-radius:18px;
-      padding:12px 14px;
-      font-weight:900;
-    }
-
+    .login-title{margin:22px 0 10px;font-size:clamp(2rem,7vw,4rem);line-height:.95;text-transform:uppercase}
+    .login-text{margin:0 0 16px;line-height:1.7;font-size:1.02rem}
+    .status{display:none;margin-top:12px;border:3px solid var(--ink);border-radius:18px;padding:12px 14px;font-weight:900}
     .status.show{display:block}
     .status.ok{background:linear-gradient(135deg,#d8ffd0,#7bed9f); color:#10301d}
     .status.err{background:linear-gradient(135deg,#ffd4de,#ff8fab); color:#4c1321}
-
-    .actions-inline{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:10px;
-    }
+    .actions-inline{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 
     @media (max-width: 900px){
       .grid,.mini-grid,.two{grid-template-columns:1fr}
     }
+    @media (max-width: 760px){
+      .hero::after,.login-card::after{position:static;display:inline-block;margin-top:10px;transform:rotate(-2deg)}
+      .hero,.panel,.login-card{padding:18px}
+    }
   </style>
 </head>
 <body>
-  <div class="star" style="top:10%;left:6%;"></div>
-  <div class="star" style="top:24%;left:88%;animation-delay:1s;"></div>
-  <div class="star" style="top:74%;left:12%;animation-delay:2s;"></div>
-  <div class="burst" style="top:14%;right:10%;"></div>
-  <div class="burst" style="bottom:18%;left:4%;animation-duration:20s;"></div>
-  <div class="swirl" style="top:52%;right:4%;"></div>
-
   <div class="login-overlay" id="loginOverlay">
     <div class="login-card">
       <div class="eyebrow">Staff nonsense access required</div>
@@ -432,7 +165,7 @@
         <div class="eyebrow">Authorized administrative foolishness</div>
         <h1>Staff Portal</h1>
         <p>
-          This is the secret-ish internal page for announcements, the production schedule, permissions, crew applications, and roster management. Your phone number has impressed the clipboard enough to let you in.
+          This is the internal page for announcements, the production schedule, permissions, crew applications, and roster management. If you are seeing this, the clipboard has temporarily chosen peace.
         </p>
 
         <div class="mini-grid">
@@ -454,7 +187,7 @@
       <div class="grid">
         <section class="panel">
           <h2>Announcements</h2>
-          <p>Post updates for staff. These are visible here in the portal.</p>
+          <p>Post updates for staff.</p>
           <div id="announcementAdmin" class="hidden">
             <div class="form-grid">
               <input id="announcementTitle" type="text" placeholder="Announcement title" />
@@ -462,6 +195,7 @@
             </div>
             <div class="btn-row">
               <button id="addAnnouncementBtn" class="btn btn-primary" type="button">Post Announcement</button>
+              <button id="refreshAnnouncementsBtn" class="btn btn-secondary" type="button">Refresh</button>
             </div>
           </div>
           <div id="announcementList" class="card-list"></div>
@@ -469,7 +203,7 @@
 
         <section class="panel">
           <h2>Production Schedule</h2>
-          <p>This is ready now. Once you give me the real schedule, you can paste it here or I can format it for you.</p>
+          <p>Add and manage schedule items here.</p>
           <div id="scheduleAdmin" class="hidden">
             <div class="form-grid">
               <input id="scheduleTitle" type="text" placeholder="Schedule item title" />
@@ -481,6 +215,7 @@
             </div>
             <div class="btn-row">
               <button id="addScheduleBtn" class="btn btn-primary" type="button">Add Schedule Item</button>
+              <button id="refreshScheduleBtn" class="btn btn-secondary" type="button">Refresh</button>
             </div>
           </div>
           <div id="scheduleList" class="card-list"></div>
@@ -489,12 +224,15 @@
         <section class="panel">
           <h2>Crew Applications</h2>
           <p>Review staff / crew applications here.</p>
+          <div class="btn-row">
+            <button id="refreshCrewAppsBtn" class="btn btn-secondary" type="button">Refresh Applications</button>
+          </div>
           <div id="crewAppsList" class="card-list"></div>
         </section>
 
         <section class="panel">
           <h2>Crew Roster</h2>
-          <p>This is the managed list of people on the crew side. You can add people manually here.</p>
+          <p>Add and manage people on the crew page here.</p>
           <div id="rosterAdmin" class="hidden">
             <div class="form-grid">
               <div class="two">
@@ -509,6 +247,7 @@
             </div>
             <div class="btn-row">
               <button id="addRosterBtn" class="btn btn-primary" type="button">Add Person</button>
+              <button id="refreshRosterBtn" class="btn btn-secondary" type="button">Refresh Roster</button>
             </div>
           </div>
           <div id="rosterList" class="card-list"></div>
@@ -517,7 +256,7 @@
 
       <section class="panel hidden" id="permissionsPanel">
         <h2>Permissions Management</h2>
-        <p>Only the owner number gets this panel. Add or update who can access the staff portal.</p>
+        <p>Only the owner number gets this panel.</p>
         <div class="form-grid">
           <div class="two">
             <input id="permName" type="text" placeholder="Person name" />
@@ -533,6 +272,7 @@
         </div>
         <div class="btn-row">
           <button id="savePermissionBtn" class="btn btn-primary" type="button">Save Permission</button>
+          <button id="refreshPermissionsBtn" class="btn btn-secondary" type="button">Refresh Permissions</button>
         </div>
         <div id="permissionList" class="card-list" style="margin-top:14px;"></div>
       </section>
@@ -567,7 +307,6 @@
     const crewApplicationCount = document.getElementById("crewApplicationCount");
 
     let currentUser = null;
-    let currentPhone = null;
     let currentPermissions = {
       canEditAnnouncements: false,
       canEditSchedule: false,
@@ -594,6 +333,20 @@
       loginStatus.className = "status err show";
     }
 
+    async function ensureOwnerPermission() {
+      await setDoc(doc(db, "staffPermissions", OWNER_PHONE), {
+        name: "Christopher Shelley",
+        role: "Owner",
+        active: true,
+        canEditAnnouncements: true,
+        canEditSchedule: true,
+        canManageRoster: true,
+        canManagePermissions: true,
+        canReviewCrew: true,
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+    }
+
     function makeOwnerPermissions() {
       return {
         canEditAnnouncements: true,
@@ -612,17 +365,16 @@
         return;
       }
 
+      await ensureOwnerPermission();
+
       if (normalized === OWNER_PHONE) {
-        currentPhone = normalized;
         currentPermissions = makeOwnerPermissions();
         currentUser = { name: "Christopher Shelley", role: "Owner" };
         unlockPortal();
         return;
       }
 
-      const staffDocRef = doc(db, "staffPermissions", normalized);
-      const snap = await getDoc(staffDocRef);
-
+      const snap = await getDoc(doc(db, "staffPermissions", normalized));
       if (!snap.exists()) {
         showLoginError("That number is not authorized. The clipboard remains deeply unconvinced.");
         return;
@@ -630,11 +382,10 @@
 
       const data = snap.data();
       if (data.active === false) {
-        showLoginError("That number exists, but its access is inactive. Bureaucracy strikes again.");
+        showLoginError("That number exists, but its access is inactive.");
         return;
       }
 
-      currentPhone = normalized;
       currentUser = data;
       currentPermissions = {
         canEditAnnouncements: !!data.canEditAnnouncements,
@@ -656,6 +407,10 @@
       document.getElementById("rosterAdmin").classList.toggle("hidden", !currentPermissions.canManageRoster);
       permissionsPanel.classList.toggle("hidden", !currentPermissions.canManagePermissions);
 
+      await refreshAll();
+    }
+
+    async function refreshAll() {
       await Promise.all([
         loadAnnouncements(),
         loadSchedule(),
@@ -689,10 +444,10 @@
       }).join("");
 
       document.querySelectorAll(".delete-announcement").forEach(btn => {
-        btn.addEventListener("click", async () => {
+        btn.onclick = async () => {
           await deleteDoc(doc(db, "announcements", btn.dataset.id));
-          loadAnnouncements();
-        });
+          await loadAnnouncements();
+        };
       });
     }
 
@@ -721,10 +476,10 @@
       }).join("");
 
       document.querySelectorAll(".delete-schedule").forEach(btn => {
-        btn.addEventListener("click", async () => {
+        btn.onclick = async () => {
           await deleteDoc(doc(db, "productionSchedule", btn.dataset.id));
-          loadSchedule();
-        });
+          await loadSchedule();
+        };
       });
     }
 
@@ -754,32 +509,31 @@
               <div class="actions-inline">
                 <button class="btn btn-secondary btn-small approve-app" data-id="${d.id}">Approve</button>
                 <button class="btn btn-danger btn-small reject-app" data-id="${d.id}">Reject</button>
-              </div>
-            ` : ""}
+              </div>` : ""}
           </div>
         `;
       }).join("");
 
       document.querySelectorAll(".approve-app").forEach(btn => {
-        btn.addEventListener("click", async () => {
+        btn.onclick = async () => {
           await updateDoc(doc(db, "crewApplications", btn.dataset.id), {
             status: "Approved",
             reviewedBy: currentUser?.name || "Unknown",
             reviewedAt: serverTimestamp()
           });
-          loadCrewApplications();
-        });
+          await loadCrewApplications();
+        };
       });
 
       document.querySelectorAll(".reject-app").forEach(btn => {
-        btn.addEventListener("click", async () => {
+        btn.onclick = async () => {
           await updateDoc(doc(db, "crewApplications", btn.dataset.id), {
             status: "Rejected",
             reviewedBy: currentUser?.name || "Unknown",
             reviewedAt: serverTimestamp()
           });
-          loadCrewApplications();
-        });
+          await loadCrewApplications();
+        };
       });
     }
 
@@ -807,10 +561,10 @@
       }).join("");
 
       document.querySelectorAll(".delete-roster").forEach(btn => {
-        btn.addEventListener("click", async () => {
+        btn.onclick = async () => {
           await deleteDoc(doc(db, "crewRoster", btn.dataset.id));
-          loadRoster();
-        });
+          await loadRoster();
+        };
       });
     }
 
@@ -841,14 +595,14 @@
       }).join("");
 
       document.querySelectorAll(".delete-permission").forEach(btn => {
-        btn.addEventListener("click", async () => {
+        btn.onclick = async () => {
           await deleteDoc(doc(db, "staffPermissions", btn.dataset.id));
-          loadPermissions();
-        });
+          await loadPermissions();
+        };
       });
     }
 
-    document.getElementById("addAnnouncementBtn").addEventListener("click", async () => {
+    document.getElementById("addAnnouncementBtn").onclick = async () => {
       const title = document.getElementById("announcementTitle").value.trim();
       const body = document.getElementById("announcementBody").value.trim();
       if (!title || !body) return;
@@ -862,10 +616,10 @@
 
       document.getElementById("announcementTitle").value = "";
       document.getElementById("announcementBody").value = "";
-      loadAnnouncements();
-    });
+      await loadAnnouncements();
+    };
 
-    document.getElementById("addScheduleBtn").addEventListener("click", async () => {
+    document.getElementById("addScheduleBtn").onclick = async () => {
       const title = document.getElementById("scheduleTitle").value.trim();
       const time = document.getElementById("scheduleTime").value.trim();
       const location = document.getElementById("scheduleLocation").value.trim();
@@ -873,10 +627,7 @@
       if (!title) return;
 
       await addDoc(collection(db, "productionSchedule"), {
-        title,
-        time,
-        location,
-        details,
+        title, time, location, details,
         createdAt: serverTimestamp()
       });
 
@@ -884,10 +635,10 @@
       document.getElementById("scheduleTime").value = "";
       document.getElementById("scheduleLocation").value = "";
       document.getElementById("scheduleDetails").value = "";
-      loadSchedule();
-    });
+      await loadSchedule();
+    };
 
-    document.getElementById("addRosterBtn").addEventListener("click", async () => {
+    document.getElementById("addRosterBtn").onclick = async () => {
       const name = document.getElementById("rosterName").value.trim();
       const phone = document.getElementById("rosterPhone").value.trim();
       const role = document.getElementById("rosterRole").value.trim();
@@ -905,10 +656,10 @@
       document.getElementById("rosterRole").value = "";
       document.getElementById("rosterTeam").value = "";
       document.getElementById("rosterNotes").value = "";
-      loadRoster();
-    });
+      await loadRoster();
+    };
 
-    document.getElementById("savePermissionBtn").addEventListener("click", async () => {
+    document.getElementById("savePermissionBtn").onclick = async () => {
       const name = document.getElementById("permName").value.trim();
       const phone = normalizePhone(document.getElementById("permPhone").value);
       const role = document.getElementById("permRole").value.trim() || "Staff";
@@ -925,17 +676,23 @@
         canManageRoster: manager,
         canManagePermissions: false,
         canReviewCrew: true,
-        createdAt: serverTimestamp()
+        updatedAt: serverTimestamp()
       }, { merge: true });
 
       document.getElementById("permName").value = "";
       document.getElementById("permPhone").value = "";
       document.getElementById("permRole").value = "";
       document.getElementById("permAccess").value = "staff";
-      loadPermissions();
-    });
+      await loadPermissions();
+    };
 
-    loginBtn.addEventListener("click", async () => {
+    document.getElementById("refreshAnnouncementsBtn").onclick = loadAnnouncements;
+    document.getElementById("refreshScheduleBtn").onclick = loadSchedule;
+    document.getElementById("refreshCrewAppsBtn").onclick = loadCrewApplications;
+    document.getElementById("refreshRosterBtn").onclick = loadRoster;
+    document.getElementById("refreshPermissionsBtn").onclick = loadPermissions;
+
+    loginBtn.onclick = async () => {
       loginStatus.classList.remove("show");
       try {
         await authenticate(loginPhone.value);
@@ -943,9 +700,9 @@
         console.error(error);
         showLoginError("Something went wrong while checking the phone number. The clipboard is having a moment.");
       }
-    });
+    };
 
-    loginPhone.addEventListener("keydown", async (e) => {
+    loginPhone.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
         loginBtn.click();
