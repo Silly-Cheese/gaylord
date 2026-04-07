@@ -8,8 +8,8 @@
     :root{
       --bg1:#6c5ce7; --bg2:#ff7675; --bg3:#fdcb6e; --bg4:#74b9ff; --bg5:#55efc4;
       --ink:#1e1834; --paper:#fffaf2; --card:rgba(255,255,255,.93);
-      --accent:#ff2d55; --accent2:#00cec9; --good:#7bed9f; --bad:#ff8fab;
-      --shadow:0 18px 50px rgba(30,24,52,.22); --radius:28px; --max:920px;
+      --accent:#ff2d55; --accent2:#00cec9; --shadow:0 18px 50px rgba(30,24,52,.22);
+      --radius:28px; --max:920px;
     }
     *{box-sizing:border-box}
     body{
@@ -34,25 +34,24 @@
       background:#fff;border:3px solid var(--ink);border-radius:999px;padding:10px 16px;
       font-weight:900;box-shadow:6px 6px 0 rgba(30,24,52,.14);text-decoration:none;color:var(--ink)
     }
-    .brand{transform:rotate(-1deg); text-transform:uppercase}
+    .brand{transform:rotate(-1deg);text-transform:uppercase}
     .hero-card,.form-card,.note-card{
       background:var(--card); border:4px solid rgba(30,24,52,.12); border-radius:var(--radius); box-shadow:var(--shadow);
     }
     .hero-card{padding:28px; position:relative; overflow:hidden; margin-bottom:18px}
     .hero-card::after{
-      content:"FIRST FIVE ONLY"; position:absolute; top:16px; right:-20px; background:var(--accent); color:#fff;
+      content:"PRE-RELEASE IS OPEN"; position:absolute; top:16px; right:-18px; background:var(--accent); color:#fff;
       padding:10px 18px; border-radius:999px; border:3px solid rgba(255,255,255,.5); font-weight:900; transform:rotate(10deg)
     }
     .eyebrow{display:inline-block;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:8px 14px;font-weight:900;font-size:.82rem;transform:rotate(-3deg);margin-bottom:14px}
     h1{margin:0;font-size:clamp(2.1rem,7vw,4.5rem);line-height:.95;text-transform:uppercase;text-shadow:3px 3px 0 rgba(255,255,255,.65)}
     .hero-card p{margin:16px 0 0;line-height:1.7;font-size:1.05rem;max-width:70ch}
     .note-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
-    .note-card{padding:16px;background:linear-gradient(180deg,#fff,#fff6dc);transition:transform .18s ease, box-shadow .18s ease}
-    .note-card:hover{transform:rotate(-2deg) translateY(-5px);box-shadow:0 14px 24px rgba(30,24,52,.14)}
+    .note-card{padding:16px;background:linear-gradient(180deg,#fff,#fff6dc)}
     .note-card h3{margin:0 0 8px;text-transform:uppercase;font-size:1rem}
     .form-card{padding:26px;position:relative;overflow:hidden}
     .form-card::before{
-      content:"THE VIEWING COUNCIL IS COUNTING"; position:absolute; top:14px; left:18px; background:#fff;
+      content:"THE VIEWING COUNCIL IS WATCHING"; position:absolute; top:14px; left:18px; background:#fff;
       border:2px solid var(--ink); border-radius:999px; padding:7px 12px; font-size:.76rem; font-weight:900; transform:rotate(-3deg)
     }
     .section-title{margin:30px 0 8px;font-size:1.8rem;text-transform:uppercase;line-height:1}
@@ -72,7 +71,6 @@
       border:3px solid var(--ink);border-radius:999px;padding:14px 22px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;
       box-shadow:0 8px 0 rgba(30,24,52,.12);cursor:pointer
     }
-    .submit-btn[disabled]{opacity:.6;cursor:not-allowed}
     .status{font-weight:900;font-size:.98rem;padding:12px 16px;border-radius:999px;border:3px solid var(--ink);background:#fff;display:none}
     .status.show{display:inline-block}
     .status.success{background:linear-gradient(135deg,#d8ffd0,#7bed9f); color:#10301d}
@@ -93,24 +91,24 @@
     </div>
 
     <section class="hero-card">
-      <div class="eyebrow">Pre-release glory has been unleashed</div>
+      <div class="eyebrow">The gate is open</div>
       <h1>Pre-Release<br>Viewing Application</h1>
       <p>
-        The gate is now open, but only for the first five brave souls who successfully get their names into the official records before the clipboard slams shut.
+        The form is now fully open. No countdown nonsense. No first-five restriction. Just pure paperwork destiny.
       </p>
 
       <div class="note-grid">
         <div class="note-card">
-          <h3>Limit</h3>
-          <p>Only the first 5 successful signups make it in. After that, the gate closes.</p>
+          <h3>Open Access</h3>
+          <p>Anyone who reaches this page can apply now.</p>
         </div>
         <div class="note-card">
           <h3>What this means</h3>
-          <p>You are racing against the invisible machinery of paperwork and destiny.</p>
+          <p>The clipboard has stopped pretending to be selective.</p>
         </div>
         <div class="note-card">
           <h3>Current status</h3>
-          <p id="spotsText">Summoning the sacred signup count...</p>
+          <p>Applications are fully open and operational.</p>
         </div>
       </div>
     </section>
@@ -118,10 +116,10 @@
     <section class="form-card">
       <h2 class="section-title">Present thy credentials</h2>
       <p class="section-sub">
-        Enter your information below. The viewing council is counting and the clipboard is in a mood.
+        Enter your information below. The viewing council is still dramatic, but no longer restrictive.
       </p>
 
-      <div class="status-pill" id="openStatus">Checking whether the gate is open...</div>
+      <div class="status-pill">PRE-RELEASE IS OPEN</div>
 
       <form id="previewForm">
         <div class="grid" style="margin-top:16px;">
@@ -148,7 +146,7 @@
         </div>
 
         <div class="helper" style="margin-top:14px;">
-          By submitting, you are effectively announcing to the universe that you wish to be counted among the first five.
+          By submitting, you are officially placing yourself before the glorious pre-release paperwork machine.
         </div>
 
         <div class="submit-row">
@@ -161,42 +159,11 @@
 
   <script type="module">
     import { db } from './firebase-config.js';
-    import {
-      collection, doc, getDoc, runTransaction, serverTimestamp
-    } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
-
-    const GATE_DOC = doc(db, "siteConfig", "previewGate");
-    const MAX_SIGNUPS = 5;
+    import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
     const form = document.getElementById("previewForm");
     const submitBtn = document.getElementById("submitBtn");
     const statusMessage = document.getElementById("statusMessage");
-    const openStatus = document.getElementById("openStatus");
-    const spotsText = document.getElementById("spotsText");
-
-    async function refreshGateView() {
-      const snap = await getDoc(GATE_DOC);
-      let total = 0;
-      let isOpen = true;
-
-      if (snap.exists()) {
-        const data = snap.data();
-        total = Number(data.total || 0);
-        isOpen = data.isOpen !== false && total < MAX_SIGNUPS;
-      }
-
-      const remaining = Math.max(0, MAX_SIGNUPS - total);
-
-      if (isOpen) {
-        openStatus.textContent = `PRE-RELEASE IS OPEN — ${remaining} SPOT${remaining === 1 ? "" : "S"} REMAIN`;
-        spotsText.textContent = `${remaining} spot${remaining === 1 ? "" : "s"} remain before the clipboard closes the gate.`;
-        submitBtn.disabled = false;
-      } else {
-        openStatus.textContent = "THE PRE-RELEASE GATE IS CLOSED";
-        spotsText.textContent = "All 5 spots have been claimed. The clipboard has ended the festivities.";
-        submitBtn.disabled = true;
-      }
-    }
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -205,63 +172,26 @@
       statusMessage.className = "status";
       statusMessage.textContent = "";
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const grade = document.getElementById("grade").value;
-
       try {
-        const newRef = doc(collection(db, "previewApplications"));
-
-        await runTransaction(db, async (transaction) => {
-          const gateSnap = await transaction.get(GATE_DOC);
-
-          let total = 0;
-          let isOpen = true;
-
-          if (gateSnap.exists()) {
-            const gateData = gateSnap.data();
-            total = Number(gateData.total || 0);
-            isOpen = gateData.isOpen !== false;
-          }
-
-          if (!isOpen || total >= MAX_SIGNUPS) {
-            throw new Error("FULL");
-          }
-
-          const nextTotal = total + 1;
-          transaction.set(newRef, {
-            name,
-            email,
-            grade,
-            createdAt: serverTimestamp()
-          });
-
-          transaction.set(GATE_DOC, {
-            total: nextTotal,
-            max: MAX_SIGNUPS,
-            isOpen: nextTotal < MAX_SIGNUPS,
-            updatedAt: serverTimestamp()
-          }, { merge: true });
+        await addDoc(collection(db, "previewApplications"), {
+          name: document.getElementById("name").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          grade: document.getElementById("grade").value,
+          createdAt: serverTimestamp()
         });
 
-        statusMessage.textContent = "Application submitted. You have entered the official pre-release records.";
+        statusMessage.textContent = "Application submitted. Your name now echoes through the pre-release records.";
         statusMessage.className = "status show success";
         form.reset();
       } catch (error) {
         console.error(error);
-        if (error.message === "FULL") {
-          statusMessage.textContent = "Too late. The first 5 spots are gone and the clipboard has closed the gate.";
-        } else {
-          statusMessage.textContent = "Submission failed. Firestore is being dramatic.";
-        }
+        statusMessage.textContent = "Submission failed. Firestore is being dramatic.";
         statusMessage.className = "status show error";
       } finally {
+        submitBtn.disabled = false;
         submitBtn.textContent = "Submit Application";
-        await refreshGateView();
       }
     });
-
-    refreshGateView();
   </script>
 </body>
 </html>
