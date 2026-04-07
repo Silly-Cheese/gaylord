@@ -18,7 +18,6 @@
       --accent2:#00cec9;
       --accent3:#ffe66d;
       --good:#7bed9f;
-      --bad:#ff5f6d;
       --card:rgba(255,255,255,.92);
       --shadow:0 18px 50px rgba(30,24,52,.22);
       --radius:28px;
@@ -27,6 +26,7 @@
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+
     body{
       margin:0;
       font-family:"Trebuchet MS","Comic Sans MS",Arial,sans-serif;
@@ -184,6 +184,44 @@
       100%{width:100%}
     }
 
+    .dismiss-banner{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:linear-gradient(135deg,#d8ffd0,#7bed9f);
+      border-bottom:4px solid rgba(30,24,52,.16);
+      box-shadow:0 10px 20px rgba(30,24,52,.1);
+    }
+
+    .dismiss-banner.hidden{display:none}
+
+    .banner-inner{
+      width:min(var(--max),calc(100% - 24px));
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:12px 0;
+      font-weight:900;
+    }
+
+    .banner-inner span{
+      line-height:1.4;
+    }
+
+    .banner-close{
+      border:none;
+      cursor:pointer;
+      background:#fff;
+      color:var(--ink);
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:900;
+      border:3px solid var(--ink);
+      box-shadow:0 6px 0 rgba(30,24,52,.12);
+    }
+
     .topbar{
       position:sticky;
       top:0;
@@ -192,6 +230,8 @@
       background:rgba(255,250,242,.74);
       border-bottom:3px solid rgba(30,24,52,.08);
     }
+
+    .with-banner .topbar{top:58px}
 
     .topbar-inner,.section-inner,.hero-inner,.footer-inner{
       width:min(var(--max),calc(100% - 32px));
@@ -342,7 +382,7 @@
       font-weight:900;
       border:3px solid var(--ink);
       box-shadow:0 8px 0 rgba(30,24,52,.16);
-      transition:transform .16s ease,box-shadow .16s ease,opacity .16s ease,filter .16s ease;
+      transition:transform .16s ease,box-shadow .16s ease,filter .16s ease;
       text-transform:uppercase;
       letter-spacing:.04em;
       cursor:pointer;
@@ -415,19 +455,19 @@
 
     .poster-card:hover .poster-title{transform:rotate(-5deg) scale(1.05)}
 
-    .countdown-shell{
+    .madness-shell{
       margin-top:28px;
       position:relative;
-      background:linear-gradient(135deg,#dfffe8,#f6ffdb);
-      border:4px solid rgba(46,140,87,.28);
+      background:linear-gradient(135deg,#fff8cf,#ffe4ee);
+      border:4px solid rgba(30,24,52,.14);
       border-radius:28px;
       padding:24px 18px 18px;
       box-shadow:0 16px 28px rgba(30,24,52,.12);
       overflow:hidden;
     }
 
-    .countdown-shell::before{
-      content:"PRE-RELEASE VIEWING SIGNUPS";
+    .madness-shell::before{
+      content:"OFFICIAL LEVEL OF HYPE";
       position:absolute;
       left:18px;
       top:14px;
@@ -441,11 +481,10 @@
       transform:rotate(-3deg);
     }
 
-    .badge-button{
+    .madness-badge{
       position:absolute;
       right:14px;
       top:14px;
-      border:none;
       background:linear-gradient(135deg,#16e0d0,#06c7b9);
       color:white;
       border-radius:999px;
@@ -454,86 +493,86 @@
       font-weight:900;
       text-transform:uppercase;
       letter-spacing:.05em;
-      cursor:pointer;
       border:3px solid rgba(255,255,255,.55);
       transform:rotate(2deg);
       box-shadow:0 10px 22px rgba(0,0,0,.12);
-      transition:transform .16s ease,filter .16s ease;
     }
 
-    .badge-button:hover{
-      transform:rotate(-1deg) scale(1.04);
-      filter:saturate(1.08);
-    }
-
-    .countdown-heading{
+    .madness-heading{
       margin:34px 0 8px;
       text-transform:uppercase;
       font-size:1.25rem;
       letter-spacing:.04em;
     }
 
-    .countdown-sub{
+    .madness-sub{
       margin:0 auto 16px;
       max-width:60ch;
       line-height:1.6;
       font-size:.98rem;
     }
 
-    .countdown-grid{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:14px;
-      margin-top:14px;
-    }
-
-    .count-box{
-      position:relative;
+    .madness-meter{
+      margin-top:16px;
+      padding:16px;
       background:linear-gradient(180deg,#fff,#fffaf0);
       border:3px solid rgba(30,24,52,.12);
       border-radius:24px;
-      padding:16px 10px;
       box-shadow:0 10px 20px rgba(30,24,52,.08);
-      animation:boxWobble 3s ease-in-out infinite;
     }
 
-    .count-box:nth-child(2){animation-delay:.15s}
-    .count-box:nth-child(3){animation-delay:.3s}
-    .count-box:nth-child(4){animation-delay:.45s}
-
-    @keyframes boxWobble{
-      0%,100%{transform:rotate(0) translateY(0)}
-      25%{transform:rotate(-1deg) translateY(-3px)}
-      50%{transform:rotate(1deg) translateY(0)}
-      75%{transform:rotate(-.5deg) translateY(2px)}
-    }
-
-    .count-label{
-      display:block;
-      margin-top:8px;
-      font-size:.82rem;
+    .meter-top{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-bottom:12px;
       font-weight:900;
       text-transform:uppercase;
-      letter-spacing:.08em;
-      opacity:.74;
+      letter-spacing:.05em;
+      font-size:.9rem;
     }
 
-    .count-value{
-      font-size:clamp(2rem,5vw,4rem);
+    .meter-track{
+      position:relative;
+      height:32px;
+      background:rgba(30,24,52,.09);
+      border-radius:999px;
+      overflow:hidden;
+      border:3px solid rgba(30,24,52,.16);
+    }
+
+    .meter-fill{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,#7bed9f,#ffe66d,#ff9f43,#ff2d55);
+      border-radius:999px;
+      transition:width .7s ease;
+      animation:meterGlow 2s linear infinite;
+    }
+
+    @keyframes meterGlow{
+      0%{filter:saturate(1)}
+      50%{filter:saturate(1.2)}
+      100%{filter:saturate(1)}
+    }
+
+    .meter-number{
+      margin-top:12px;
+      font-size:clamp(2rem,6vw,4.2rem);
       font-weight:900;
       line-height:1;
-      letter-spacing:.02em;
-      display:block;
       text-shadow:3px 3px 0 rgba(255,230,109,.55);
       animation:numberPulse 1s ease-in-out infinite;
     }
 
     @keyframes numberPulse{
       0%,100%{transform:scale(1)}
-      50%{transform:scale(1.06)}
+      50%{transform:scale(1.05)}
     }
 
-    .count-chaos{
+    .comment-chaos{
       margin-top:14px;
       display:flex;
       flex-wrap:wrap;
@@ -556,7 +595,7 @@
     .chaos-pill:nth-child(3){transform:rotate(-4deg)}
     .chaos-pill:nth-child(4){transform:rotate(3deg)}
 
-    .status-banner{
+    .rotating-comment{
       margin-top:18px;
       display:inline-block;
       border-radius:999px;
@@ -564,8 +603,7 @@
       font-weight:900;
       font-size:1rem;
       border:3px solid var(--ink);
-      background:linear-gradient(135deg,#d8ffd0,#7bed9f);
-      color:#12311f;
+      background:linear-gradient(135deg,#fff,#ffeeb5);
       box-shadow:0 8px 18px rgba(30,24,52,.12);
       animation:statusDance 2.6s ease-in-out infinite;
     }
@@ -777,14 +815,13 @@
     @media (max-width: 980px){
       .hero-inner,.cast-layout,.credits,.fun-grid{grid-template-columns:1fr}
       .hero{padding-top:34px}
-      .countdown-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .hero-card::after,.poster-card::after,.badge-button{
+      .hero-card::after,.poster-card::after,.madness-badge{
         position:static;
         display:inline-block;
         margin-top:12px;
         transform:rotate(-2deg);
       }
-      .countdown-shell::before{
+      .madness-shell::before{
         position:static;
         display:inline-block;
         margin-bottom:12px;
@@ -793,22 +830,28 @@
 
     @media (max-width: 620px){
       nav{display:none}
-      .countdown-grid{grid-template-columns:1fr 1fr}
       .topbar-inner{justify-content:center}
-      .count-value{font-size:2.3rem}
       .hero-card,.section-card,.poster-card{padding:20px}
+      .banner-inner{align-items:flex-start}
     }
   </style>
 </head>
-<body class="loading">
+<body class="loading with-banner">
   <div class="loading-screen" id="loadingScreen">
     <div class="loading-content">
       <div class="loading-badge">Please stand by for cinematic nonsense</div>
       <h1 class="loading-title">Loading<br>The Adventures<br>of Gaylord</h1>
-      <p class="loading-subtitle">Preparing chaos, beans, destiny, and a totally reasonable amount of paperwork...</p>
+      <p class="loading-subtitle">Preparing chaos, beans, destiny, and several completely unnecessary levels of hype...</p>
       <div class="loading-bar-wrap">
         <div class="loading-bar"></div>
       </div>
+    </div>
+  </div>
+
+  <div class="dismiss-banner" id="preReleaseBanner">
+    <div class="banner-inner">
+      <span>PRE-RELEASE APPLICATIONS ARE OPEN NOW. THIS IS NOT A DRILL. THE CLIPBOARD HAS RELEASED THE PAPERWORK.</span>
+      <button class="banner-close" id="closeBanner" type="button">Dismiss The Hype</button>
     </div>
   </div>
 
@@ -826,7 +869,7 @@
       <div class="brand">The Adventures of Gaylord</div>
       <nav>
         <a href="#about">About</a>
-        <a href="#countdown">Countdown</a>
+        <a href="#madness">Madness</a>
         <a href="#cast">Cast & Crew</a>
         <a href="#credits">Project</a>
       </nav>
@@ -843,41 +886,33 @@
             A wild comedy project with gigantic energy, ridiculous characters, suspicious levels of drama, and the kind of advertising that acts like this is the most important motion picture event in the history of humanity, beans, and whatever else is floating through space.
           </p>
 
-          <div class="countdown-shell" id="countdown">
-            <button class="badge-button explode-on-click" id="secretBadge" type="button">NOW OPEN • FIRST 5 ONLY</button>
-            <h2 class="countdown-heading">Pre-release viewing signups are now live</h2>
-            <p class="countdown-sub" id="countdownText">
-              The sacred hour has passed. The forms are awake. The first five brave souls may now enter the pre-release application before the clipboard slams the gate shut.
+          <div class="madness-shell" id="madness">
+            <div class="madness-badge">ABSURDITY DETECTOR</div>
+            <h2 class="madness-heading">Official live measurement of total cinematic nonsense</h2>
+            <p class="madness-sub" id="madnessSub">
+              Scientists, philosophers, and one very stressed clipboard have all agreed that this situation has become completely unreasonable in the funniest possible way.
             </p>
 
-            <div class="countdown-grid">
-              <div class="count-box">
-                <span class="count-value" id="days">00</span>
-                <span class="count-label">Days</span>
+            <div class="madness-meter">
+              <div class="meter-top">
+                <span>Current nonsense level</span>
+                <span id="meterLabel">Elevated buffoonery</span>
               </div>
-              <div class="count-box">
-                <span class="count-value" id="hours">00</span>
-                <span class="count-label">Hours</span>
+              <div class="meter-track">
+                <div class="meter-fill" id="meterFill"></div>
               </div>
-              <div class="count-box">
-                <span class="count-value" id="minutes">00</span>
-                <span class="count-label">Minutes</span>
-              </div>
-              <div class="count-box">
-                <span class="count-value" id="seconds">00</span>
-                <span class="count-label">Seconds</span>
-              </div>
+              <div class="meter-number" id="meterNumber">108%</div>
             </div>
 
-            <div class="count-chaos">
-              <div class="chaos-pill" id="chaosOne">The forms are awake.</div>
-              <div class="chaos-pill" id="chaosTwo">The clipboard smells opportunity.</div>
-              <div class="chaos-pill" id="chaosThree">Only the first five survive.</div>
-              <div class="chaos-pill" id="chaosFour">Administrative destiny is upon us.</div>
+            <div class="comment-chaos">
+              <div class="chaos-pill">The forms are awake.</div>
+              <div class="chaos-pill">The clipboard feels overqualified.</div>
+              <div class="chaos-pill">The drama budget has exploded.</div>
+              <div class="chaos-pill">Somebody call the Academy.</div>
             </div>
 
-            <div class="status-banner" id="statusBanner">
-              PRE-RELEASE SIGNUPS ARE NOW OPEN — FIRST 5 ONLY
+            <div class="rotating-comment" id="rotatingComment">
+              Current official statement: this project has exceeded healthy levels of silliness.
             </div>
           </div>
 
@@ -974,7 +1009,7 @@
               <h3>Project Highlights</h3>
               <div class="flip-grid">
                 <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Style</strong><span>What to expect</span></div><div class="flip-face flip-back">Cartoony, dramatic, ridiculous, and fully committed to being way too much.</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Preview Access</strong><span>Administrative Destiny</span></div><div class="flip-face flip-back">The gate is open right now, but only the first five brave souls make it through before the clipboard closes it.</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Preview Access</strong><span>Administrative Destiny</span></div><div class="flip-face flip-back">The gate is open right now, and the paperwork is strutting around like it owns the place.</div></div></div>
                 <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Mission</strong><span>Completely Reasonable Goal</span></div><div class="flip-face flip-back">Make this project feel like a historical event, a heroic saga, and a paperwork emergency all at once.</div></div></div>
               </div>
             </div>
@@ -994,7 +1029,7 @@
             </div>
             <div class="credit-box explode-on-click">
               <h3>Applications</h3>
-              <p>Pre-release signups are live now and limited to the first five. Staff and crew applications remain open through the crew page, while the staff portal handles internal chaos.</p>
+              <p>Pre-release applications are open now, the crew page is ready for chaos, and the staff portal is waiting for phone-number-based administrative nonsense.</p>
             </div>
           </div>
         </div>
@@ -1008,11 +1043,41 @@
     </div>
   </footer>
 
-  <script type="module">
-    import { db } from './firebase-config.js';
-    import { doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
-
+  <script>
     const loadingScreen = document.getElementById("loadingScreen");
+    const preReleaseBanner = document.getElementById("preReleaseBanner");
+    const closeBanner = document.getElementById("closeBanner");
+
+    const rotatingComment = document.getElementById("rotatingComment");
+    const meterFill = document.getElementById("meterFill");
+    const meterNumber = document.getElementById("meterNumber");
+    const meterLabel = document.getElementById("meterLabel");
+    const madnessSub = document.getElementById("madnessSub");
+
+    const madnessComments = [
+      "Current official statement: this project has exceeded healthy levels of silliness.",
+      "Breaking news: the clipboard has become self-aware and now demands theatrical lighting.",
+      "Experts confirm that this website is operating with dangerously inflated confidence.",
+      "A panel of imaginary critics has described this as 'deeply unnecessary' and 'incredible.'",
+      "Local authorities were asked to comment and instead simply stared at the poster.",
+      "Somewhere, a bean-shaped destiny machine is nodding in approval.",
+      "This project is now 73% chaos, 21% paperwork, and 6% unexplained confidence.",
+      "The hype department has lost all restraint and refuses to apologize.",
+      "The official nonsense committee has raised the danger level to 'remarkably goofy.'",
+      "The forms have unionized and now demand more dramatic music."
+    ];
+
+    const madnessStates = [
+      { value: 108, label: "Elevated buffoonery", sub: "Scientists, philosophers, and one very stressed clipboard have all agreed that this situation has become completely unreasonable in the funniest possible way." },
+      { value: 126, label: "Theatrical instability", sub: "The project is radiating enough dramatic nonsense to bend nearby common sense out of shape." },
+      { value: 143, label: "Heroic paperwork surge", sub: "The administrative energy has become so intense that nearby staplers may begin behaving emotionally." },
+      { value: 158, label: "Maximum goof pressure", sub: "This is no longer a normal level of excitement. This is a fully weaponized comedy atmosphere." },
+      { value: 172, label: "Legendary nonsense", sub: "The absurdity has reached folklore status and is now being passed down through extremely dramatic whispers." },
+      { value: 189, label: "Cinematic emergency", sub: "If this becomes any more over-the-top, the poster may legally qualify as a public event." }
+    ];
+
+    let commentIndex = 0;
+    let meterIndex = 0;
 
     window.addEventListener("load", () => {
       setTimeout(() => {
@@ -1020,6 +1085,31 @@
         document.body.classList.remove("loading");
       }, 2800);
     });
+
+    closeBanner.addEventListener("click", () => {
+      preReleaseBanner.classList.add("hidden");
+      document.body.classList.remove("with-banner");
+    });
+
+    function cycleMadness() {
+      commentIndex = (commentIndex + 1) % madnessComments.length;
+      meterIndex = (meterIndex + 1) % madnessStates.length;
+
+      rotatingComment.textContent = madnessComments[commentIndex];
+
+      const state = madnessStates[meterIndex];
+      meterFill.style.width = Math.min(state.value, 100) + "%";
+      meterNumber.textContent = state.value + "%";
+      meterLabel.textContent = state.label;
+      madnessSub.textContent = state.sub;
+    }
+
+    meterFill.style.width = "100%";
+    meterNumber.textContent = madnessStates[0].value + "%";
+    meterLabel.textContent = madnessStates[0].label;
+    madnessSub.textContent = madnessStates[0].sub;
+
+    setInterval(cycleMadness, 2600);
 
     function createExplosion(x, y) {
       const explosion = document.createElement("div");
@@ -1056,84 +1146,6 @@
         createExplosion(e.clientX, e.clientY);
       });
     });
-
-    async function ensureDoc(pathParts, data) {
-      const ref = doc(db, ...pathParts);
-      const snap = await getDoc(ref);
-      if (!snap.exists()) {
-        await setDoc(ref, {
-          ...data,
-          createdAt: serverTimestamp(),
-          autoBuilt: true
-        });
-      }
-    }
-
-    async function autoBuildFirestore() {
-      await ensureDoc(
-        ["siteConfig", "previewGate"],
-        {
-          total: 0,
-          max: 5,
-          isOpen: true
-        }
-      );
-
-      await ensureDoc(
-        ["siteConfig", "productionSettings"],
-        {
-          projectTitle: "The Adventures of Gaylord",
-          scheduleMode: "manual"
-        }
-      );
-
-      await ensureDoc(
-        ["staffPermissions", "9182895779"],
-        {
-          name: "Christopher Shelley",
-          role: "Owner",
-          active: true,
-          canEditAnnouncements: true,
-          canEditSchedule: true,
-          canManageRoster: true,
-          canManagePermissions: true,
-          canReviewCrew: true
-        }
-      );
-    }
-
-    autoBuildFirestore().catch(console.error);
-
-    const previewButton = document.getElementById("previewButton");
-    const statusBanner = document.getElementById("statusBanner");
-    const countdownText = document.getElementById("countdownText");
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
-
-    const chaosOne = document.getElementById("chaosOne");
-    const chaosTwo = document.getElementById("chaosTwo");
-    const chaosThree = document.getElementById("chaosThree");
-    const chaosFour = document.getElementById("chaosFour");
-
-    function updateOpenState() {
-      daysEl.textContent = "00";
-      hoursEl.textContent = "00";
-      minutesEl.textContent = "00";
-      secondsEl.textContent = "00";
-
-      countdownText.textContent = "The sacred hour has passed. The forms are awake. The first five brave souls may now enter the pre-release application before the clipboard slams the gate shut.";
-      chaosOne.textContent = "The forms are awake.";
-      chaosTwo.textContent = "The clipboard smells opportunity.";
-      chaosThree.textContent = "Only the first five survive.";
-      chaosFour.textContent = "Administrative destiny is upon us.";
-
-      previewButton.textContent = "Apply for Pre-Release Viewing";
-      statusBanner.textContent = "PRE-RELEASE SIGNUPS ARE NOW OPEN — FIRST 5 ONLY";
-    }
-
-    updateOpenState();
   </script>
 </body>
 </html>
