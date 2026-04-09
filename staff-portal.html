@@ -20,7 +20,7 @@
       --bad:#ff8fab;
       --shadow:0 18px 50px rgba(30,24,52,.22);
       --radius:28px;
-      --max:1220px;
+      --max:1240px;
     }
 
     *{box-sizing:border-box}
@@ -97,7 +97,7 @@
       margin-bottom:18px;
     }
 
-    .brand,.back-btn,.pill{
+    .brand,.back-btn{
       background:#fff;
       border:3px solid var(--ink);
       border-radius:999px;
@@ -108,14 +108,8 @@
       color:var(--ink);
     }
 
-    .brand{
-      transform:rotate(-1deg);
-      text-transform:uppercase;
-    }
-
-    .back-btn:hover{
-      transform:translateY(-2px) rotate(-1deg);
-    }
+    .brand{transform:rotate(-1deg);text-transform:uppercase}
+    .back-btn:hover{transform:translateY(-2px) rotate(-1deg)}
 
     .hero,.panel,.card{
       background:var(--card);
@@ -179,25 +173,11 @@
       gap:18px;
     }
 
-    .panel{
-      padding:22px;
-    }
+    .panel{padding:22px}
+    .panel h2{margin:0 0 8px;text-transform:uppercase;line-height:1}
+    .panel p{margin:0 0 14px;line-height:1.6}
 
-    .panel h2{
-      margin:0 0 8px;
-      text-transform:uppercase;
-      line-height:1;
-    }
-
-    .panel p{
-      margin:0 0 14px;
-      line-height:1.6;
-    }
-
-    .card-list{
-      display:grid;
-      gap:12px;
-    }
+    .card-list{display:grid;gap:12px}
 
     .card{
       padding:16px;
@@ -210,11 +190,7 @@
       font-size:1rem;
     }
 
-    .meta{
-      display:grid;
-      gap:8px;
-    }
-
+    .meta{display:grid;gap:8px}
     .meta div{
       background:rgba(255,255,255,.8);
       border:2px solid rgba(30,24,52,.08);
@@ -264,17 +240,8 @@
       opacity:.75;
     }
 
-    .form-grid{
-      display:grid;
-      gap:12px;
-      margin-top:12px;
-    }
-
-    .two{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
+    .form-grid{display:grid;gap:12px;margin-top:12px}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
     input,textarea,select{
       width:100%;
@@ -288,16 +255,10 @@
       box-shadow:0 8px 16px rgba(30,24,52,.05);
     }
 
-    input:focus,textarea:focus,select:focus{
-      border-color:var(--accent2);
-    }
+    input:focus,textarea:focus,select:focus{border-color:var(--accent2)}
+    textarea{min-height:110px;resize:vertical}
 
-    textarea{
-      min-height:110px;
-      resize:vertical;
-    }
-
-    .btn-row{
+    .btn-row,.actions-inline{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
@@ -326,10 +287,7 @@
       transition:transform .16s ease, opacity .16s ease;
     }
 
-    .btn:hover{
-      transform:translateY(-2px) rotate(-1deg);
-    }
-
+    .btn:hover{transform:translateY(-2px) rotate(-1deg)}
     .btn-primary{background:linear-gradient(135deg,#ffef66,#ff9f43)}
     .btn-secondary{background:linear-gradient(135deg,#d8fff0,#8ef5ea)}
     .btn-danger{background:linear-gradient(135deg,#ffd5de,#ff9aad)}
@@ -403,13 +361,6 @@
     .status.ok{background:linear-gradient(135deg,#d8ffd0,#7bed9f); color:#10301d}
     .status.err{background:linear-gradient(135deg,#ffd4de,#ff8fab); color:#4c1321}
 
-    .actions-inline{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:10px;
-    }
-
     .notice{
       margin-top:10px;
       padding:12px 14px;
@@ -421,9 +372,7 @@
     }
 
     @media (max-width: 980px){
-      .grid,.mini-grid,.two{
-        grid-template-columns:1fr;
-      }
+      .grid,.mini-grid,.two{grid-template-columns:1fr}
     }
 
     @media (max-width: 760px){
@@ -433,10 +382,7 @@
         margin-top:10px;
         transform:rotate(-2deg);
       }
-
-      .hero,.panel,.login-card{
-        padding:18px;
-      }
+      .hero,.panel,.login-card{padding:18px}
     }
   </style>
 </head>
@@ -453,7 +399,7 @@
       <div class="eyebrow">Staff nonsense access required</div>
       <h1 class="login-title">Enter thy<br>phone number</h1>
       <p class="login-text">
-        Only approved staff numbers may pass. If you are not authorized, the clipboard will stare at you with deep and theatrical judgment.
+        Only approved staff numbers may pass. If the cloud is feeling dramatic today, the portal will still work locally instead of collapsing into theatrical despair.
       </p>
 
       <div class="form-grid">
@@ -465,9 +411,7 @@
       </div>
 
       <div class="notice">
-        Testing numbers:<br>
-        Owner: 9182895779<br>
-        Demo bypass: 5551234567
+        This portal has a built-in fallback mode, so it keeps working even if Firestore decides to become spiritually unavailable.
       </div>
 
       <div id="loginStatus" class="status err"></div>
@@ -485,7 +429,7 @@
         <div class="eyebrow">Authorized administrative foolishness</div>
         <h1>Staff Portal</h1>
         <p>
-          This is the internal page for announcements, the production schedule, permissions, crew applications, and roster management. If you are seeing this, the clipboard has temporarily chosen mercy.
+          This is the internal page for announcements, the production schedule, permissions, crew applications, and roster management. It is now built to keep functioning even when technology gets stage fright.
         </p>
 
         <div class="mini-grid">
@@ -511,7 +455,7 @@
       <div class="grid">
         <section class="panel">
           <h2>Announcements</h2>
-          <p>Post updates for staff and refresh them whenever the clipboard desires.</p>
+          <p>Post updates for staff and refresh them whenever the clipboard demands new information.</p>
 
           <div id="announcementAdmin" class="hidden">
             <div class="form-grid">
@@ -588,7 +532,7 @@
 
       <section class="panel hidden" id="permissionsPanel" style="margin-top:18px;">
         <h2>Permissions Management</h2>
-        <p>Only the owner number gets this panel. Add or update portal access here.</p>
+        <p>Only the owner gets this panel. No phone numbers are displayed anywhere in the interface.</p>
 
         <div class="form-grid">
           <div class="two">
@@ -661,6 +605,14 @@
       canReviewCrew: false
     };
 
+    const localKeys = {
+      announcements: "gaylord_local_announcements",
+      schedule: "gaylord_local_schedule",
+      crewApps: "gaylord_local_crew_apps",
+      roster: "gaylord_local_roster",
+      permissions: "gaylord_local_permissions"
+    };
+
     function normalizePhone(value) {
       return String(value || "").replace(/\D/g, "");
     }
@@ -679,8 +631,54 @@
       loginStatus.className = "status err show";
     }
 
+    function showLoginOk(text) {
+      loginStatus.textContent = text;
+      loginStatus.className = "status ok show";
+    }
+
+    function uid() {
+      return "id_" + Date.now() + "_" + Math.random().toString(36).slice(2, 9);
+    }
+
+    function nowString() {
+      return new Date().toLocaleString();
+    }
+
+    function readLocal(key) {
+      try {
+        return JSON.parse(localStorage.getItem(key) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function writeLocal(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function sortByCreatedDesc(items) {
+      return [...items].sort((a, b) => (b.createdAtMs || 0) - (a.createdAtMs || 0));
+    }
+
+    function sortByCreatedAsc(items) {
+      return [...items].sort((a, b) => (a.createdAtMs || 0) - (b.createdAtMs || 0));
+    }
+
+    function sortByName(items) {
+      return [...items].sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
+    }
+
+    async function safeFirestoreCall(fn, fallbackFn) {
+      try {
+        return await fn();
+      } catch (error) {
+        console.error("Firestore unavailable, using local fallback:", error);
+        return await fallbackFn();
+      }
+    }
+
     async function ensureOwnerPermission() {
-      await setDoc(doc(db, "staffPermissions", OWNER_PHONE), {
+      const ownerDoc = {
         name: "Christopher Shelley",
         role: "Owner",
         active: true,
@@ -689,8 +687,24 @@
         canManageRoster: true,
         canManagePermissions: true,
         canReviewCrew: true,
-        updatedAt: serverTimestamp()
-      }, { merge: true });
+        updatedAt: nowString(),
+        updatedAtMs: Date.now()
+      };
+
+      await safeFirestoreCall(
+        async () => setDoc(doc(db, "staffPermissions", OWNER_PHONE), {
+          ...ownerDoc,
+          updatedAt: serverTimestamp()
+        }, { merge: true }),
+        async () => {
+          const permissions = readLocal(localKeys.permissions);
+          const exists = permissions.find(p => p.phone === OWNER_PHONE);
+          if (!exists) {
+            permissions.push({ phone: OWNER_PHONE, ...ownerDoc });
+            writeLocal(localKeys.permissions, permissions);
+          }
+        }
+      );
     }
 
     function makeOwnerPermissions() {
@@ -717,7 +731,8 @@
       if (normalized === OWNER_PHONE) {
         currentPermissions = makeOwnerPermissions();
         currentUser = { name: "Christopher Shelley", role: "Owner" };
-        unlockPortal();
+        showLoginOk("Owner access recognized. The clipboard salutes dramatically.");
+        setTimeout(unlockPortal, 250);
         return;
       }
 
@@ -736,35 +751,44 @@
           role: "Manager"
         };
 
-        unlockPortal();
+        showLoginOk("Demo access accepted. The clipboard has decided to be generous.");
+        setTimeout(unlockPortal, 250);
         return;
       }
 
-      const snap = await getDoc(doc(db, "staffPermissions", normalized));
+      const permission = await safeFirestoreCall(
+        async () => {
+          const snap = await getDoc(doc(db, "staffPermissions", normalized));
+          return snap.exists() ? { phone: normalized, ...snap.data() } : null;
+        },
+        async () => {
+          const permissions = readLocal(localKeys.permissions);
+          return permissions.find(p => p.phone === normalized) || null;
+        }
+      );
 
-      if (!snap.exists()) {
+      if (!permission) {
         showLoginError("That number is not authorized. The clipboard remains deeply unconvinced.");
         return;
       }
 
-      const data = snap.data();
-
-      if (data.active === false) {
+      if (permission.active === false) {
         showLoginError("That number exists, but its access is inactive.");
         return;
       }
 
-      currentUser = data;
+      currentUser = permission;
       currentPermissions = {
-        canEditAnnouncements: !!data.canEditAnnouncements,
-        canEditSchedule: !!data.canEditSchedule,
-        canManageRoster: !!data.canManageRoster,
-        canManagePermissions: !!data.canManagePermissions,
-        canReviewCrew: !!data.canReviewCrew,
-        role: data.role || "Staff"
+        canEditAnnouncements: !!permission.canEditAnnouncements,
+        canEditSchedule: !!permission.canEditSchedule,
+        canManageRoster: !!permission.canManageRoster,
+        canManagePermissions: !!permission.canManagePermissions,
+        canReviewCrew: !!permission.canReviewCrew,
+        role: permission.role || "Staff"
       };
 
-      unlockPortal();
+      showLoginOk("Access granted. Bureaucratic destiny approves.");
+      setTimeout(unlockPortal, 250);
     }
 
     async function unlockPortal() {
@@ -789,164 +813,247 @@
       ]);
     }
 
-    async function loadAnnouncements() {
-      const snap = await getDocs(query(collection(db, "announcements"), orderBy("createdAt", "desc")));
-      announcementCount.textContent = String(snap.size);
+    async function getAnnouncements() {
+      return safeFirestoreCall(
+        async () => {
+          const snap = await getDocs(query(collection(db, "announcements"), orderBy("createdAt", "desc")));
+          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        },
+        async () => sortByCreatedDesc(readLocal(localKeys.announcements))
+      );
+    }
 
-      if (!snap.size) {
+    async function getSchedule() {
+      return safeFirestoreCall(
+        async () => {
+          const snap = await getDocs(query(collection(db, "productionSchedule"), orderBy("createdAt", "asc")));
+          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        },
+        async () => sortByCreatedAsc(readLocal(localKeys.schedule))
+      );
+    }
+
+    async function getCrewApps() {
+      return safeFirestoreCall(
+        async () => {
+          const snap = await getDocs(query(collection(db, "crewApplications"), orderBy("createdAt", "desc")));
+          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        },
+        async () => sortByCreatedDesc(readLocal(localKeys.crewApps))
+      );
+    }
+
+    async function getRoster() {
+      return safeFirestoreCall(
+        async () => {
+          const snap = await getDocs(query(collection(db, "crewRoster"), orderBy("name", "asc")));
+          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        },
+        async () => sortByName(readLocal(localKeys.roster))
+      );
+    }
+
+    async function getPermissions() {
+      return safeFirestoreCall(
+        async () => {
+          const snap = await getDocs(query(collection(db, "staffPermissions"), orderBy("name", "asc")));
+          return snap.docs.map(d => ({ id: d.id, phone: d.id, ...d.data() }));
+        },
+        async () => sortByName(readLocal(localKeys.permissions))
+      );
+    }
+
+    async function loadAnnouncements() {
+      const items = await getAnnouncements();
+      announcementCount.textContent = String(items.length);
+
+      if (!items.length) {
         announcementList.innerHTML = `<div class="card"><h3>No announcements yet</h3><p>The clipboard is currently speechless.</p></div>`;
         return;
       }
 
-      announcementList.innerHTML = snap.docs.map(d => {
-        const a = d.data();
-        return `
-          <div class="card">
-            <h3>${escapeHtml(a.title || "Untitled announcement")}</h3>
-            <div class="meta">
-              <div><span class="label">Message</span>${escapeHtml(a.body || "")}</div>
-              <div><span class="label">Posted By</span>${escapeHtml(a.author || "Unknown")}</div>
-            </div>
-            ${currentPermissions.canEditAnnouncements ? `
-              <div class="actions-inline">
-                <button class="btn btn-danger btn-small delete-announcement" data-id="${d.id}">Delete</button>
-              </div>
-            ` : ""}
+      announcementList.innerHTML = items.map(a => `
+        <div class="card">
+          <h3>${escapeHtml(a.title || "Untitled announcement")}</h3>
+          <div class="meta">
+            <div><span class="label">Message</span>${escapeHtml(a.body || "")}</div>
+            <div><span class="label">Posted By</span>${escapeHtml(a.author || "Unknown")}</div>
           </div>
-        `;
-      }).join("");
+          ${currentPermissions.canEditAnnouncements ? `
+            <div class="actions-inline">
+              <button class="btn btn-danger btn-small delete-announcement" data-id="${a.id}">Delete</button>
+            </div>
+          ` : ""}
+        </div>
+      `).join("");
 
       document.querySelectorAll(".delete-announcement").forEach(btn => {
         btn.onclick = async () => {
-          await deleteDoc(doc(db, "announcements", btn.dataset.id));
+          const id = btn.dataset.id;
+          await safeFirestoreCall(
+            async () => deleteDoc(doc(db, "announcements", id)),
+            async () => {
+              const items = readLocal(localKeys.announcements).filter(x => x.id !== id);
+              writeLocal(localKeys.announcements, items);
+            }
+          );
           await loadAnnouncements();
         };
       });
     }
 
     async function loadSchedule() {
-      const snap = await getDocs(query(collection(db, "productionSchedule"), orderBy("createdAt", "asc")));
-      scheduleCount.textContent = String(snap.size);
+      const items = await getSchedule();
+      scheduleCount.textContent = String(items.length);
 
-      if (!snap.size) {
+      if (!items.length) {
         scheduleList.innerHTML = `<div class="card"><h3>No schedule yet</h3><p>The production schedule awaits your glorious instructions.</p></div>`;
         return;
       }
 
-      scheduleList.innerHTML = snap.docs.map(d => {
-        const s = d.data();
-        return `
-          <div class="card">
-            <h3>${escapeHtml(s.title || "Untitled schedule item")}</h3>
-            <div class="meta">
-              <div><span class="label">Time / Date</span>${escapeHtml(s.time || "TBD")}</div>
-              <div><span class="label">Location</span>${escapeHtml(s.location || "TBD")}</div>
-              <div><span class="label">Details</span>${escapeHtml(s.details || "")}</div>
-            </div>
-            ${currentPermissions.canEditSchedule ? `
-              <div class="actions-inline">
-                <button class="btn btn-danger btn-small delete-schedule" data-id="${d.id}">Delete</button>
-              </div>
-            ` : ""}
+      scheduleList.innerHTML = items.map(s => `
+        <div class="card">
+          <h3>${escapeHtml(s.title || "Untitled schedule item")}</h3>
+          <div class="meta">
+            <div><span class="label">Time / Date</span>${escapeHtml(s.time || "TBD")}</div>
+            <div><span class="label">Location</span>${escapeHtml(s.location || "TBD")}</div>
+            <div><span class="label">Details</span>${escapeHtml(s.details || "")}</div>
           </div>
-        `;
-      }).join("");
+          ${currentPermissions.canEditSchedule ? `
+            <div class="actions-inline">
+              <button class="btn btn-danger btn-small delete-schedule" data-id="${s.id}">Delete</button>
+            </div>
+          ` : ""}
+        </div>
+      `).join("");
 
       document.querySelectorAll(".delete-schedule").forEach(btn => {
         btn.onclick = async () => {
-          await deleteDoc(doc(db, "productionSchedule", btn.dataset.id));
+          const id = btn.dataset.id;
+          await safeFirestoreCall(
+            async () => deleteDoc(doc(db, "productionSchedule", id)),
+            async () => {
+              const items = readLocal(localKeys.schedule).filter(x => x.id !== id);
+              writeLocal(localKeys.schedule, items);
+            }
+          );
           await loadSchedule();
         };
       });
     }
 
     async function loadCrewApplications() {
-      const snap = await getDocs(query(collection(db, "crewApplications"), orderBy("createdAt", "desc")));
-      crewApplicationCount.textContent = String(snap.size);
+      const items = await getCrewApps();
+      crewApplicationCount.textContent = String(items.length);
 
-      if (!snap.size) {
+      if (!items.length) {
         crewAppsList.innerHTML = `<div class="card"><h3>No crew applications yet</h3><p>The chaos has not yet received fresh volunteers.</p></div>`;
         return;
       }
 
-      crewAppsList.innerHTML = snap.docs.map(d => {
-        const c = d.data();
-        return `
-          <div class="card">
-            <h3>${escapeHtml(c.name || "Unnamed applicant")}</h3>
-            <div class="meta">
-              <div><span class="label">Phone</span>${escapeHtml(c.phone || "")}</div>
-              <div><span class="label">Email</span>${escapeHtml(c.email || "")}</div>
-              <div><span class="label">Grade</span>${escapeHtml(c.grade || "")}</div>
-              <div><span class="label">Role Requests</span>${escapeHtml(c.roleRequests || c.role || "")}</div>
-              <div><span class="label">Reason</span>${escapeHtml(c.reason || "")}</div>
-              <div><span class="label">Status</span>${escapeHtml(c.status || "Pending")}</div>
-            </div>
-            ${currentPermissions.canReviewCrew ? `
-              <div class="actions-inline">
-                <button class="btn btn-secondary btn-small approve-app" data-id="${d.id}">Approve</button>
-                <button class="btn btn-danger btn-small reject-app" data-id="${d.id}">Reject</button>
-              </div>
-            ` : ""}
+      crewAppsList.innerHTML = items.map(c => `
+        <div class="card">
+          <h3>${escapeHtml(c.name || "Unnamed applicant")}</h3>
+          <div class="meta">
+            <div><span class="label">Email</span>${escapeHtml(c.email || "")}</div>
+            <div><span class="label">Grade</span>${escapeHtml(c.grade || "")}</div>
+            <div><span class="label">Role Requests</span>${escapeHtml(c.roleRequests || c.role || "")}</div>
+            <div><span class="label">Reason</span>${escapeHtml(c.reason || "")}</div>
+            <div><span class="label">Status</span>${escapeHtml(c.status || "Pending")}</div>
           </div>
-        `;
-      }).join("");
+          ${currentPermissions.canReviewCrew ? `
+            <div class="actions-inline">
+              <button class="btn btn-secondary btn-small approve-app" data-id="${c.id}">Approve</button>
+              <button class="btn btn-danger btn-small reject-app" data-id="${c.id}">Reject</button>
+            </div>
+          ` : ""}
+        </div>
+      `).join("");
 
       document.querySelectorAll(".approve-app").forEach(btn => {
         btn.onclick = async () => {
-          await updateDoc(doc(db, "crewApplications", btn.dataset.id), {
-            status: "Approved",
-            reviewedBy: currentUser?.name || "Unknown",
-            reviewedAt: serverTimestamp()
-          });
+          const id = btn.dataset.id;
+          await safeFirestoreCall(
+            async () => updateDoc(doc(db, "crewApplications", id), {
+              status: "Approved",
+              reviewedBy: currentUser?.name || "Unknown",
+              reviewedAt: serverTimestamp()
+            }),
+            async () => {
+              const items = readLocal(localKeys.crewApps);
+              const item = items.find(x => x.id === id);
+              if (item) {
+                item.status = "Approved";
+                item.reviewedBy = currentUser?.name || "Unknown";
+                item.reviewedAt = nowString();
+              }
+              writeLocal(localKeys.crewApps, items);
+            }
+          );
           await loadCrewApplications();
         };
       });
 
       document.querySelectorAll(".reject-app").forEach(btn => {
         btn.onclick = async () => {
-          await updateDoc(doc(db, "crewApplications", btn.dataset.id), {
-            status: "Rejected",
-            reviewedBy: currentUser?.name || "Unknown",
-            reviewedAt: serverTimestamp()
-          });
+          const id = btn.dataset.id;
+          await safeFirestoreCall(
+            async () => updateDoc(doc(db, "crewApplications", id), {
+              status: "Rejected",
+              reviewedBy: currentUser?.name || "Unknown",
+              reviewedAt: serverTimestamp()
+            }),
+            async () => {
+              const items = readLocal(localKeys.crewApps);
+              const item = items.find(x => x.id === id);
+              if (item) {
+                item.status = "Rejected";
+                item.reviewedBy = currentUser?.name || "Unknown";
+                item.reviewedAt = nowString();
+              }
+              writeLocal(localKeys.crewApps, items);
+            }
+          );
           await loadCrewApplications();
         };
       });
     }
 
     async function loadRoster() {
-      const snap = await getDocs(query(collection(db, "crewRoster"), orderBy("name", "asc")));
-      rosterCount.textContent = String(snap.size);
+      const items = await getRoster();
+      rosterCount.textContent = String(items.length);
 
-      if (!snap.size) {
+      if (!items.length) {
         rosterList.innerHTML = `<div class="card"><h3>No roster entries yet</h3><p>The crew roster is currently an empty monument to potential.</p></div>`;
         return;
       }
 
-      rosterList.innerHTML = snap.docs.map(d => {
-        const r = d.data();
-        return `
-          <div class="card">
-            <h3>${escapeHtml(r.name || "Unnamed person")}</h3>
-            <div class="meta">
-              <div><span class="label">Phone</span>${escapeHtml(r.phone || "")}</div>
-              <div><span class="label">Role</span>${escapeHtml(r.role || "")}</div>
-              <div><span class="label">Team</span>${escapeHtml(r.team || "")}</div>
-              <div><span class="label">Notes</span>${escapeHtml(r.notes || "")}</div>
-            </div>
-            ${currentPermissions.canManageRoster ? `
-              <div class="actions-inline">
-                <button class="btn btn-danger btn-small delete-roster" data-id="${d.id}">Remove</button>
-              </div>
-            ` : ""}
+      rosterList.innerHTML = items.map(r => `
+        <div class="card">
+          <h3>${escapeHtml(r.name || "Unnamed person")}</h3>
+          <div class="meta">
+            <div><span class="label">Role</span>${escapeHtml(r.role || "")}</div>
+            <div><span class="label">Team</span>${escapeHtml(r.team || "")}</div>
+            <div><span class="label">Notes</span>${escapeHtml(r.notes || "")}</div>
           </div>
-        `;
-      }).join("");
+          ${currentPermissions.canManageRoster ? `
+            <div class="actions-inline">
+              <button class="btn btn-danger btn-small delete-roster" data-id="${r.id}">Remove</button>
+            </div>
+          ` : ""}
+        </div>
+      `).join("");
 
       document.querySelectorAll(".delete-roster").forEach(btn => {
         btn.onclick = async () => {
-          await deleteDoc(doc(db, "crewRoster", btn.dataset.id));
+          const id = btn.dataset.id;
+          await safeFirestoreCall(
+            async () => deleteDoc(doc(db, "crewRoster", id)),
+            async () => {
+              const items = readLocal(localKeys.roster).filter(x => x.id !== id);
+              writeLocal(localKeys.roster, items);
+            }
+          );
           await loadRoster();
         };
       });
@@ -955,33 +1062,38 @@
     async function loadPermissions() {
       if (!currentPermissions.canManagePermissions) return;
 
-      const snap = await getDocs(query(collection(db, "staffPermissions"), orderBy("name", "asc")));
+      const items = await getPermissions();
 
-      if (!snap.size) {
-        permissionList.innerHTML = `<div class="card"><h3>No saved permissions yet</h3><p>Only the owner number exists in pure clipboard legend form.</p></div>`;
+      if (!items.length) {
+        permissionList.innerHTML = `<div class="card"><h3>No saved permissions yet</h3><p>The owner exists in pure clipboard legend form, but nobody else has been invited.</p></div>`;
         return;
       }
 
-      permissionList.innerHTML = snap.docs.map(d => {
-        const p = d.data();
-        return `
-          <div class="card">
-            <h3>${escapeHtml(p.name || "Unnamed staff person")}</h3>
-            <div class="meta">
-              <div><span class="label">Phone</span>${escapeHtml(d.id)}</div>
-              <div><span class="label">Role</span>${escapeHtml(p.role || "Staff")}</div>
-              <div><span class="label">Active</span>${p.active === false ? "No" : "Yes"}</div>
-            </div>
-            <div class="actions-inline">
-              <button class="btn btn-danger btn-small delete-permission" data-id="${d.id}">Remove Access</button>
-            </div>
+      permissionList.innerHTML = items.map(p => `
+        <div class="card">
+          <h3>${escapeHtml(p.name || "Unnamed staff person")}</h3>
+          <div class="meta">
+            <div><span class="label">Role</span>${escapeHtml(p.role || "Staff")}</div>
+            <div><span class="label">Active</span>${p.active === false ? "No" : "Yes"}</div>
           </div>
-        `;
-      }).join("");
+          <div class="actions-inline">
+            <button class="btn btn-danger btn-small delete-permission" data-id="${p.phone || p.id}">Remove Access</button>
+          </div>
+        </div>
+      `).join("");
 
       document.querySelectorAll(".delete-permission").forEach(btn => {
         btn.onclick = async () => {
-          await deleteDoc(doc(db, "staffPermissions", btn.dataset.id));
+          const id = btn.dataset.id;
+          if (id === OWNER_PHONE) return;
+
+          await safeFirestoreCall(
+            async () => deleteDoc(doc(db, "staffPermissions", id)),
+            async () => {
+              const items = readLocal(localKeys.permissions).filter(x => x.phone !== id);
+              writeLocal(localKeys.permissions, items);
+            }
+          );
           await loadPermissions();
         };
       });
@@ -990,15 +1102,30 @@
     document.getElementById("addAnnouncementBtn").onclick = async () => {
       const title = document.getElementById("announcementTitle").value.trim();
       const body = document.getElementById("announcementBody").value.trim();
-
       if (!title || !body) return;
 
-      await addDoc(collection(db, "announcements"), {
+      const item = {
+        id: uid(),
         title,
         body,
         author: currentUser?.name || "Unknown",
-        createdAt: serverTimestamp()
-      });
+        createdAtMs: Date.now(),
+        createdAtText: nowString()
+      };
+
+      await safeFirestoreCall(
+        async () => addDoc(collection(db, "announcements"), {
+          title: item.title,
+          body: item.body,
+          author: item.author,
+          createdAt: serverTimestamp()
+        }),
+        async () => {
+          const items = readLocal(localKeys.announcements);
+          items.push(item);
+          writeLocal(localKeys.announcements, items);
+        }
+      );
 
       document.getElementById("announcementTitle").value = "";
       document.getElementById("announcementBody").value = "";
@@ -1010,16 +1137,26 @@
       const time = document.getElementById("scheduleTime").value.trim();
       const location = document.getElementById("scheduleLocation").value.trim();
       const details = document.getElementById("scheduleDetails").value.trim();
-
       if (!title) return;
 
-      await addDoc(collection(db, "productionSchedule"), {
-        title,
-        time,
-        location,
-        details,
-        createdAt: serverTimestamp()
-      });
+      const item = {
+        id: uid(),
+        title, time, location, details,
+        createdAtMs: Date.now(),
+        createdAtText: nowString()
+      };
+
+      await safeFirestoreCall(
+        async () => addDoc(collection(db, "productionSchedule"), {
+          title, time, location, details,
+          createdAt: serverTimestamp()
+        }),
+        async () => {
+          const items = readLocal(localKeys.schedule);
+          items.push(item);
+          writeLocal(localKeys.schedule, items);
+        }
+      );
 
       document.getElementById("scheduleTitle").value = "";
       document.getElementById("scheduleTime").value = "";
@@ -1034,17 +1171,26 @@
       const role = document.getElementById("rosterRole").value.trim();
       const team = document.getElementById("rosterTeam").value.trim();
       const notes = document.getElementById("rosterNotes").value.trim();
-
       if (!name) return;
 
-      await addDoc(collection(db, "crewRoster"), {
-        name,
-        phone,
-        role,
-        team,
-        notes,
-        createdAt: serverTimestamp()
-      });
+      const item = {
+        id: uid(),
+        name, phone, role, team, notes,
+        createdAtMs: Date.now(),
+        createdAtText: nowString()
+      };
+
+      await safeFirestoreCall(
+        async () => addDoc(collection(db, "crewRoster"), {
+          name, phone, role, team, notes,
+          createdAt: serverTimestamp()
+        }),
+        async () => {
+          const items = readLocal(localKeys.roster);
+          items.push(item);
+          writeLocal(localKeys.roster, items);
+        }
+      );
 
       document.getElementById("rosterName").value = "";
       document.getElementById("rosterPhone").value = "";
@@ -1059,12 +1205,12 @@
       const phone = normalizePhone(document.getElementById("permPhone").value);
       const role = document.getElementById("permRole").value.trim() || "Staff";
       const access = document.getElementById("permAccess").value;
-
       if (!name || !phone) return;
 
       const manager = access === "manager";
 
-      await setDoc(doc(db, "staffPermissions", phone), {
+      const item = {
+        phone,
         name,
         role,
         active: true,
@@ -1073,8 +1219,23 @@
         canManageRoster: manager,
         canManagePermissions: false,
         canReviewCrew: true,
-        updatedAt: serverTimestamp()
-      }, { merge: true });
+        updatedAtMs: Date.now(),
+        updatedAtText: nowString()
+      };
+
+      await safeFirestoreCall(
+        async () => setDoc(doc(db, "staffPermissions", phone), {
+          ...item,
+          updatedAt: serverTimestamp()
+        }, { merge: true }),
+        async () => {
+          const items = readLocal(localKeys.permissions);
+          const existing = items.find(x => x.phone === phone);
+          if (existing) Object.assign(existing, item);
+          else items.push(item);
+          writeLocal(localKeys.permissions, items);
+        }
+      );
 
       document.getElementById("permName").value = "";
       document.getElementById("permPhone").value = "";
