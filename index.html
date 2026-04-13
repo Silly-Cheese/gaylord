@@ -16,9 +16,7 @@
       --paper:#fffaf2;
       --accent:#ff2d55;
       --accent2:#00cec9;
-      --accent3:#ffe66d;
       --good:#7bed9f;
-      --bad:#ff6b81;
       --card:rgba(255,255,255,.92);
       --shadow:0 18px 50px rgba(30,24,52,.22);
       --radius:28px;
@@ -48,61 +46,6 @@
       0%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
       50%{background-position:0% 0%,0% 0%,0% 0%,100% 50%}
       100%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
-    }
-
-    .star,.burst,.swirl,.bean{
-      position:fixed;
-      pointer-events:none;
-      z-index:0;
-      opacity:.8;
-    }
-
-    .star{
-      width:18px;
-      height:18px;
-      background:#fff8b2;
-      clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
-      animation:floaty 8s ease-in-out infinite;
-    }
-
-    .burst{
-      width:80px;
-      height:80px;
-      background:rgba(255,255,255,.35);
-      clip-path:polygon(50% 0%,60% 25%,85% 15%,75% 40%,100% 50%,75% 60%,85% 85%,60% 75%,50% 100%,40% 75%,15% 85%,25% 60%,0% 50%,25% 40%,15% 15%,40% 25%);
-      animation:spinSlow 16s linear infinite;
-    }
-
-    .swirl{
-      width:110px;
-      height:110px;
-      border:10px dashed rgba(255,255,255,.42);
-      border-radius:50%;
-      animation:spinSlow 20s linear infinite;
-    }
-
-    .bean{
-      width:48px;
-      height:34px;
-      background:rgba(255,255,255,.28);
-      border:4px solid rgba(255,255,255,.45);
-      border-radius:50% 45% 55% 50% / 55% 50% 50% 45%;
-      animation:beanFloat 12s ease-in-out infinite;
-    }
-
-    @keyframes floaty{
-      0%,100%{transform:translateY(0) rotate(0)}
-      50%{transform:translateY(-18px) rotate(12deg)}
-    }
-
-    @keyframes beanFloat{
-      0%,100%{transform:translateY(0) rotate(0)}
-      50%{transform:translateY(-26px) rotate(18deg)}
-    }
-
-    @keyframes spinSlow{
-      from{transform:rotate(0)}
-      to{transform:rotate(360deg)}
     }
 
     .loading-screen{
@@ -292,7 +235,7 @@
       gap:28px;
     }
 
-    .hero-card,.poster-card,.section-card,.contest-card,.vault-card{
+    .hero-card,.poster-card,.section-card{
       background:var(--card);
       border:4px solid rgba(30,24,52,.12);
       border-radius:var(--radius);
@@ -379,7 +322,7 @@
       font-weight:900;
       border:3px solid var(--ink);
       box-shadow:0 8px 0 rgba(30,24,52,.16);
-      transition:transform .16s ease,box-shadow .16s ease,filter .16s ease,opacity .16s ease;
+      transition:transform .16s ease,box-shadow .16s ease,filter .16s ease;
       text-transform:uppercase;
       letter-spacing:.04em;
       cursor:pointer;
@@ -395,7 +338,6 @@
     .btn-primary{background:linear-gradient(135deg,#ffef66,#ff9f43)}
     .btn-secondary{background:linear-gradient(135deg,#b2f7ef,#7ed6df)}
     .btn-pink{background:linear-gradient(135deg,#ffd1dc,#ff84a1)}
-    .btn-danger{background:linear-gradient(135deg,#ffd4de,#ff9aad)}
 
     .poster-card{
       padding:24px;
@@ -618,8 +560,12 @@
       position:relative;
     }
 
-    .section-card,.contest-card,.vault-card{
+    .section-card{
       padding:28px;
+      background:var(--card);
+      border:4px solid rgba(30,24,52,.12);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
     }
 
     .section-title{
@@ -659,87 +605,6 @@
       margin-top:0;
       margin-bottom:10px;
       text-transform:uppercase;
-    }
-
-    .contest-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:18px;
-      margin-top:18px;
-    }
-
-    .contest-box{
-      background:linear-gradient(180deg,#fff,#fff6dc);
-      border:3px solid rgba(30,24,52,.12);
-      border-radius:24px;
-      padding:20px;
-    }
-
-    .contest-buttons{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-      margin-top:14px;
-    }
-
-    .order-btn{
-      padding:16px 10px;
-      border:none;
-      cursor:pointer;
-      border-radius:20px;
-      border:3px solid var(--ink);
-      background:linear-gradient(135deg,#ffffff,#ffe7a8);
-      color:var(--ink);
-      font-weight:900;
-      text-transform:uppercase;
-      box-shadow:0 8px 0 rgba(30,24,52,.12);
-      transition:transform .16s ease;
-    }
-
-    .order-btn:hover{
-      transform:translateY(-3px) rotate(-1deg);
-    }
-
-    .order-btn.active{
-      background:linear-gradient(135deg,#d8ffd0,#7bed9f);
-    }
-
-    .contest-status{
-      margin-top:14px;
-      font-weight:900;
-      padding:12px 14px;
-      border-radius:18px;
-      border:3px solid var(--ink);
-      background:#fff;
-    }
-
-    .code-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-
-    .code-row input{
-      flex:1 1 320px;
-      padding:14px;
-      border-radius:18px;
-      border:3px solid rgba(30,24,52,.14);
-      font:inherit;
-      background:#fff;
-      color:var(--ink);
-      outline:none;
-      box-shadow:0 8px 16px rgba(30,24,52,.05);
-    }
-
-    .helper-hint{
-      margin-top:12px;
-      font-weight:900;
-      background:#fff;
-      border:2px dashed rgba(30,24,52,.28);
-      border-radius:18px;
-      padding:12px 14px;
-      line-height:1.55;
     }
 
     .cast-layout{
@@ -832,34 +697,6 @@
       line-height:1.4;
     }
 
-    .script-status{
-      display:inline-block;
-      margin-top:10px;
-      padding:12px 16px;
-      border-radius:999px;
-      border:3px solid var(--ink);
-      font-weight:900;
-      background:linear-gradient(135deg,#fff,#ffeeb5);
-    }
-
-    .script-status.unlocked{
-      background:linear-gradient(135deg,#d8ffd0,#7bed9f);
-      color:#12311f;
-    }
-
-    .script-box{
-      margin-top:18px;
-      background:linear-gradient(180deg,#fff,#fffaf0);
-      border:3px solid rgba(30,24,52,.12);
-      border-radius:24px;
-      padding:18px;
-      white-space:pre-wrap;
-      line-height:1.7;
-      max-height:700px;
-      overflow:auto;
-      font-size:.98rem;
-    }
-
     .credits{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
@@ -919,7 +756,7 @@
     }
 
     @media (max-width: 980px){
-      .hero-inner,.cast-layout,.credits,.fun-grid,.contest-grid{grid-template-columns:1fr}
+      .hero-inner,.cast-layout,.credits,.fun-grid{grid-template-columns:1fr}
       .hero{padding-top:34px}
       .hero-card::after,.poster-card::after,.madness-badge{
         position:static;
@@ -934,14 +771,10 @@
       }
     }
 
-    @media (max-width: 720px){
-      .contest-buttons{grid-template-columns:1fr}
-    }
-
     @media (max-width: 620px){
       nav{display:none}
       .topbar-inner{justify-content:center}
-      .hero-card,.section-card,.poster-card,.contest-card,.vault-card{padding:20px}
+      .hero-card,.section-card,.poster-card{padding:20px}
       .banner-inner{align-items:flex-start}
     }
   </style>
@@ -965,24 +798,14 @@
     </div>
   </div>
 
-  <div class="star" style="top: 10%; left: 6%;"></div>
-  <div class="star" style="top: 24%; left: 88%; animation-delay: 1s;"></div>
-  <div class="star" style="top: 74%; left: 12%; animation-delay: 2s;"></div>
-  <div class="burst" style="top: 14%; right: 10%;"></div>
-  <div class="burst" style="bottom: 18%; left: 4%; animation-duration: 20s;"></div>
-  <div class="swirl" style="top: 52%; right: 4%;"></div>
-  <div class="bean" style="top: 18%; left: 78%;"></div>
-  <div class="bean" style="bottom: 12%; left: 18%; animation-delay: 1.5s;"></div>
-
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">The Adventures of Gaylord</div>
       <nav>
         <a href="#about">About</a>
         <a href="#madness">Madness</a>
-        <a href="#contest">Contest</a>
         <a href="#cast">Cast & Crew</a>
-        <a href="#vault">Script Vault</a>
+        <a href="#credits">Project</a>
       </nav>
     </div>
   </header>
@@ -1028,18 +851,11 @@
           </div>
 
           <div class="hero-actions">
-            <a class="btn btn-primary explode-on-click" id="previewButton" href="preview-application.html">
-              Apply for Pre-Release Viewing
-            </a>
-            <a class="btn btn-pink explode-on-click" href="crew-application.html">
-              Apply for Staff / Crew
-            </a>
-            <a class="btn btn-secondary explode-on-click" href="staff-portal.html">
-              Staff Portal
-            </a>
-            <a class="btn btn-secondary explode-on-click" href="https://www.youtube.com/channel/UCioveEI2fUb76p97JselZ5w" target="_blank" rel="noopener noreferrer">
-              Watch Trailer & Updates
-            </a>
+            <a class="btn btn-primary explode-on-click" href="preview-application.html">Apply for Pre-Release Viewing</a>
+            <a class="btn btn-pink explode-on-click" href="crew-application.html">Apply for Staff / Crew</a>
+            <a class="btn btn-secondary explode-on-click" href="viewing-release.html">Viewing Release Form</a>
+            <a class="btn btn-secondary explode-on-click" href="staff-portal.html">Staff Portal</a>
+            <a class="btn btn-secondary explode-on-click" href="https://www.youtube.com/channel/UCioveEI2fUb76p97JselZ5w" target="_blank" rel="noopener noreferrer">Watch Trailer & Updates</a>
           </div>
         </div>
 
@@ -1069,64 +885,6 @@
             <div class="fun-box explode-on-click">
               <h3>School Project</h3>
               <p>This project is for Christopher Shelley, Ty Keeler, Blake Pitts, and Makar Portniagin, which means history is being made whether the world is ready or not.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contest">
-      <div class="section-inner">
-        <div class="contest-card">
-          <h2 class="section-title">The Clipboard Challenge</h2>
-          <p class="section-subtitle">
-            Somewhere in this world of nonsense, a line matters. But first, you must prove you can press dramatic buttons in the correct order like a person of questionable but important destiny.
-          </p>
-
-          <div class="contest-grid">
-            <div class="contest-box">
-              <h3 style="margin-top:0; text-transform:uppercase;">Step 1: Press the sacred order</h3>
-              <p>Only one sequence satisfies the clipboard. Choose carefully.</p>
-
-              <div class="contest-buttons">
-                <button class="order-btn" data-value="warning" type="button">Warning</button>
-                <button class="order-btn" data-value="promise" type="button">Promise</button>
-                <button class="order-btn" data-value="destiny" type="button">Destiny</button>
-              </div>
-
-              <div class="contest-status" id="orderStatus">
-                Current sequence: absolutely nothing of value yet.
-              </div>
-
-              <div class="btn-row" style="margin-top:12px;">
-                <button class="btn btn-secondary" id="resetOrderBtn" type="button">Reset Dramatic Mistakes</button>
-              </div>
-            </div>
-
-            <div class="contest-box">
-              <h3 style="margin-top:0; text-transform:uppercase;">Step 2: Enter the line</h3>
-              <p>Once the order is correct, the clipboard will allow you to attempt the sacred phrase.</p>
-
-              <div class="code-row">
-                <input id="codeInput" type="text" placeholder="Enter the exact line here..." disabled />
-                <button class="btn btn-primary" id="submitCodeBtn" type="button" disabled>Confront The Clipboard</button>
-              </div>
-
-              <div class="contest-status" id="codeStatus">
-                The code field remains locked because the clipboard enjoys power.
-              </div>
-
-              <div class="helper-hint">
-                Hint cluster 1: It is a full sentence. It sounds dramatic. It sounds like a promise. It sounds like somebody is saying something weirdly important for a movie this unhinged.
-              </div>
-
-              <div class="helper-hint">
-                Hint cluster 2: Pay attention to words about time, destiny, and world-scale nonsense. The line is not shy. It absolutely thinks it matters.
-              </div>
-
-              <div class="helper-hint">
-                Hint cluster 3: The three-button order is not random either. The line behaves like a warning, then a promise, then a statement of destiny.
-              </div>
             </div>
           </div>
         </div>
@@ -1178,29 +936,10 @@
               <h3>Project Highlights</h3>
               <div class="flip-grid">
                 <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Style</strong><span>What to expect</span></div><div class="flip-face flip-back">Cartoony, dramatic, ridiculous, and fully committed to being way too much.</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Contest</strong><span>Suspiciously important</span></div><div class="flip-face flip-back">Somewhere in this nonsense lies a line dramatic enough to unlock the script vault.</div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Release Forms</strong><span>Paperwork of Destiny</span></div><div class="flip-face flip-back">A brand-new form now determines whose voice, face, blur, and parental approval may enter the chaos.</div></div></div>
                 <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Mission</strong><span>Completely Reasonable Goal</span></div><div class="flip-face flip-back">Make this project feel like a historical event, a heroic saga, and a paperwork emergency all at once.</div></div></div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="vault">
-      <div class="section-inner">
-        <div class="vault-card">
-          <h2 class="section-title">Full Script Vault</h2>
-          <p class="section-subtitle">
-            This section remains locked until the clipboard challenge is completed correctly by someone with courage, memory, and a suspicious tolerance for overdramatic websites.
-          </p>
-
-          <div class="script-status" id="scriptStatus">
-            Vault status: LOCKED BY THE CLIPBOARD
-          </div>
-
-          <div class="script-box" id="scriptBox" style="display:none;">
-SLOW DOWN THERE MUCHACHO! Too many people have found the script. Don't worry, it will be back up in a little! 
           </div>
         </div>
       </div>
@@ -1216,8 +955,8 @@ SLOW DOWN THERE MUCHACHO! Too many people have found the script. Don't worry, it
               <p>Christopher Shelley, Ty Keeler, Blake Pitts, and Makar Portniagin.</p>
             </div>
             <div class="credit-box explode-on-click">
-              <h3>Applications & Contest</h3>
-              <p>Pre-release applications are open now, the crew page is ready for chaos, and the clipboard challenge now stands between mortals and the script vault.</p>
+              <h3>Applications & Forms</h3>
+              <p>Pre-release applications are open, the crew page is ready, the viewing release form is live, and the secret authorization page waits silently in the shadows for whoever types the URL correctly.</p>
             </div>
           </div>
         </div>
@@ -1242,15 +981,6 @@ SLOW DOWN THERE MUCHACHO! Too many people have found the script. Don't worry, it
     const meterLabel = document.getElementById("meterLabel");
     const madnessSub = document.getElementById("madnessSub");
 
-    const orderButtons = Array.from(document.querySelectorAll(".order-btn"));
-    const orderStatus = document.getElementById("orderStatus");
-    const resetOrderBtn = document.getElementById("resetOrderBtn");
-    const codeInput = document.getElementById("codeInput");
-    const submitCodeBtn = document.getElementById("submitCodeBtn");
-    const codeStatus = document.getElementById("codeStatus");
-    const scriptStatus = document.getElementById("scriptStatus");
-    const scriptBox = document.getElementById("scriptBox");
-
     const madnessComments = [
       "Current official statement: this project has exceeded healthy levels of silliness.",
       "Breaking news: the clipboard has become self-aware and now demands theatrical lighting.",
@@ -1261,9 +991,7 @@ SLOW DOWN THERE MUCHACHO! Too many people have found the script. Don't worry, it
       "This project is now 73% chaos, 21% paperwork, and 6% unexplained confidence.",
       "The hype department has lost all restraint and refuses to apologize.",
       "The official nonsense committee has raised the danger level to 'remarkably goofy.'",
-      "The forms have unionized and now demand more dramatic music.",
-      "Mysterious note from the void: some lines sound like warnings, promises, and destiny all at once.",
-      "There are phrases in this universe that seem casual until you realize they are absolutely not casual."
+      "The forms have unionized and now demand more dramatic music."
     ];
 
     const madnessStates = [
@@ -1274,110 +1002,6 @@ SLOW DOWN THERE MUCHACHO! Too many people have found the script. Don't worry, it
       { value: 172, label: "Legendary nonsense", sub: "The absurdity has reached folklore status and is now being passed down through extremely dramatic whispers." },
       { value: 189, label: "Cinematic emergency", sub: "If this becomes any more over-the-top, the poster may legally qualify as a public event." }
     ];
-
-    const requiredOrder = ["warning", "promise", "destiny"];
-    let selectedOrder = [];
-
-    const unlockKey = "gaylord_script_unlocked";
-
-    function normalizeCode(text) {
-      return String(text || "")
-        .trim()
-        .toLowerCase()
-        .replace(/[^\w\s]/g, "")
-        .replace(/\s+/g, " ");
-    }
-
-    function unlockVault() {
-      localStorage.setItem(unlockKey, "true");
-      scriptStatus.textContent = "Vault status: UNLOCKED BY SOMEONE ABSURDLY PERCEPTIVE";
-      scriptStatus.classList.add("unlocked");
-      scriptBox.style.display = "block";
-      codeStatus.textContent = "Correct. The clipboard is stunned, annoyed, and somehow impressed.";
-      codeInput.disabled = false;
-      submitCodeBtn.disabled = false;
-    }
-
-    function updateOrderUI() {
-      orderButtons.forEach(btn => {
-        const value = btn.dataset.value;
-        const index = selectedOrder.indexOf(value);
-        btn.classList.toggle("active", index !== -1);
-        btn.textContent = index !== -1
-          ? `${index + 1}. ${value.charAt(0).toUpperCase() + value.slice(1)}`
-          : value.charAt(0).toUpperCase() + value.slice(1);
-      });
-
-      if (selectedOrder.length === 0) {
-        orderStatus.textContent = "Current sequence: absolutely nothing of value yet.";
-        codeInput.disabled = true;
-        submitCodeBtn.disabled = true;
-        codeStatus.textContent = "The code field remains locked because the clipboard enjoys power.";
-        return;
-      }
-
-      orderStatus.textContent = `Current sequence: ${selectedOrder.join(" → ")}`;
-
-      const isCorrectSoFar = selectedOrder.every((value, i) => value === requiredOrder[i]);
-
-      if (!isCorrectSoFar) {
-        orderStatus.textContent = "That sequence made the clipboard visibly uncomfortable. Try again.";
-        codeInput.disabled = true;
-        submitCodeBtn.disabled = true;
-        codeStatus.textContent = "The code field remains locked because your button behavior has been questionable.";
-      } else if (selectedOrder.length === requiredOrder.length) {
-        codeInput.disabled = false;
-        submitCodeBtn.disabled = false;
-        codeStatus.textContent = "The order is correct. The clipboard will now hear your sacred line.";
-      } else {
-        codeInput.disabled = true;
-        submitCodeBtn.disabled = true;
-        codeStatus.textContent = "Promising. Continue the sequence with courage and deeply unnecessary drama.";
-      }
-    }
-
-    orderButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const value = btn.dataset.value;
-
-        if (selectedOrder.length >= requiredOrder.length) return;
-
-        if (!selectedOrder.includes(value)) {
-          selectedOrder.push(value);
-        }
-
-        updateOrderUI();
-      });
-    });
-
-    resetOrderBtn.addEventListener("click", () => {
-      selectedOrder = [];
-      updateOrderUI();
-    });
-
-    submitCodeBtn.addEventListener("click", () => {
-      const orderCorrect =
-        selectedOrder.length === requiredOrder.length &&
-        selectedOrder.every((value, index) => value === requiredOrder[index]);
-
-      if (!orderCorrect) {
-        codeStatus.textContent = "The clipboard rejects this attempt on the grounds of chaotic button malpractice.";
-        return;
-      }
-
-      const entered = normalizeCode(codeInput.value);
-      const correct = normalizeCode("And one day, you will save the world!");
-
-      if (entered === correct) {
-        unlockVault();
-      } else {
-        codeStatus.textContent = "Incorrect line. The clipboard has narrowed its eyes and become spiritually disappointed.";
-      }
-    });
-
-    if (localStorage.getItem(unlockKey) === "true") {
-      unlockVault();
-    }
 
     let commentIndex = 0;
     let meterIndex = 0;
@@ -1449,8 +1073,6 @@ SLOW DOWN THERE MUCHACHO! Too many people have found the script. Don't worry, it
         createExplosion(e.clientX, e.clientY);
       });
     });
-
-    updateOrderUI();
   </script>
 </body>
 </html>
