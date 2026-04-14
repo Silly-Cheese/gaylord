@@ -371,18 +371,69 @@
       line-height:1.5;
     }
 
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(19,16,34,.58);
+      backdrop-filter:blur(6px);
+      z-index:99999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+
+    .modal-overlay.show{display:flex}
+
+    .modal-card{
+      width:min(760px,100%);
+      background:rgba(255,255,255,.97);
+      border:4px solid rgba(30,24,52,.14);
+      border-radius:32px;
+      box-shadow:0 24px 60px rgba(30,24,52,.28);
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .modal-card::after{
+      content:"SUSPICIOUSLY IMPORTANT";
+      position:absolute;
+      top:14px;
+      right:-20px;
+      background:var(--accent);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      border:3px solid rgba(255,255,255,.55);
+      transform:rotate(11deg);
+      font-weight:900;
+      font-size:.8rem;
+    }
+
+    .modal-card h3{
+      margin:0 0 10px;
+      text-transform:uppercase;
+      font-size:1.5rem;
+    }
+
+    .modal-card p{
+      margin:0 0 14px;
+      line-height:1.6;
+    }
+
     @media (max-width: 980px){
       .grid,.mini-grid,.two{grid-template-columns:1fr}
     }
 
     @media (max-width: 760px){
-      .hero::after,.login-card::after{
+      .hero::after,.login-card::after,.modal-card::after{
         position:static;
         display:inline-block;
         margin-top:10px;
         transform:rotate(-2deg);
       }
-      .hero,.panel,.login-card{padding:18px}
+      .hero,.panel,.login-card,.modal-card{padding:18px}
     }
   </style>
 </head>
@@ -399,7 +450,7 @@
       <div class="eyebrow">Staff nonsense access required</div>
       <h1 class="login-title">Enter thy<br>phone number</h1>
       <p class="login-text">
-        Only approved staff numbers may pass. Your phone number is now hidden from view because apparently secrecy has entered the building.
+        Only approved staff numbers may pass. Your phone number is hidden from view now because secrecy has wandered onto the set.
       </p>
 
       <div class="form-grid">
@@ -411,7 +462,7 @@
       </div>
 
       <div class="notice">
-        This portal has a built-in fallback mode, so it keeps working even if Firestore decides to throw itself onto the stage dramatically.
+        This portal has a built-in fallback mode, so it keeps working even if Firestore throws itself dramatically onto the stage.
       </div>
 
       <div id="loginStatus" class="status err"></div>
@@ -454,14 +505,8 @@
           <p>Managers only may create, edit, or delete announcements.</p>
 
           <div id="announcementAdmin" class="hidden">
-            <div class="form-grid">
-              <input id="announcementTitle" type="text" placeholder="Announcement title" />
-              <textarea id="announcementBody" placeholder="Write the announcement"></textarea>
-            </div>
             <div class="btn-row">
-              <button id="addAnnouncementBtn" class="btn btn-primary" type="button">Post Announcement</button>
-              <button id="updateAnnouncementBtn" class="btn btn-secondary hidden" type="button">Update Announcement</button>
-              <button id="cancelAnnouncementEditBtn" class="btn btn-danger hidden" type="button">Cancel Edit</button>
+              <button id="openAnnouncementCreateBtn" class="btn btn-primary" type="button">New Announcement</button>
               <button id="refreshAnnouncementsBtn" class="btn btn-secondary" type="button">Refresh</button>
             </div>
           </div>
@@ -496,29 +541,56 @@
         <h2>Permissions Management</h2>
         <p>Owner-only section. Add, update, and edit permissions here.</p>
 
-        <div class="form-grid">
-          <div class="two">
-            <input id="permName" type="text" placeholder="Person name" />
-            <input id="permPhone" type="text" placeholder="Phone number" />
-          </div>
-          <div class="two">
-            <input id="permRole" type="text" placeholder="Portal role" />
-            <select id="permAccess">
-              <option value="staff">Standard staff access</option>
-              <option value="manager">Manager access</option>
-            </select>
-          </div>
-        </div>
-
         <div class="btn-row">
-          <button id="savePermissionBtn" class="btn btn-primary" type="button">Save Permission</button>
-          <button id="updatePermissionBtn" class="btn btn-secondary hidden" type="button">Update Permission</button>
-          <button id="cancelPermissionEditBtn" class="btn btn-danger hidden" type="button">Cancel Edit</button>
+          <button id="openPermissionCreateBtn" class="btn btn-primary" type="button">New Permission</button>
           <button id="refreshPermissionsBtn" class="btn btn-secondary" type="button">Refresh Permissions</button>
         </div>
 
         <div id="permissionList" class="card-list" style="margin-top:14px;"></div>
       </section>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="announcementModal">
+    <div class="modal-card">
+      <h3 id="announcementModalTitle">Create Announcement</h3>
+      <p>The clipboard has opened a dramatic little window for your administrative nonsense.</p>
+
+      <div class="form-grid">
+        <input id="announcementTitle" type="text" placeholder="Announcement title" />
+        <textarea id="announcementBody" placeholder="Write the announcement"></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button id="saveAnnouncementModalBtn" class="btn btn-primary" type="button">Save Announcement</button>
+        <button id="closeAnnouncementModalBtn" class="btn btn-danger" type="button">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="permissionModal">
+    <div class="modal-card">
+      <h3 id="permissionModalTitle">Create Permission</h3>
+      <p>Welcome to the tiny chamber where access is granted, denied, and otherwise judged by the clipboard.</p>
+
+      <div class="form-grid">
+        <div class="two">
+          <input id="permName" type="text" placeholder="Person name" />
+          <input id="permPhone" type="text" placeholder="Phone number" />
+        </div>
+        <div class="two">
+          <input id="permRole" type="text" placeholder="Portal role" />
+          <select id="permAccess">
+            <option value="staff">Standard staff access</option>
+            <option value="manager">Manager access</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button id="savePermissionModalBtn" class="btn btn-primary" type="button">Save Permission</button>
+        <button id="closePermissionModalBtn" class="btn btn-danger" type="button">Cancel</button>
+      </div>
     </div>
   </div>
 
@@ -557,13 +629,17 @@
     const scheduleCount = document.getElementById("scheduleCount");
     const permissionCount = document.getElementById("permissionCount");
 
-    const addAnnouncementBtn = document.getElementById("addAnnouncementBtn");
-    const updateAnnouncementBtn = document.getElementById("updateAnnouncementBtn");
-    const cancelAnnouncementEditBtn = document.getElementById("cancelAnnouncementEditBtn");
+    const announcementModal = document.getElementById("announcementModal");
+    const announcementModalTitle = document.getElementById("announcementModalTitle");
+    const openAnnouncementCreateBtn = document.getElementById("openAnnouncementCreateBtn");
+    const saveAnnouncementModalBtn = document.getElementById("saveAnnouncementModalBtn");
+    const closeAnnouncementModalBtn = document.getElementById("closeAnnouncementModalBtn");
 
-    const savePermissionBtn = document.getElementById("savePermissionBtn");
-    const updatePermissionBtn = document.getElementById("updatePermissionBtn");
-    const cancelPermissionEditBtn = document.getElementById("cancelPermissionEditBtn");
+    const permissionModal = document.getElementById("permissionModal");
+    const permissionModalTitle = document.getElementById("permissionModalTitle");
+    const openPermissionCreateBtn = document.getElementById("openPermissionCreateBtn");
+    const savePermissionModalBtn = document.getElementById("savePermissionModalBtn");
+    const closePermissionModalBtn = document.getElementById("closePermissionModalBtn");
 
     let currentUser = null;
     let currentPermissions = {
@@ -800,24 +876,39 @@
       );
     }
 
-    function resetAnnouncementEditor() {
+    function openAnnouncementModal(mode = "create", item = null) {
+      editingAnnouncementId = mode === "edit" && item ? item.id : null;
+      announcementModalTitle.textContent = mode === "edit" ? "Edit Announcement" : "Create Announcement";
+      document.getElementById("announcementTitle").value = item?.title || "";
+      document.getElementById("announcementBody").value = item?.body || "";
+      announcementModal.classList.add("show");
+    }
+
+    function closeAnnouncementModal() {
       editingAnnouncementId = null;
       document.getElementById("announcementTitle").value = "";
       document.getElementById("announcementBody").value = "";
-      addAnnouncementBtn.classList.remove("hidden");
-      updateAnnouncementBtn.classList.add("hidden");
-      cancelAnnouncementEditBtn.classList.add("hidden");
+      announcementModal.classList.remove("show");
     }
 
-    function resetPermissionEditor() {
+    function openPermissionModal(mode = "create", item = null) {
+      editingPermissionPhone = mode === "edit" && item ? (item.phone || item.id) : null;
+      permissionModalTitle.textContent = mode === "edit" ? "Edit Permission" : "Create Permission";
+      document.getElementById("permName").value = item?.name || "";
+      document.getElementById("permPhone").value = item?.phone || item?.id || "";
+      document.getElementById("permRole").value = item?.role || "";
+      document.getElementById("permAccess").value =
+        item && item.canEditAnnouncements ? "manager" : "staff";
+      permissionModal.classList.add("show");
+    }
+
+    function closePermissionModal() {
       editingPermissionPhone = null;
       document.getElementById("permName").value = "";
       document.getElementById("permPhone").value = "";
       document.getElementById("permRole").value = "";
       document.getElementById("permAccess").value = "staff";
-      savePermissionBtn.classList.remove("hidden");
-      updatePermissionBtn.classList.add("hidden");
-      cancelPermissionEditBtn.classList.add("hidden");
+      permissionModal.classList.remove("show");
     }
 
     async function loadAnnouncements() {
@@ -850,14 +941,7 @@
           const items = await getAnnouncements();
           const item = items.find(x => x.id === btn.dataset.id);
           if (!item) return;
-
-          editingAnnouncementId = item.id;
-          document.getElementById("announcementTitle").value = item.title || "";
-          document.getElementById("announcementBody").value = item.body || "";
-          addAnnouncementBtn.classList.add("hidden");
-          updateAnnouncementBtn.classList.remove("hidden");
-          cancelAnnouncementEditBtn.classList.remove("hidden");
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          openAnnouncementModal("edit", item);
         };
       });
 
@@ -947,19 +1031,7 @@
           const items = await getPermissions();
           const item = items.find(x => (x.phone || x.id) === btn.dataset.id);
           if (!item) return;
-
-          editingPermissionPhone = item.phone || item.id;
-          document.getElementById("permName").value = item.name || "";
-          document.getElementById("permPhone").value = item.phone || item.id || "";
-          document.getElementById("permRole").value = item.role || "";
-          document.getElementById("permAccess").value =
-            item.canManagePermissions ? "manager" :
-            item.canEditAnnouncements ? "manager" : "staff";
-
-          savePermissionBtn.classList.add("hidden");
-          updatePermissionBtn.classList.remove("hidden");
-          cancelPermissionEditBtn.classList.remove("hidden");
-          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+          openPermissionModal("edit", item);
         };
       });
 
@@ -980,65 +1052,54 @@
       });
     }
 
-    addAnnouncementBtn.onclick = async () => {
+    saveAnnouncementModalBtn.onclick = async () => {
       const title = document.getElementById("announcementTitle").value.trim();
       const body = document.getElementById("announcementBody").value.trim();
       if (!title || !body) return;
 
-      const item = {
-        id: uid(),
-        title,
-        body,
-        author: currentUser?.name || "Unknown",
-        createdAtMs: Date.now(),
-        createdAtText: nowString()
-      };
-
-      await safeFirestoreCall(
-        async () => addDoc(collection(db, "announcements"), {
-          title: item.title,
-          body: item.body,
-          author: item.author,
-          createdAt: serverTimestamp()
-        }),
-        async () => {
-          const items = readLocal(localKeys.announcements);
-          items.push(item);
-          writeLocal(localKeys.announcements, items);
-        }
-      );
-
-      resetAnnouncementEditor();
-      await loadAnnouncements();
-    };
-
-    updateAnnouncementBtn.onclick = async () => {
-      const title = document.getElementById("announcementTitle").value.trim();
-      const body = document.getElementById("announcementBody").value.trim();
-      if (!editingAnnouncementId || !title || !body) return;
-
-      await safeFirestoreCall(
-        async () => updateDoc(doc(db, "announcements", editingAnnouncementId), {
+      if (!editingAnnouncementId) {
+        const item = {
+          id: uid(),
           title,
-          body
-        }),
-        async () => {
-          const items = readLocal(localKeys.announcements);
-          const item = items.find(x => x.id === editingAnnouncementId);
-          if (item) {
-            item.title = title;
-            item.body = body;
+          body,
+          author: currentUser?.name || "Unknown",
+          createdAtMs: Date.now(),
+          createdAtText: nowString()
+        };
+
+        await safeFirestoreCall(
+          async () => addDoc(collection(db, "announcements"), {
+            title: item.title,
+            body: item.body,
+            author: item.author,
+            createdAt: serverTimestamp()
+          }),
+          async () => {
+            const items = readLocal(localKeys.announcements);
+            items.push(item);
+            writeLocal(localKeys.announcements, items);
           }
-          writeLocal(localKeys.announcements, items);
-        }
-      );
+        );
+      } else {
+        await safeFirestoreCall(
+          async () => updateDoc(doc(db, "announcements", editingAnnouncementId), {
+            title,
+            body
+          }),
+          async () => {
+            const items = readLocal(localKeys.announcements);
+            const item = items.find(x => x.id === editingAnnouncementId);
+            if (item) {
+              item.title = title;
+              item.body = body;
+            }
+            writeLocal(localKeys.announcements, items);
+          }
+        );
+      }
 
-      resetAnnouncementEditor();
+      closeAnnouncementModal();
       await loadAnnouncements();
-    };
-
-    cancelAnnouncementEditBtn.onclick = () => {
-      resetAnnouncementEditor();
     };
 
     document.getElementById("addScheduleBtn").onclick = async () => {
@@ -1074,7 +1135,7 @@
       await loadSchedule();
     };
 
-    savePermissionBtn.onclick = async () => {
+    savePermissionModalBtn.onclick = async () => {
       const name = document.getElementById("permName").value.trim();
       const phone = normalizePhone(document.getElementById("permPhone").value);
       const role = document.getElementById("permRole").value.trim() || "Staff";
@@ -1095,74 +1156,66 @@
         updatedAtText: nowString()
       };
 
-      await safeFirestoreCall(
-        async () => setDoc(doc(db, "staffPermissions", phone), {
-          ...item,
-          updatedAt: serverTimestamp()
-        }, { merge: true }),
-        async () => {
-          const items = readLocal(localKeys.permissions);
-          const existing = items.find(x => x.phone === phone);
-          if (existing) Object.assign(existing, item);
-          else items.push(item);
-          writeLocal(localKeys.permissions, items);
-        }
-      );
-
-      resetPermissionEditor();
-      await loadPermissions();
-    };
-
-    updatePermissionBtn.onclick = async () => {
-      const name = document.getElementById("permName").value.trim();
-      const phone = normalizePhone(document.getElementById("permPhone").value);
-      const role = document.getElementById("permRole").value.trim() || "Staff";
-      const access = document.getElementById("permAccess").value;
-      if (!editingPermissionPhone || !name || !phone) return;
-
-      const manager = access === "manager";
-
-      const item = {
-        phone,
-        name,
-        role,
-        active: true,
-        canEditAnnouncements: manager,
-        canEditSchedule: manager,
-        canManagePermissions: false,
-        updatedAtMs: Date.now(),
-        updatedAtText: nowString()
-      };
-
-      await safeFirestoreCall(
-        async () => {
-          if (phone !== editingPermissionPhone) {
-            const oldSnap = await getDoc(doc(db, "staffPermissions", editingPermissionPhone));
-            if (oldSnap.exists()) await deleteDoc(doc(db, "staffPermissions", editingPermissionPhone));
-          }
-          await setDoc(doc(db, "staffPermissions", phone), {
+      if (!editingPermissionPhone) {
+        await safeFirestoreCall(
+          async () => setDoc(doc(db, "staffPermissions", phone), {
             ...item,
             updatedAt: serverTimestamp()
-          }, { merge: true });
-        },
-        async () => {
-          let items = readLocal(localKeys.permissions).filter(x => x.phone !== editingPermissionPhone);
-          items.push(item);
-          writeLocal(localKeys.permissions, items);
-        }
-      );
+          }, { merge: true }),
+          async () => {
+            const items = readLocal(localKeys.permissions);
+            const existing = items.find(x => x.phone === phone);
+            if (existing) Object.assign(existing, item);
+            else items.push(item);
+            writeLocal(localKeys.permissions, items);
+          }
+        );
+      } else {
+        await safeFirestoreCall(
+          async () => {
+            if (phone !== editingPermissionPhone) {
+              const oldSnap = await getDoc(doc(db, "staffPermissions", editingPermissionPhone));
+              if (oldSnap.exists()) await deleteDoc(doc(db, "staffPermissions", editingPermissionPhone));
+            }
+            await setDoc(doc(db, "staffPermissions", phone), {
+              ...item,
+              updatedAt: serverTimestamp()
+            }, { merge: true });
+          },
+          async () => {
+            let items = readLocal(localKeys.permissions).filter(x => x.phone !== editingPermissionPhone);
+            items.push(item);
+            writeLocal(localKeys.permissions, items);
+          }
+        );
+      }
 
-      resetPermissionEditor();
+      closePermissionModal();
       await loadPermissions();
-    };
-
-    cancelPermissionEditBtn.onclick = () => {
-      resetPermissionEditor();
     };
 
     document.getElementById("refreshAnnouncementsBtn").onclick = loadAnnouncements;
     document.getElementById("refreshScheduleBtn").onclick = loadSchedule;
     document.getElementById("refreshPermissionsBtn").onclick = loadPermissions;
+
+    if (openAnnouncementCreateBtn) {
+      openAnnouncementCreateBtn.onclick = () => openAnnouncementModal("create");
+    }
+
+    if (openPermissionCreateBtn) {
+      openPermissionCreateBtn.onclick = () => openPermissionModal("create");
+    }
+
+    closeAnnouncementModalBtn.onclick = () => closeAnnouncementModal();
+    closePermissionModalBtn.onclick = () => closePermissionModal();
+
+    announcementModal.addEventListener("click", (e) => {
+      if (e.target === announcementModal) closeAnnouncementModal();
+    });
+
+    permissionModal.addEventListener("click", (e) => {
+      if (e.target === permissionModal) closePermissionModal();
+    });
 
     loginBtn.onclick = async () => {
       loginStatus.classList.remove("show");
