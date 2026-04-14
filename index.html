@@ -20,7 +20,7 @@
       --card:rgba(255,255,255,.92);
       --shadow:0 18px 50px rgba(30,24,52,.22);
       --radius:28px;
-      --max:1220px;
+      --max:1240px;
     }
 
     *{box-sizing:border-box}
@@ -46,6 +46,61 @@
       0%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
       50%{background-position:0% 0%,0% 0%,0% 0%,100% 50%}
       100%{background-position:0% 0%,0% 0%,0% 0%,0% 50%}
+    }
+
+    .star,.burst,.swirl,.bean{
+      position:fixed;
+      pointer-events:none;
+      z-index:0;
+      opacity:.8;
+    }
+
+    .star{
+      width:18px;
+      height:18px;
+      background:#fff8b2;
+      clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+      animation:floaty 8s ease-in-out infinite;
+    }
+
+    .burst{
+      width:80px;
+      height:80px;
+      background:rgba(255,255,255,.35);
+      clip-path:polygon(50% 0%,60% 25%,85% 15%,75% 40%,100% 50%,75% 60%,85% 85%,60% 75%,50% 100%,40% 75%,15% 85%,25% 60%,0% 50%,25% 40%,15% 15%,40% 25%);
+      animation:spinSlow 16s linear infinite;
+    }
+
+    .swirl{
+      width:110px;
+      height:110px;
+      border:10px dashed rgba(255,255,255,.42);
+      border-radius:50%;
+      animation:spinSlow 20s linear infinite;
+    }
+
+    .bean{
+      width:48px;
+      height:34px;
+      background:rgba(255,255,255,.28);
+      border:4px solid rgba(255,255,255,.45);
+      border-radius:50% 45% 55% 50% / 55% 50% 50% 45%;
+      animation:beanFloat 12s ease-in-out infinite;
+    }
+
+    @keyframes floaty{
+      0%,100%{transform:translateY(0) rotate(0)}
+      50%{transform:translateY(-18px) rotate(12deg)}
+    }
+
+    @keyframes beanFloat{
+      0%,100%{transform:translateY(0) rotate(0)}
+      50%{transform:translateY(-26px) rotate(18deg)}
+    }
+
+    @keyframes spinSlow{
+      from{transform:rotate(0)}
+      to{transform:rotate(360deg)}
     }
 
     .loading-screen{
@@ -128,40 +183,6 @@
       100%{width:100%}
     }
 
-    .dismiss-banner{
-      position:sticky;
-      top:0;
-      z-index:100;
-      background:linear-gradient(135deg,#d8ffd0,#7bed9f);
-      border-bottom:4px solid rgba(30,24,52,.16);
-      box-shadow:0 10px 20px rgba(30,24,52,.1);
-    }
-
-    .dismiss-banner.hidden{display:none}
-
-    .banner-inner{
-      width:min(var(--max),calc(100% - 24px));
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      padding:12px 0;
-      font-weight:900;
-    }
-
-    .banner-close{
-      border:none;
-      cursor:pointer;
-      background:#fff;
-      color:var(--ink);
-      border-radius:999px;
-      padding:10px 14px;
-      font-weight:900;
-      border:3px solid var(--ink);
-      box-shadow:0 6px 0 rgba(30,24,52,.12);
-    }
-
     .topbar{
       position:sticky;
       top:0;
@@ -170,8 +191,6 @@
       background:rgba(255,250,242,.74);
       border-bottom:3px solid rgba(30,24,52,.08);
     }
-
-    .with-banner .topbar{top:58px}
 
     .topbar-inner,.section-inner,.hero-inner,.footer-inner{
       width:min(var(--max),calc(100% - 32px));
@@ -199,6 +218,7 @@
       border-radius:999px;
       padding:10px 16px;
       box-shadow:6px 6px 0 rgba(30,24,52,.18);
+      cursor:pointer;
     }
 
     nav{
@@ -230,7 +250,7 @@
 
     .hero-inner{
       display:grid;
-      grid-template-columns:1.15fr .85fr;
+      grid-template-columns:1.12fr .88fr;
       align-items:start;
       gap:28px;
     }
@@ -273,6 +293,7 @@
       font-size:.88rem;
       transform:rotate(-3deg);
       margin-bottom:16px;
+      cursor:pointer;
     }
 
     h1{
@@ -347,6 +368,7 @@
       position:relative;
       overflow:hidden;
       transition:transform .25s ease;
+      cursor:pointer;
     }
 
     .poster-card:hover{transform:rotate(1deg) scale(1.02)}
@@ -436,6 +458,7 @@
       border:3px solid rgba(255,255,255,.55);
       transform:rotate(2deg);
       box-shadow:0 10px 22px rgba(0,0,0,.12);
+      cursor:pointer;
     }
 
     .madness-heading{
@@ -459,6 +482,7 @@
       border:3px solid rgba(30,24,52,.12);
       border-radius:24px;
       box-shadow:0 10px 20px rgba(30,24,52,.08);
+      cursor:pointer;
     }
 
     .meter-top{
@@ -528,6 +552,7 @@
       font-weight:900;
       transform:rotate(-2deg);
       box-shadow:0 6px 16px rgba(30,24,52,.08);
+      cursor:pointer;
     }
 
     .chaos-pill:nth-child(2){transform:rotate(2deg)}
@@ -545,6 +570,7 @@
       background:linear-gradient(135deg,#fff,#ffeeb5);
       box-shadow:0 8px 18px rgba(30,24,52,.12);
       animation:statusDance 2.6s ease-in-out infinite;
+      cursor:pointer;
     }
 
     @keyframes statusDance{
@@ -562,10 +588,6 @@
 
     .section-card{
       padding:28px;
-      background:var(--card);
-      border:4px solid rgba(30,24,52,.12);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
     }
 
     .section-title{
@@ -594,6 +616,7 @@
       border-radius:24px;
       padding:20px;
       transition:transform .2s ease,box-shadow .2s ease;
+      cursor:pointer;
     }
 
     .fun-box:hover{
@@ -638,6 +661,7 @@
       margin:0 0 14px;
       text-transform:uppercase;
       font-size:1.35rem;
+      cursor:pointer;
     }
 
     .flip-grid{
@@ -647,13 +671,13 @@
 
     .flip-card{
       perspective:1200px;
-      min-height:110px;
+      min-height:112px;
     }
 
     .flip-card-inner{
       position:relative;
       width:100%;
-      min-height:110px;
+      min-height:112px;
       transition:transform .8s cubic-bezier(.2,.8,.2,1);
       transform-style:preserve-3d;
     }
@@ -674,7 +698,6 @@
     }
 
     .flip-front{background:rgba(255,255,255,.9)}
-
     .flip-front strong{
       display:block;
       font-size:1rem;
@@ -710,6 +733,7 @@
       border-radius:22px;
       padding:22px;
       transition:transform .18s ease;
+      cursor:pointer;
     }
 
     .credit-box:hover{transform:scale(1.03) rotate(.5deg)}
@@ -755,6 +779,86 @@
       100%{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}
     }
 
+    .popup-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(19,16,34,.58);
+      backdrop-filter:blur(6px);
+      z-index:99999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+
+    .popup-overlay.show{display:flex}
+
+    .popup-card{
+      width:min(760px,100%);
+      background:rgba(255,255,255,.97);
+      border:4px solid rgba(30,24,52,.14);
+      border-radius:32px;
+      box-shadow:0 24px 60px rgba(30,24,52,.28);
+      padding:26px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .popup-card::after{
+      content:"TOTALLY IMPORTANT";
+      position:absolute;
+      top:14px;
+      right:-20px;
+      background:var(--accent);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      border:3px solid rgba(255,255,255,.55);
+      transform:rotate(11deg);
+      font-weight:900;
+      font-size:.8rem;
+    }
+
+    .popup-card h2{
+      margin:12px 0 12px;
+      font-size:clamp(1.9rem,5vw,3.2rem);
+      line-height:.95;
+      text-transform:uppercase;
+    }
+
+    .popup-card p{
+      margin:0;
+      font-size:1.06rem;
+      line-height:1.7;
+      font-weight:700;
+    }
+
+    .popup-actions{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .popup-btn{
+      border:none;
+      cursor:pointer;
+      background:#fff;
+      color:var(--ink);
+      border:3px solid var(--ink);
+      border-radius:999px;
+      padding:12px 16px;
+      font:inherit;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      box-shadow:0 8px 0 rgba(30,24,52,.12);
+    }
+
+    .popup-btn:hover{transform:translateY(-2px) rotate(-1deg)}
+
     @media (max-width: 980px){
       .hero-inner,.cast-layout,.credits,.fun-grid{grid-template-columns:1fr}
       .hero{padding-top:34px}
@@ -775,32 +879,33 @@
       nav{display:none}
       .topbar-inner{justify-content:center}
       .hero-card,.section-card,.poster-card{padding:20px}
-      .banner-inner{align-items:flex-start}
     }
   </style>
 </head>
-<body class="loading with-banner">
+<body class="loading">
   <div class="loading-screen" id="loadingScreen">
     <div class="loading-content">
       <div class="loading-badge">Please stand by for cinematic nonsense</div>
       <h1 class="loading-title">Loading<br>The Adventures<br>of Gaylord</h1>
-      <p class="loading-subtitle">Preparing chaos, beans, destiny, and several completely unnecessary levels of hype...</p>
+      <p class="loading-subtitle">Preparing chaos, beans, destiny, background walkers, and emotionally unstable paperwork...</p>
       <div class="loading-bar-wrap">
         <div class="loading-bar"></div>
       </div>
     </div>
   </div>
 
-  <div class="dismiss-banner" id="preReleaseBanner">
-    <div class="banner-inner">
-      <span>PRE-RELEASE APPLICATIONS ARE OPEN NOW. THIS IS NOT A DRILL. THE CLIPBOARD HAS RELEASED THE PAPERWORK.</span>
-      <button class="banner-close" id="closeBanner" type="button">Dismiss The Hype</button>
-    </div>
-  </div>
+  <div class="star" style="top: 10%; left: 6%;"></div>
+  <div class="star" style="top: 24%; left: 88%; animation-delay: 1s;"></div>
+  <div class="star" style="top: 74%; left: 12%; animation-delay: 2s;"></div>
+  <div class="burst" style="top: 14%; right: 10%;"></div>
+  <div class="burst" style="bottom: 18%; left: 4%; animation-duration: 20s;"></div>
+  <div class="swirl" style="top: 52%; right: 4%;"></div>
+  <div class="bean" style="top: 18%; left: 78%;"></div>
+  <div class="bean" style="bottom: 12%; left: 18%; animation-delay: 1.5s;"></div>
 
   <header class="topbar">
     <div class="topbar-inner">
-      <div class="brand">The Adventures of Gaylord</div>
+      <div class="brand easter-egg">The Adventures of Gaylord</div>
       <nav>
         <a href="#about">About</a>
         <a href="#madness">Madness</a>
@@ -814,20 +919,20 @@
     <section class="hero">
       <div class="hero-inner">
         <div class="hero-card">
-          <div class="eyebrow">A school project with maximum cinematic nonsense</div>
+          <div class="eyebrow easter-egg">A school project with maximum cinematic nonsense</div>
           <h1><span class="shake">The Adventures</span><br>of Gaylord</h1>
           <p>
             A wild comedy project with gigantic energy, ridiculous characters, suspicious levels of drama, and the kind of advertising that acts like this is the most important motion picture event in the history of humanity, beans, and whatever else is floating through space.
           </p>
 
           <div class="madness-shell" id="madness">
-            <div class="madness-badge">ABSURDITY DETECTOR</div>
+            <div class="madness-badge easter-egg">ABSURDITY DETECTOR</div>
             <h2 class="madness-heading">Official live measurement of total cinematic nonsense</h2>
             <p class="madness-sub" id="madnessSub">
               Scientists, philosophers, and one very stressed clipboard have all agreed that this situation has become completely unreasonable in the funniest possible way.
             </p>
 
-            <div class="madness-meter">
+            <div class="madness-meter easter-egg">
               <div class="meter-top">
                 <span>Current nonsense level</span>
                 <span id="meterLabel">Elevated buffoonery</span>
@@ -839,13 +944,13 @@
             </div>
 
             <div class="comment-chaos">
-              <div class="chaos-pill">The forms are awake.</div>
-              <div class="chaos-pill">The clipboard feels overqualified.</div>
-              <div class="chaos-pill">The drama budget has exploded.</div>
-              <div class="chaos-pill">Somebody call the Academy.</div>
+              <div class="chaos-pill easter-egg">The forms are awake.</div>
+              <div class="chaos-pill easter-egg">The clipboard feels overqualified.</div>
+              <div class="chaos-pill easter-egg">The drama budget has exploded.</div>
+              <div class="chaos-pill easter-egg">Somebody call the Academy.</div>
             </div>
 
-            <div class="rotating-comment" id="rotatingComment">
+            <div class="rotating-comment easter-egg" id="rotatingComment">
               Current official statement: this project has exceeded healthy levels of silliness.
             </div>
           </div>
@@ -859,13 +964,13 @@
           </div>
         </div>
 
-        <div class="poster-card explode-on-click">
+        <div class="poster-card explode-on-click easter-egg">
           <div class="poster-title">Heroics.<br>Chaos.<br>Forms.<br>Absolute Madness.</div>
         </div>
       </div>
     </section>
 
-    <section id="about">
+<section id="about">
       <div class="section-inner">
         <div class="section-card">
           <h2 class="section-title">What is this masterpiece?</h2>
@@ -874,15 +979,15 @@
           </p>
 
           <div class="fun-grid">
-            <div class="fun-box explode-on-click">
+            <div class="fun-box explode-on-click easter-egg">
               <h3>Big Comedy Energy</h3>
               <p>Everything is loud, colorful, exaggerated, and powered by the sacred belief that subtlety is for cowards.</p>
             </div>
-            <div class="fun-box explode-on-click">
+            <div class="fun-box explode-on-click easter-egg">
               <h3>Trailer Central</h3>
               <p>The trailer button goes straight to the YouTube channel so viewers can witness updates and whatever cinematic business occurs next.</p>
             </div>
-            <div class="fun-box explode-on-click">
+            <div class="fun-box explode-on-click easter-egg">
               <h3>School Project</h3>
               <p>This project is for Christopher Shelley, Ty Keeler, Blake Pitts, and Makar Portniagin, which means history is being made whether the world is ready or not.</p>
             </div>
@@ -894,50 +999,247 @@
     <section id="cast">
       <div class="section-inner">
         <div class="section-card">
-          <h2 class="section-title">Cast & Crew</h2>
-          <p class="section-subtitle">Names and roles are grouped by team. Hover a card to flip it dramatically, because ordinary cards lacked courage.</p>
+          <h2 class="section-title">Confirmed Cast & Production Staff</h2>
+          <p class="section-subtitle">Just the names, their parts, and their team, as demanded by the sacred spreadsheet.</p>
 
           <div class="cast-layout">
             <div class="team-card">
-              <h3>Production & Crew</h3>
+              <h3 class="easter-egg">Production & Crew</h3>
               <div class="flip-grid">
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Ty Keeler</strong><span>Production & Crew</span></div><div class="flip-face flip-back">Gaylord Queerston</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Christopher Shelley</strong><span>Production & Crew</span></div><div class="flip-face flip-back">Catstopher Shelley, Christopher Shelley, Nazi Best Friend, Resurrected Person</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Hannah Myers</strong><span>Production & Crew</span></div><div class="flip-face flip-back">Costumes, Make-up</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Blake Pitts</strong><span>Production & Crew</span></div><div class="flip-face flip-back">The Rabid Gay</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Makar Portniagin</strong><span>Production & Crew</span></div><div class="flip-face flip-back">Vehicle Hitler</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Kate Miller</strong><span>Production & Crew</span></div><div class="flip-face flip-back">Makeup, Costumes, Background Drag</div></div></div>
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Ty Keeler</strong>
+                      <span>Production & Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Gaylord Queerston, Writer</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Christopher Shelley</strong>
+                      <span>Production & Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Catstopher Shelley, Christopher Shelley, Nazi Best Friend, Resurrected Person, Writer, Video Editor</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Hannah Myers</strong>
+                      <span>Production & Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Costumes, Make-up, Director, Background</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Blake Pitts</strong>
+                      <span>Production & Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">The Rabid Gay, Writer</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Makar Portniagin</strong>
+                      <span>Production & Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Vehicle Hitler, Writer</div>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="team-card">
-              <h3>Production</h3>
+              <h3 class="easter-egg">Production</h3>
               <div class="flip-grid">
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Brad Nunn</strong><span>Production</span></div><div class="flip-face flip-back">Director, Photographer</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Jonathan Myers</strong><span>Production</span></div><div class="flip-face flip-back">Set Baker</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Shelby Finton</strong><span>Production</span></div><div class="flip-face flip-back">Script Editor</div></div></div>
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Brad Nunn</strong>
+                      <span>Production</span>
+                    </div>
+                    <div class="flip-face flip-back">Director, Photographer</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Shelby Finton</strong>
+                      <span>Production</span>
+                    </div>
+                    <div class="flip-face flip-back">Script Editor</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Kate Miller</strong>
+                      <span>Production</span>
+                    </div>
+                    <div class="flip-face flip-back">Costume, Makeup</div>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="team-card">
-              <h3>Crew</h3>
+              <h3 class="easter-egg">Crew</h3>
               <div class="flip-grid">
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Ziggy Holden</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Eden Anders</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Makenna Overholt</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Raiden P.</strong><span>Crew</span></div><div class="flip-face flip-back">Unknown Narrator</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Lennnnayyyyyyyyy</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Julee Shelley</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Kylie Donderson</strong><span>Crew</span></div><div class="flip-face flip-back">Drag King/Queen, Background</div></div></div>
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Ziggy Holden</strong>
+                      <span>Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Drag King/Queen, Background, Jaywalker</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Eden Andrew's</strong>
+                      <span>Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Drag King/Queen, Background, Nazi Goon</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Jonathan Myers</strong>
+                      <span>Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Set Baker, Fill-In</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Makenna Overholt</strong>
+                      <span>Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Drag King/Queen, Background, Nazi Goon</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Raiden P.</strong>
+                      <span>Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Unknown Narrator, Jaywalker</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Lennnnayyyyyyyyy</strong>
+                      <span>Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Drag King/Queen, Background</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Julee Shelley</strong>
+                      <span>Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Drag King/Queen, Background</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Kylie Denderson</strong>
+                      <span>Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Drag King/Queen, Background</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Joel Nunn</strong>
+                      <span>Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Drag King/Queen, Background, Supposedly Innocent Man</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Sam Lanz</strong>
+                      <span>Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Helbert</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Jacklyn "Kaz" Monson</strong>
+                      <span>Crew</span>
+                    </div>
+                    <div class="flip-face flip-back">Drag King/Queen, Background</div>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="team-card">
-              <h3>Project Highlights</h3>
+              <h3 class="easter-egg">Production Highlights</h3>
               <div class="flip-grid">
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Style</strong><span>What to expect</span></div><div class="flip-face flip-back">Cartoony, dramatic, ridiculous, and fully committed to being way too much.</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Release Forms</strong><span>Paperwork of Destiny</span></div><div class="flip-face flip-back">A brand-new form now determines whose voice, face, blur, and parental approval may enter the chaos.</div></div></div>
-                <div class="flip-card"><div class="flip-card-inner"><div class="flip-face flip-front"><strong>Mission</strong><span>Completely Reasonable Goal</span></div><div class="flip-face flip-back">Make this project feel like a historical event, a heroic saga, and a paperwork emergency all at once.</div></div></div>
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Writers</strong>
+                      <span>Important nonsense creators</span>
+                    </div>
+                    <div class="flip-face flip-back">Ty Keeler, Christopher Shelley, Blake Pitts, and Makar Portniagin are all listed as writers.</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>Directors</strong>
+                      <span>Chaos overseers</span>
+                    </div>
+                    <div class="flip-face flip-back">Brad Nunn and Hannah Myers are both carrying directorial energy into the void.</div>
+                  </div>
+                </div>
+
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-face flip-front">
+                      <strong>General Mood</strong>
+                      <span>Operational condition</span>
+                    </div>
+                    <div class="flip-face flip-back">This production currently appears to be held together by commitment, nonsense, and possibly eyeliner.</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -950,13 +1252,13 @@
         <div class="section-card">
           <h2 class="section-title">Project Credits</h2>
           <div class="credits">
-            <div class="credit-box explode-on-click">
+            <div class="credit-box explode-on-click easter-egg">
               <h3>Created For</h3>
               <p>Christopher Shelley, Ty Keeler, Blake Pitts, and Makar Portniagin.</p>
             </div>
-            <div class="credit-box explode-on-click">
+            <div class="credit-box explode-on-click easter-egg">
               <h3>Applications & Forms</h3>
-              <p>Pre-release applications are open, the crew page is ready, the viewing release form is live, and the secret authorization page waits silently in the shadows for whoever types the URL correctly.</p>
+              <p>Pre-release applications are open, the crew page is ready, the viewing release form is live, and the site now contains random clickable nonsense for those who refuse to act normal.</p>
             </div>
           </div>
         </div>
@@ -970,16 +1272,29 @@
     </div>
   </footer>
 
-  <script>
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-card">
+      <h2 id="popupTitle">Important Nonsense Detected</h2>
+      <p id="popupText">The clipboard has issued a statement of confusing significance.</p>
+      <div class="popup-actions">
+        <button class="popup-btn" id="popupClose" type="button">Return To Reality</button>
+        <button class="popup-btn" id="popupAnother" type="button">Give Me More Nonsense</button>
+      </div>
+    </div>
+  </div>
+<script>
     const loadingScreen = document.getElementById("loadingScreen");
-    const preReleaseBanner = document.getElementById("preReleaseBanner");
-    const closeBanner = document.getElementById("closeBanner");
-
     const rotatingComment = document.getElementById("rotatingComment");
     const meterFill = document.getElementById("meterFill");
     const meterNumber = document.getElementById("meterNumber");
     const meterLabel = document.getElementById("meterLabel");
     const madnessSub = document.getElementById("madnessSub");
+
+    const popupOverlay = document.getElementById("popupOverlay");
+    const popupTitle = document.getElementById("popupTitle");
+    const popupText = document.getElementById("popupText");
+    const popupClose = document.getElementById("popupClose");
+    const popupAnother = document.getElementById("popupAnother");
 
     const madnessComments = [
       "Current official statement: this project has exceeded healthy levels of silliness.",
@@ -995,28 +1310,102 @@
     ];
 
     const madnessStates = [
-      { value: 108, label: "Elevated buffoonery", sub: "Scientists, philosophers, and one very stressed clipboard have all agreed that this situation has become completely unreasonable in the funniest possible way." },
-      { value: 126, label: "Theatrical instability", sub: "The project is radiating enough dramatic nonsense to bend nearby common sense out of shape." },
-      { value: 143, label: "Heroic paperwork surge", sub: "The administrative energy has become so intense that nearby staplers may begin behaving emotionally." },
-      { value: 158, label: "Maximum goof pressure", sub: "This is no longer a normal level of excitement. This is a fully weaponized comedy atmosphere." },
-      { value: 172, label: "Legendary nonsense", sub: "The absurdity has reached folklore status and is now being passed down through extremely dramatic whispers." },
-      { value: 189, label: "Cinematic emergency", sub: "If this becomes any more over-the-top, the poster may legally qualify as a public event." }
+      {
+        value: 108,
+        label: "Elevated buffoonery",
+        sub: "Scientists, philosophers, and one very stressed clipboard have all agreed that this situation has become completely unreasonable in the funniest possible way."
+      },
+      {
+        value: 126,
+        label: "Theatrical instability",
+        sub: "The project is radiating enough dramatic nonsense to bend nearby common sense out of shape."
+      },
+      {
+        value: 143,
+        label: "Heroic paperwork surge",
+        sub: "The administrative energy has become so intense that nearby staplers may begin behaving emotionally."
+      },
+      {
+        value: 158,
+        label: "Maximum goof pressure",
+        sub: "This is no longer a normal level of excitement. This is a fully weaponized comedy atmosphere."
+      },
+      {
+        value: 172,
+        label: "Legendary nonsense",
+        sub: "The absurdity has reached folklore status and is now being passed down through extremely dramatic whispers."
+      },
+      {
+        value: 189,
+        label: "Cinematic emergency",
+        sub: "If this becomes any more over-the-top, the poster may legally qualify as a public event."
+      }
+    ];
+
+    const eggMessages = [
+      {
+        title: "Clipboard Bulletin",
+        text: "The clipboard has reviewed your click and has determined that you are probably up to something."
+      },
+      {
+        title: "Emergency Statement",
+        text: "This website contains no less than four metric tons of dramatic energy and at least one bean of destiny."
+      },
+      {
+        title: "Production Alert",
+        text: "Someone somewhere is currently adjusting a costume and pretending it is not extremely important."
+      },
+      {
+        title: "Official Warning",
+        text: "If you keep clicking random things, you may become legally classified as part of the production."
+      },
+      {
+        title: "Deep Lore Discovered",
+        text: "Under the website there is only HTML, CSS, JavaScript, and an unreasonable amount of confidence."
+      },
+      {
+        title: "Background Walker Notice",
+        text: "Please walk suspiciously across the frame and pretend you belong there."
+      },
+      {
+        title: "Bean Advisory",
+        text: "A bean has been consulted. The bean believes in this project more than some people believe in themselves."
+      },
+      {
+        title: "Budget Update",
+        text: "The budget remains emotionally committed, spiritually confused, and artistically overqualified."
+      },
+      {
+        title: "Confidential Production Note",
+        text: "If anybody asks, all of this is definitely under control and not held together by dramatic pressure alone."
+      },
+      {
+        title: "Suspicious Discovery",
+        text: "You clicked that because your instincts told you nonsense was hidden here. Your instincts were correct."
+      },
+      {
+        title: "Background Energy Reading",
+        text: "Jaywalker levels are stable. Drag energy remains high. Clipboard confidence is peaking."
+      },
+      {
+        title: "Historical Update",
+        text: "Future historians will probably be confused, but they will absolutely not be bored."
+      }
     ];
 
     let commentIndex = 0;
     let meterIndex = 0;
 
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        loadingScreen.classList.add("hidden");
-        document.body.classList.remove("loading");
-      }, 2800);
-    });
+    function showPopup(messageObj) {
+      popupTitle.textContent = messageObj.title;
+      popupText.textContent = messageObj.text;
+      popupOverlay.classList.add("show");
+    }
 
-    closeBanner.addEventListener("click", () => {
-      preReleaseBanner.classList.add("hidden");
-      document.body.classList.remove("with-banner");
-    });
+    function randomEggMessage() {
+      const randomIndex = Math.floor(Math.random() * eggMessages.length);
+      return eggMessages[randomIndex];
+    }
 
     function cycleMadness() {
       commentIndex = (commentIndex + 1) % madnessComments.length;
@@ -1030,13 +1419,6 @@
       meterLabel.textContent = state.label;
       madnessSub.textContent = state.sub;
     }
-
-    meterFill.style.width = "100%";
-    meterNumber.textContent = madnessStates[0].value + "%";
-    meterLabel.textContent = madnessStates[0].label;
-    madnessSub.textContent = madnessStates[0].sub;
-
-    setInterval(cycleMadness, 2600);
 
     function createExplosion(x, y) {
       const explosion = document.createElement("div");
@@ -1068,11 +1450,62 @@
       setTimeout(() => explosion.remove(), 750);
     }
 
+    window.addEventListener("load", () => {
+      meterFill.style.width = "100%";
+      meterNumber.textContent = madnessStates[0].value + "%";
+      meterLabel.textContent = madnessStates[0].label;
+      madnessSub.textContent = madnessStates[0].sub;
+
+      setTimeout(() => {
+        loadingScreen.classList.add("hidden");
+        document.body.classList.remove("loading");
+      }, 2800);
+    });
+
+    setInterval(cycleMadness, 2600);
+
     document.querySelectorAll(".explode-on-click").forEach((el) => {
       el.addEventListener("click", (e) => {
         createExplosion(e.clientX, e.clientY);
       });
     });
+
+    document.querySelectorAll(".easter-egg").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        showPopup(randomEggMessage());
+      });
+    });
+
+    popupClose.addEventListener("click", () => {
+      popupOverlay.classList.remove("show");
+    });
+
+    popupAnother.addEventListener("click", () => {
+      showPopup(randomEggMessage());
+    });
+
+    popupOverlay.addEventListener("click", (e) => {
+      if (e.target === popupOverlay) {
+        popupOverlay.classList.remove("show");
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        popupOverlay.classList.remove("show");
+      }
+    });
+
+    if (rotatingComment) {
+      rotatingComment.addEventListener("dblclick", () => {
+        showPopup({
+          title: "Ultra Secret Double Click Award",
+          text: "Congratulations. You clicked a rotating sentence twice and have now achieved a level of curiosity that concerns the clipboard."
+        });
+      });
+    }
   </script>
 </body>
 </html>
