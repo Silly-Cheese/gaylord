@@ -211,7 +211,7 @@
 
     .mini-grid{
       display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
+      grid-template-columns:repeat(3,minmax(0,1fr));
       gap:14px;
       margin-top:16px;
     }
@@ -399,11 +399,11 @@
       <div class="eyebrow">Staff nonsense access required</div>
       <h1 class="login-title">Enter thy<br>phone number</h1>
       <p class="login-text">
-        Only approved staff numbers may pass. If the cloud is feeling dramatic today, the portal will still work locally instead of collapsing into theatrical despair.
+        Only approved staff numbers may pass. Your phone number is now hidden from view because apparently secrecy has entered the building.
       </p>
 
       <div class="form-grid">
-        <input id="loginPhone" type="tel" placeholder="Enter your phone number" />
+        <input id="loginPhone" type="password" placeholder="Enter your phone number" />
       </div>
 
       <div class="btn-row" style="justify-content:center">
@@ -411,7 +411,7 @@
       </div>
 
       <div class="notice">
-        This portal has a built-in fallback mode, so it keeps working even if Firestore decides to become spiritually unavailable.
+        This portal has a built-in fallback mode, so it keeps working even if Firestore decides to throw itself onto the stage dramatically.
       </div>
 
       <div id="loginStatus" class="status err"></div>
@@ -429,7 +429,7 @@
         <div class="eyebrow">Authorized administrative foolishness</div>
         <h1>Staff Portal</h1>
         <p>
-          This is the internal page for announcements, the production schedule, permissions, crew applications, and roster management. It is now built to keep functioning even when technology gets stage fright.
+          This page now focuses on announcements, schedule items, and permissions. Crew sections have been removed. The clipboard has streamlined itself and is feeling very powerful.
         </p>
 
         <div class="mini-grid">
@@ -442,12 +442,8 @@
             <span class="stat-label">Schedule Items</span>
           </div>
           <div class="stat">
-            <span class="stat-number" id="crewApplicationCount">0</span>
-            <span class="stat-label">Crew Applications</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number" id="rosterCount">0</span>
-            <span class="stat-label">Roster People</span>
+            <span class="stat-number" id="permissionCount">0</span>
+            <span class="stat-label">Permissions</span>
           </div>
         </div>
       </section>
@@ -455,7 +451,7 @@
       <div class="grid">
         <section class="panel">
           <h2>Announcements</h2>
-          <p>Post updates for staff and refresh them whenever the clipboard demands new information.</p>
+          <p>Managers only may create, edit, or delete announcements.</p>
 
           <div id="announcementAdmin" class="hidden">
             <div class="form-grid">
@@ -464,6 +460,8 @@
             </div>
             <div class="btn-row">
               <button id="addAnnouncementBtn" class="btn btn-primary" type="button">Post Announcement</button>
+              <button id="updateAnnouncementBtn" class="btn btn-secondary hidden" type="button">Update Announcement</button>
+              <button id="cancelAnnouncementEditBtn" class="btn btn-danger hidden" type="button">Cancel Edit</button>
               <button id="refreshAnnouncementsBtn" class="btn btn-secondary" type="button">Refresh</button>
             </div>
           </div>
@@ -473,7 +471,7 @@
 
         <section class="panel">
           <h2>Production Schedule</h2>
-          <p>Add and manage schedule items here.</p>
+          <p>Schedule items can still be managed by users with schedule permissions.</p>
 
           <div id="scheduleAdmin" class="hidden">
             <div class="form-grid">
@@ -492,47 +490,11 @@
 
           <div id="scheduleList" class="card-list"></div>
         </section>
-
-        <section class="panel">
-          <h2>Crew Applications</h2>
-          <p>Review staff / crew applications here and approve or reject them.</p>
-
-          <div class="btn-row">
-            <button id="refreshCrewAppsBtn" class="btn btn-secondary" type="button">Refresh Applications</button>
-          </div>
-
-          <div id="crewAppsList" class="card-list"></div>
-        </section>
-
-        <section class="panel">
-          <h2>Crew Roster</h2>
-          <p>Add and manage people on the roster here.</p>
-
-          <div id="rosterAdmin" class="hidden">
-            <div class="form-grid">
-              <div class="two">
-                <input id="rosterName" type="text" placeholder="Name" />
-                <input id="rosterPhone" type="text" placeholder="Phone number" />
-              </div>
-              <div class="two">
-                <input id="rosterRole" type="text" placeholder="Role" />
-                <input id="rosterTeam" type="text" placeholder="Team" />
-              </div>
-              <textarea id="rosterNotes" placeholder="Notes"></textarea>
-            </div>
-            <div class="btn-row">
-              <button id="addRosterBtn" class="btn btn-primary" type="button">Add Person</button>
-              <button id="refreshRosterBtn" class="btn btn-secondary" type="button">Refresh Roster</button>
-            </div>
-          </div>
-
-          <div id="rosterList" class="card-list"></div>
-        </section>
       </div>
 
       <section class="panel hidden" id="permissionsPanel" style="margin-top:18px;">
         <h2>Permissions Management</h2>
-        <p>Only the owner gets this panel. No phone numbers are displayed anywhere in the interface.</p>
+        <p>Owner-only section. Add, update, and edit permissions here.</p>
 
         <div class="form-grid">
           <div class="two">
@@ -550,6 +512,8 @@
 
         <div class="btn-row">
           <button id="savePermissionBtn" class="btn btn-primary" type="button">Save Permission</button>
+          <button id="updatePermissionBtn" class="btn btn-secondary hidden" type="button">Update Permission</button>
+          <button id="cancelPermissionEditBtn" class="btn btn-danger hidden" type="button">Cancel Edit</button>
           <button id="refreshPermissionsBtn" class="btn btn-secondary" type="button">Refresh Permissions</button>
         </div>
 
@@ -587,29 +551,33 @@
 
     const announcementList = document.getElementById("announcementList");
     const scheduleList = document.getElementById("scheduleList");
-    const crewAppsList = document.getElementById("crewAppsList");
-    const rosterList = document.getElementById("rosterList");
     const permissionList = document.getElementById("permissionList");
 
     const announcementCount = document.getElementById("announcementCount");
     const scheduleCount = document.getElementById("scheduleCount");
-    const crewApplicationCount = document.getElementById("crewApplicationCount");
-    const rosterCount = document.getElementById("rosterCount");
+    const permissionCount = document.getElementById("permissionCount");
+
+    const addAnnouncementBtn = document.getElementById("addAnnouncementBtn");
+    const updateAnnouncementBtn = document.getElementById("updateAnnouncementBtn");
+    const cancelAnnouncementEditBtn = document.getElementById("cancelAnnouncementEditBtn");
+
+    const savePermissionBtn = document.getElementById("savePermissionBtn");
+    const updatePermissionBtn = document.getElementById("updatePermissionBtn");
+    const cancelPermissionEditBtn = document.getElementById("cancelPermissionEditBtn");
 
     let currentUser = null;
     let currentPermissions = {
       canEditAnnouncements: false,
       canEditSchedule: false,
-      canManageRoster: false,
-      canManagePermissions: false,
-      canReviewCrew: false
+      canManagePermissions: false
     };
+
+    let editingAnnouncementId = null;
+    let editingPermissionPhone = null;
 
     const localKeys = {
       announcements: "gaylord_local_announcements",
       schedule: "gaylord_local_schedule",
-      crewApps: "gaylord_local_crew_apps",
-      roster: "gaylord_local_roster",
       permissions: "gaylord_local_permissions"
     };
 
@@ -684,9 +652,7 @@
         active: true,
         canEditAnnouncements: true,
         canEditSchedule: true,
-        canManageRoster: true,
         canManagePermissions: true,
-        canReviewCrew: true,
         updatedAt: nowString(),
         updatedAtMs: Date.now()
       };
@@ -711,9 +677,7 @@
       return {
         canEditAnnouncements: true,
         canEditSchedule: true,
-        canManageRoster: true,
         canManagePermissions: true,
-        canReviewCrew: true,
         role: "Owner"
       };
     }
@@ -738,20 +702,18 @@
 
       if (normalized === DEMO_BYPASS_PHONE) {
         currentUser = {
-          name: "Demo Staff",
+          name: "Demo Manager",
           role: "Manager"
         };
 
         currentPermissions = {
           canEditAnnouncements: true,
           canEditSchedule: true,
-          canManageRoster: true,
           canManagePermissions: false,
-          canReviewCrew: true,
           role: "Manager"
         };
 
-        showLoginOk("Demo access accepted. The clipboard has decided to be generous.");
+        showLoginOk("Demo manager access accepted. The clipboard has allowed mischief.");
         setTimeout(unlockPortal, 250);
         return;
       }
@@ -768,7 +730,7 @@
       );
 
       if (!permission) {
-        showLoginError("That number is not authorized. The clipboard remains deeply unconvinced.");
+        showLoginError("That number is not authorized. The clipboard remains unconvinced.");
         return;
       }
 
@@ -781,9 +743,7 @@
       currentPermissions = {
         canEditAnnouncements: !!permission.canEditAnnouncements,
         canEditSchedule: !!permission.canEditSchedule,
-        canManageRoster: !!permission.canManageRoster,
         canManagePermissions: !!permission.canManagePermissions,
-        canReviewCrew: !!permission.canReviewCrew,
         role: permission.role || "Staff"
       };
 
@@ -797,7 +757,6 @@
 
       document.getElementById("announcementAdmin").classList.toggle("hidden", !currentPermissions.canEditAnnouncements);
       document.getElementById("scheduleAdmin").classList.toggle("hidden", !currentPermissions.canEditSchedule);
-      document.getElementById("rosterAdmin").classList.toggle("hidden", !currentPermissions.canManageRoster);
       permissionsPanel.classList.toggle("hidden", !currentPermissions.canManagePermissions);
 
       await refreshAll();
@@ -807,8 +766,6 @@
       await Promise.all([
         loadAnnouncements(),
         loadSchedule(),
-        loadCrewApplications(),
-        loadRoster(),
         loadPermissions()
       ]);
     }
@@ -833,26 +790,6 @@
       );
     }
 
-    async function getCrewApps() {
-      return safeFirestoreCall(
-        async () => {
-          const snap = await getDocs(query(collection(db, "crewApplications"), orderBy("createdAt", "desc")));
-          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        },
-        async () => sortByCreatedDesc(readLocal(localKeys.crewApps))
-      );
-    }
-
-    async function getRoster() {
-      return safeFirestoreCall(
-        async () => {
-          const snap = await getDocs(query(collection(db, "crewRoster"), orderBy("name", "asc")));
-          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        },
-        async () => sortByName(readLocal(localKeys.roster))
-      );
-    }
-
     async function getPermissions() {
       return safeFirestoreCall(
         async () => {
@@ -861,6 +798,26 @@
         },
         async () => sortByName(readLocal(localKeys.permissions))
       );
+    }
+
+    function resetAnnouncementEditor() {
+      editingAnnouncementId = null;
+      document.getElementById("announcementTitle").value = "";
+      document.getElementById("announcementBody").value = "";
+      addAnnouncementBtn.classList.remove("hidden");
+      updateAnnouncementBtn.classList.add("hidden");
+      cancelAnnouncementEditBtn.classList.add("hidden");
+    }
+
+    function resetPermissionEditor() {
+      editingPermissionPhone = null;
+      document.getElementById("permName").value = "";
+      document.getElementById("permPhone").value = "";
+      document.getElementById("permRole").value = "";
+      document.getElementById("permAccess").value = "staff";
+      savePermissionBtn.classList.remove("hidden");
+      updatePermissionBtn.classList.add("hidden");
+      cancelPermissionEditBtn.classList.add("hidden");
     }
 
     async function loadAnnouncements() {
@@ -881,11 +838,28 @@
           </div>
           ${currentPermissions.canEditAnnouncements ? `
             <div class="actions-inline">
+              <button class="btn btn-secondary btn-small edit-announcement" data-id="${a.id}">Edit</button>
               <button class="btn btn-danger btn-small delete-announcement" data-id="${a.id}">Delete</button>
             </div>
           ` : ""}
         </div>
       `).join("");
+
+      document.querySelectorAll(".edit-announcement").forEach(btn => {
+        btn.onclick = async () => {
+          const items = await getAnnouncements();
+          const item = items.find(x => x.id === btn.dataset.id);
+          if (!item) return;
+
+          editingAnnouncementId = item.id;
+          document.getElementById("announcementTitle").value = item.title || "";
+          document.getElementById("announcementBody").value = item.body || "";
+          addAnnouncementBtn.classList.add("hidden");
+          updateAnnouncementBtn.classList.remove("hidden");
+          cancelAnnouncementEditBtn.classList.remove("hidden");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+      });
 
       document.querySelectorAll(".delete-announcement").forEach(btn => {
         btn.onclick = async () => {
@@ -942,127 +916,11 @@
       });
     }
 
-    async function loadCrewApplications() {
-      const items = await getCrewApps();
-      crewApplicationCount.textContent = String(items.length);
-
-      if (!items.length) {
-        crewAppsList.innerHTML = `<div class="card"><h3>No crew applications yet</h3><p>The chaos has not yet received fresh volunteers.</p></div>`;
-        return;
-      }
-
-      crewAppsList.innerHTML = items.map(c => `
-        <div class="card">
-          <h3>${escapeHtml(c.name || "Unnamed applicant")}</h3>
-          <div class="meta">
-            <div><span class="label">Email</span>${escapeHtml(c.email || "")}</div>
-            <div><span class="label">Grade</span>${escapeHtml(c.grade || "")}</div>
-            <div><span class="label">Role Requests</span>${escapeHtml(c.roleRequests || c.role || "")}</div>
-            <div><span class="label">Reason</span>${escapeHtml(c.reason || "")}</div>
-            <div><span class="label">Status</span>${escapeHtml(c.status || "Pending")}</div>
-          </div>
-          ${currentPermissions.canReviewCrew ? `
-            <div class="actions-inline">
-              <button class="btn btn-secondary btn-small approve-app" data-id="${c.id}">Approve</button>
-              <button class="btn btn-danger btn-small reject-app" data-id="${c.id}">Reject</button>
-            </div>
-          ` : ""}
-        </div>
-      `).join("");
-
-      document.querySelectorAll(".approve-app").forEach(btn => {
-        btn.onclick = async () => {
-          const id = btn.dataset.id;
-          await safeFirestoreCall(
-            async () => updateDoc(doc(db, "crewApplications", id), {
-              status: "Approved",
-              reviewedBy: currentUser?.name || "Unknown",
-              reviewedAt: serverTimestamp()
-            }),
-            async () => {
-              const items = readLocal(localKeys.crewApps);
-              const item = items.find(x => x.id === id);
-              if (item) {
-                item.status = "Approved";
-                item.reviewedBy = currentUser?.name || "Unknown";
-                item.reviewedAt = nowString();
-              }
-              writeLocal(localKeys.crewApps, items);
-            }
-          );
-          await loadCrewApplications();
-        };
-      });
-
-      document.querySelectorAll(".reject-app").forEach(btn => {
-        btn.onclick = async () => {
-          const id = btn.dataset.id;
-          await safeFirestoreCall(
-            async () => updateDoc(doc(db, "crewApplications", id), {
-              status: "Rejected",
-              reviewedBy: currentUser?.name || "Unknown",
-              reviewedAt: serverTimestamp()
-            }),
-            async () => {
-              const items = readLocal(localKeys.crewApps);
-              const item = items.find(x => x.id === id);
-              if (item) {
-                item.status = "Rejected";
-                item.reviewedBy = currentUser?.name || "Unknown";
-                item.reviewedAt = nowString();
-              }
-              writeLocal(localKeys.crewApps, items);
-            }
-          );
-          await loadCrewApplications();
-        };
-      });
-    }
-
-    async function loadRoster() {
-      const items = await getRoster();
-      rosterCount.textContent = String(items.length);
-
-      if (!items.length) {
-        rosterList.innerHTML = `<div class="card"><h3>No roster entries yet</h3><p>The crew roster is currently an empty monument to potential.</p></div>`;
-        return;
-      }
-
-      rosterList.innerHTML = items.map(r => `
-        <div class="card">
-          <h3>${escapeHtml(r.name || "Unnamed person")}</h3>
-          <div class="meta">
-            <div><span class="label">Role</span>${escapeHtml(r.role || "")}</div>
-            <div><span class="label">Team</span>${escapeHtml(r.team || "")}</div>
-            <div><span class="label">Notes</span>${escapeHtml(r.notes || "")}</div>
-          </div>
-          ${currentPermissions.canManageRoster ? `
-            <div class="actions-inline">
-              <button class="btn btn-danger btn-small delete-roster" data-id="${r.id}">Remove</button>
-            </div>
-          ` : ""}
-        </div>
-      `).join("");
-
-      document.querySelectorAll(".delete-roster").forEach(btn => {
-        btn.onclick = async () => {
-          const id = btn.dataset.id;
-          await safeFirestoreCall(
-            async () => deleteDoc(doc(db, "crewRoster", id)),
-            async () => {
-              const items = readLocal(localKeys.roster).filter(x => x.id !== id);
-              writeLocal(localKeys.roster, items);
-            }
-          );
-          await loadRoster();
-        };
-      });
-    }
-
     async function loadPermissions() {
       if (!currentPermissions.canManagePermissions) return;
 
       const items = await getPermissions();
+      permissionCount.textContent = String(items.length);
 
       if (!items.length) {
         permissionList.innerHTML = `<div class="card"><h3>No saved permissions yet</h3><p>The owner exists in pure clipboard legend form, but nobody else has been invited.</p></div>`;
@@ -1074,13 +932,36 @@
           <h3>${escapeHtml(p.name || "Unnamed staff person")}</h3>
           <div class="meta">
             <div><span class="label">Role</span>${escapeHtml(p.role || "Staff")}</div>
+            <div><span class="label">Access Level</span>${p.canEditAnnouncements ? (p.canManagePermissions ? "Owner" : "Manager") : "Staff"}</div>
             <div><span class="label">Active</span>${p.active === false ? "No" : "Yes"}</div>
           </div>
           <div class="actions-inline">
-            <button class="btn btn-danger btn-small delete-permission" data-id="${p.phone || p.id}">Remove Access</button>
+            <button class="btn btn-secondary btn-small edit-permission" data-id="${p.phone || p.id}">Edit</button>
+            ${((p.phone || p.id) !== OWNER_PHONE) ? `<button class="btn btn-danger btn-small delete-permission" data-id="${p.phone || p.id}">Remove Access</button>` : ""}
           </div>
         </div>
       `).join("");
+
+      document.querySelectorAll(".edit-permission").forEach(btn => {
+        btn.onclick = async () => {
+          const items = await getPermissions();
+          const item = items.find(x => (x.phone || x.id) === btn.dataset.id);
+          if (!item) return;
+
+          editingPermissionPhone = item.phone || item.id;
+          document.getElementById("permName").value = item.name || "";
+          document.getElementById("permPhone").value = item.phone || item.id || "";
+          document.getElementById("permRole").value = item.role || "";
+          document.getElementById("permAccess").value =
+            item.canManagePermissions ? "manager" :
+            item.canEditAnnouncements ? "manager" : "staff";
+
+          savePermissionBtn.classList.add("hidden");
+          updatePermissionBtn.classList.remove("hidden");
+          cancelPermissionEditBtn.classList.remove("hidden");
+          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        };
+      });
 
       document.querySelectorAll(".delete-permission").forEach(btn => {
         btn.onclick = async () => {
@@ -1099,7 +980,7 @@
       });
     }
 
-    document.getElementById("addAnnouncementBtn").onclick = async () => {
+    addAnnouncementBtn.onclick = async () => {
       const title = document.getElementById("announcementTitle").value.trim();
       const body = document.getElementById("announcementBody").value.trim();
       if (!title || !body) return;
@@ -1127,9 +1008,37 @@
         }
       );
 
-      document.getElementById("announcementTitle").value = "";
-      document.getElementById("announcementBody").value = "";
+      resetAnnouncementEditor();
       await loadAnnouncements();
+    };
+
+    updateAnnouncementBtn.onclick = async () => {
+      const title = document.getElementById("announcementTitle").value.trim();
+      const body = document.getElementById("announcementBody").value.trim();
+      if (!editingAnnouncementId || !title || !body) return;
+
+      await safeFirestoreCall(
+        async () => updateDoc(doc(db, "announcements", editingAnnouncementId), {
+          title,
+          body
+        }),
+        async () => {
+          const items = readLocal(localKeys.announcements);
+          const item = items.find(x => x.id === editingAnnouncementId);
+          if (item) {
+            item.title = title;
+            item.body = body;
+          }
+          writeLocal(localKeys.announcements, items);
+        }
+      );
+
+      resetAnnouncementEditor();
+      await loadAnnouncements();
+    };
+
+    cancelAnnouncementEditBtn.onclick = () => {
+      resetAnnouncementEditor();
     };
 
     document.getElementById("addScheduleBtn").onclick = async () => {
@@ -1165,42 +1074,7 @@
       await loadSchedule();
     };
 
-    document.getElementById("addRosterBtn").onclick = async () => {
-      const name = document.getElementById("rosterName").value.trim();
-      const phone = document.getElementById("rosterPhone").value.trim();
-      const role = document.getElementById("rosterRole").value.trim();
-      const team = document.getElementById("rosterTeam").value.trim();
-      const notes = document.getElementById("rosterNotes").value.trim();
-      if (!name) return;
-
-      const item = {
-        id: uid(),
-        name, phone, role, team, notes,
-        createdAtMs: Date.now(),
-        createdAtText: nowString()
-      };
-
-      await safeFirestoreCall(
-        async () => addDoc(collection(db, "crewRoster"), {
-          name, phone, role, team, notes,
-          createdAt: serverTimestamp()
-        }),
-        async () => {
-          const items = readLocal(localKeys.roster);
-          items.push(item);
-          writeLocal(localKeys.roster, items);
-        }
-      );
-
-      document.getElementById("rosterName").value = "";
-      document.getElementById("rosterPhone").value = "";
-      document.getElementById("rosterRole").value = "";
-      document.getElementById("rosterTeam").value = "";
-      document.getElementById("rosterNotes").value = "";
-      await loadRoster();
-    };
-
-    document.getElementById("savePermissionBtn").onclick = async () => {
+    savePermissionBtn.onclick = async () => {
       const name = document.getElementById("permName").value.trim();
       const phone = normalizePhone(document.getElementById("permPhone").value);
       const role = document.getElementById("permRole").value.trim() || "Staff";
@@ -1214,11 +1088,9 @@
         name,
         role,
         active: true,
-        canEditAnnouncements: true,
+        canEditAnnouncements: manager,
         canEditSchedule: manager,
-        canManageRoster: manager,
         canManagePermissions: false,
-        canReviewCrew: true,
         updatedAtMs: Date.now(),
         updatedAtText: nowString()
       };
@@ -1237,17 +1109,59 @@
         }
       );
 
-      document.getElementById("permName").value = "";
-      document.getElementById("permPhone").value = "";
-      document.getElementById("permRole").value = "";
-      document.getElementById("permAccess").value = "staff";
+      resetPermissionEditor();
       await loadPermissions();
+    };
+
+    updatePermissionBtn.onclick = async () => {
+      const name = document.getElementById("permName").value.trim();
+      const phone = normalizePhone(document.getElementById("permPhone").value);
+      const role = document.getElementById("permRole").value.trim() || "Staff";
+      const access = document.getElementById("permAccess").value;
+      if (!editingPermissionPhone || !name || !phone) return;
+
+      const manager = access === "manager";
+
+      const item = {
+        phone,
+        name,
+        role,
+        active: true,
+        canEditAnnouncements: manager,
+        canEditSchedule: manager,
+        canManagePermissions: false,
+        updatedAtMs: Date.now(),
+        updatedAtText: nowString()
+      };
+
+      await safeFirestoreCall(
+        async () => {
+          if (phone !== editingPermissionPhone) {
+            const oldSnap = await getDoc(doc(db, "staffPermissions", editingPermissionPhone));
+            if (oldSnap.exists()) await deleteDoc(doc(db, "staffPermissions", editingPermissionPhone));
+          }
+          await setDoc(doc(db, "staffPermissions", phone), {
+            ...item,
+            updatedAt: serverTimestamp()
+          }, { merge: true });
+        },
+        async () => {
+          let items = readLocal(localKeys.permissions).filter(x => x.phone !== editingPermissionPhone);
+          items.push(item);
+          writeLocal(localKeys.permissions, items);
+        }
+      );
+
+      resetPermissionEditor();
+      await loadPermissions();
+    };
+
+    cancelPermissionEditBtn.onclick = () => {
+      resetPermissionEditor();
     };
 
     document.getElementById("refreshAnnouncementsBtn").onclick = loadAnnouncements;
     document.getElementById("refreshScheduleBtn").onclick = loadSchedule;
-    document.getElementById("refreshCrewAppsBtn").onclick = loadCrewApplications;
-    document.getElementById("refreshRosterBtn").onclick = loadRoster;
     document.getElementById("refreshPermissionsBtn").onclick = loadPermissions;
 
     loginBtn.onclick = async () => {
