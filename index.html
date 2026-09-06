@@ -1,335 +1,847 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="The final home of The Adventures of Gaylord. Watch the movie and join us for one last ridiculous victory lap before the project and website close on April 1, 2027." />
-<title>The Adventures of Gaylord | The Final Goodbye</title>
-<style>
-:root{
-  --void:#090600;
-  --inferno:#ff3b00;
-  --lava:#ff006e;
-  --royal:#3a00ff;
-  --laser:#00ffb3;
-  --sun:#fff200;
-  --cream:#fffbe6;
-  --ink:#120b00;
-  --card:rgba(255,255,255,.95);
-  --shadow:0 30px 100px rgba(0,0,0,.5);
-  --radius:34px;
-  --max:1240px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  min-height:100vh;
-  overflow-x:hidden;
-  font-family:"Trebuchet MS","Comic Sans MS",Arial,sans-serif;
-  color:var(--cream);
-  background:
-    radial-gradient(circle at 10% 12%,rgba(255,59,0,.65),transparent 22%),
-    radial-gradient(circle at 88% 12%,rgba(0,255,179,.45),transparent 20%),
-    radial-gradient(circle at 50% 86%,rgba(255,242,0,.42),transparent 23%),
-    linear-gradient(135deg,#090600,#2b003d,#3a00ff,#ff006e,#090600);
-  background-size:140% 140%,140% 140%,140% 140%,400% 400%;
-  animation:bg 13s ease infinite;
-}
-@keyframes bg{0%,100%{background-position:0 0,100% 0,50% 100%,0 50%}50%{background-position:35% 18%,65% 20%,85% 70%,100% 50%}}
-.wrap,.top-inner,.section-inner,.footer-inner{width:min(var(--max),calc(100% - 28px));margin:0 auto;position:relative;z-index:2}
-.orb,.spark,.reel,.ticket,.siren{position:fixed;pointer-events:none;z-index:0;opacity:.78}
-.orb{width:82px;height:82px;border-radius:50%;border:4px solid rgba(255,255,255,.18);background:rgba(255,255,255,.09);animation:float 6s ease-in-out infinite}
-.spark{width:22px;height:22px;background:var(--sun);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:twinkle 2.9s ease-in-out infinite}
-.reel{width:104px;height:104px;border:13px dashed rgba(0,255,179,.34);border-radius:50%;animation:spin 12s linear infinite}
-.ticket{width:110px;height:50px;border:4px solid rgba(255,255,255,.26);border-radius:14px;background:rgba(255,242,0,.14);transform:rotate(-12deg);animation:ticket 8s ease-in-out infinite}
-.siren{width:80px;height:80px;border-radius:50% 50% 16px 16px;background:linear-gradient(180deg,#ff006e,#ff3b00);border:4px solid rgba(255,255,255,.35);animation:siren 1.2s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-32px) rotate(16deg)}}
-@keyframes ticket{0%,100%{transform:translateY(0) rotate(-12deg)}50%{transform:translateY(-28px) rotate(10deg)}}
-@keyframes twinkle{0%,100%{transform:scale(1) rotate(0);opacity:.55}50%{transform:scale(1.7) rotate(24deg);opacity:1}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes siren{0%,100%{filter:drop-shadow(0 0 8px #ff006e);transform:rotate(-7deg)}50%{filter:drop-shadow(0 0 28px #fff200);transform:rotate(7deg)}}
-.banner{
-  background:linear-gradient(90deg,var(--sun),#ff3b00,var(--lava),var(--laser));
-  color:#150900;
-  text-align:center;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.05em;
-  padding:14px 16px;
-  position:relative;
-  z-index:3;
-  text-shadow:1px 1px 0 rgba(255,255,255,.45);
-  border-bottom:4px solid rgba(255,255,255,.28);
-  animation:buzz 1.7s ease-in-out infinite;
-}
-@keyframes buzz{0%,100%{transform:translateX(0)}25%{transform:translateX(1px)}75%{transform:translateX(-1px)}}
-.topbar{position:sticky;top:0;z-index:80;background:rgba(9,6,0,.74);backdrop-filter:blur(16px);border-bottom:2px solid rgba(255,255,255,.14)}
-.top-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;flex-wrap:wrap}
-.brand,.nav{background:rgba(255,255,255,.95);color:var(--ink);border:3px solid var(--ink);border-radius:999px;padding:10px 16px;font-weight:900;text-transform:uppercase;text-decoration:none;box-shadow:6px 6px 0 rgba(255,242,0,.45)}
-.brand{transform:rotate(-1deg);cursor:pointer}
-nav{display:flex;gap:10px;flex-wrap:wrap}
-.nav:hover{transform:translateY(-2px) rotate(-1deg)}
-.hero{padding:54px 0 28px}
-.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:24px;align-items:stretch}
-.card,.poster,.stat,.mini,.challenge,.movie-shell,.goodbye-box{border:4px solid rgba(255,255,255,.2);border-radius:var(--radius);box-shadow:var(--shadow)}
-.hero-card,.section-card{background:var(--card);color:var(--ink)}
-.hero-card{padding:40px;position:relative;overflow:hidden}
-.hero-card:after{content:"FINAL CHAPTER UNLOCKED";position:absolute;top:18px;right:-44px;background:var(--lava);color:white;border:3px solid white;border-radius:999px;padding:10px 24px;font-weight:900;transform:rotate(10deg);box-shadow:0 14px 32px rgba(255,0,110,.38)}
-.tag{display:inline-block;background:var(--sun);color:var(--ink);border:3px solid var(--ink);border-radius:999px;padding:10px 16px;font-weight:900;text-transform:uppercase;transform:rotate(-3deg);margin-bottom:16px;cursor:pointer;box-shadow:0 8px 0 rgba(18,11,0,.15)}
-h1{margin:0;font-size:clamp(3.1rem,8.3vw,7.2rem);line-height:.86;text-transform:uppercase;letter-spacing:.02em;text-shadow:5px 5px 0 var(--sun),8px 8px 0 rgba(255,0,110,.45);animation:titleScream 2.4s ease-in-out infinite}
-@keyframes titleScream{0%,100%{transform:rotate(0)}25%{transform:rotate(-.5deg)}75%{transform:rotate(.5deg)}}
-p{font-size:1.1rem;line-height:1.75}
-.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
-.pill{background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:999px;padding:10px 15px;font-weight:900;text-transform:uppercase;box-shadow:0 8px 0 rgba(18,11,0,.14);cursor:pointer}
-.poster{background:linear-gradient(135deg,#fffbe6,#fff,#e6fff8);color:var(--ink);min-height:465px;padding:28px;position:relative;overflow:hidden;display:grid;place-items:center;text-align:center}
-.poster:before{content:"THE MOVIE IS PUBLIC";position:absolute;top:18px;left:18px;background:var(--laser);color:var(--ink);border:3px solid var(--ink);border-radius:999px;padding:10px 15px;font-weight:900;transform:rotate(-7deg)}
-.poster:after{content:"GOODBYE: APRIL 1, 2027";position:absolute;bottom:18px;right:-14px;background:var(--lava);color:#fff;border:3px solid white;border-radius:999px;padding:10px 18px;font-weight:900;transform:rotate(-7deg)}
-.poster-title{font-size:clamp(2.1rem,4.5vw,4.7rem);font-weight:900;line-height:.9;text-transform:uppercase;border:4px solid var(--ink);border-radius:30px;padding:26px;background:linear-gradient(180deg,#fff,#fff200,#ffb703);box-shadow:12px 12px 0 rgba(18,11,0,.2);transform:rotate(-2deg);animation:pulse .95s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:rotate(-2deg) scale(1)}50%{transform:rotate(2deg) scale(1.045)}}
-section{padding:26px 0}
-.section-card{padding:32px}
-.section-title{margin:0 0 10px;font-size:clamp(2.1rem,5.2vw,3.8rem);line-height:.93;text-transform:uppercase;text-shadow:3px 3px 0 rgba(255,242,0,.42)}
-.movie-shell{background:rgba(9,6,0,.94);padding:18px;overflow:hidden;position:relative}
-.movie-shell:before{content:"PRESS PLAY. HISTORY AWAITS. PROBABLY.";display:block;background:var(--sun);color:var(--ink);border:3px solid var(--ink);border-radius:999px;padding:10px 15px;width:max-content;max-width:100%;font-weight:900;text-transform:uppercase;margin:0 auto 16px;transform:rotate(-1deg);text-align:center}
-.video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:#000;border:4px solid rgba(255,255,255,.16)}
-.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.status,.cards,.challenges,.thanks{display:grid;gap:18px;margin-top:18px}
-.status{grid-template-columns:repeat(4,minmax(0,1fr))}
-.cards{grid-template-columns:repeat(3,minmax(0,1fr))}
-.challenges,.thanks{grid-template-columns:repeat(2,minmax(0,1fr))}
-.stat{background:linear-gradient(180deg,#fff,#fff200);color:var(--ink);padding:20px;text-align:center;cursor:pointer;transition:.2s}
-.stat:hover,.mini:hover{transform:translateY(-9px) rotate(-2deg)}
-.num{display:block;font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1;color:var(--lava);text-shadow:2px 2px 0 #fff}
-.label{display:block;margin-top:8px;font-weight:900;text-transform:uppercase;font-size:.85rem;letter-spacing:.05em}
-.countdown-note{margin-top:18px;background:var(--ink);color:var(--cream);border-radius:20px;padding:14px 18px;font-weight:900;text-align:center}
-.mini{background:linear-gradient(180deg,#fff,#eafff9);color:var(--ink);padding:22px;cursor:pointer;transition:.2s}
-.mini h3,.challenge h3{margin:0 0 10px;text-transform:uppercase}
-.goodbye-box{background:linear-gradient(135deg,#fffbe6,#fff,#e6fff8);color:var(--ink);padding:34px;position:relative;overflow:hidden}
-.goodbye-box:after{content:"ONE LAST WAVE";position:absolute;right:18px;top:18px;background:var(--lava);color:#fff;border:3px solid white;border-radius:999px;padding:9px 14px;font-weight:900;transform:rotate(7deg)}
-.goodbye-box strong{font-size:1.13em}
-.challenge{background:linear-gradient(135deg,rgba(9,6,0,.93),rgba(58,0,255,.76));color:var(--cream);border-color:rgba(255,255,255,.22);padding:22px;position:relative;overflow:hidden;cursor:pointer}
-.challenge:after{content:"FINAL QUEST";position:absolute;right:14px;top:14px;opacity:.12;font-size:2.25rem;font-weight:900}
-.challenge h3{color:var(--sun)}
-.thank{background:#fff;color:var(--ink);border:3px solid rgba(18,11,0,.14);border-radius:22px;padding:17px;font-weight:900;line-height:1.55;cursor:pointer}
-.pop{position:fixed;inset:0;background:rgba(9,6,0,.78);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;padding:18px}
-.pop.show{display:flex}
-.pop-card{width:min(800px,100%);background:#fff;color:var(--ink);border:4px solid var(--ink);border-radius:34px;padding:30px;text-align:center;box-shadow:0 30px 100px rgba(0,0,0,.55);position:relative;overflow:hidden}
-.pop-card:after{content:"FINAL ERA EMERGENCY";position:absolute;top:14px;right:-22px;background:var(--lava);color:#fff;border:3px solid white;border-radius:999px;padding:9px 14px;font-weight:900;transform:rotate(10deg);font-size:.78rem}
-.pop-card h2{margin:12px 0;font-size:clamp(2.1rem,5.2vw,3.6rem);line-height:.93;text-transform:uppercase}
-.pop-card p{font-size:1.1rem;line-height:1.7;font-weight:800}
-.popbtn{border:3px solid var(--ink);background:var(--sun);border-radius:999px;padding:12px 16px;font:inherit;font-weight:900;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 0 rgba(18,11,0,.16)}
-footer{padding:34px 0 44px}
-.footer-inner{background:rgba(255,255,255,.13);border:2px solid rgba(255,255,255,.18);border-radius:24px;padding:22px;text-align:center;line-height:1.65}
-@media(max-width:900px){.hero-grid,.status,.cards,.challenges,.thanks{grid-template-columns:1fr}.hero-card:after,.poster:after,.goodbye-box:after{position:static;display:inline-block;margin-top:12px;transform:rotate(-2deg)}}
-@media(max-width:620px){nav{display:none}.hero-card,.section-card,.poster,.goodbye-box{padding:22px}.movie-shell{padding:10px}.banner{font-size:.82rem}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="The final goodbye of The Adventures of Gaylord. Watch the movie and enjoy one last absurdly dramatic farewell before the site shuts down on April 1, 2027."
+  />
+  <title>The Adventures of Gaylord | Final Curtain</title>
+  <style>
+    :root{
+      --bg:#07040d;
+      --bg2:#1a0d2b;
+      --bg3:#2a0f46;
+      --red:#ff5a3d;
+      --pink:#ff2f92;
+      --gold:#ffd966;
+      --mint:#91ffe0;
+      --white:#fff9f1;
+      --ink:#1a1020;
+      --glass:rgba(255,255,255,.09);
+      --line:rgba(255,255,255,.15);
+      --shadow:0 24px 70px rgba(0,0,0,.38);
+      --radius:28px;
+      --max:1250px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow-x:hidden;
+      font-family:"Trebuchet MS","Comic Sans MS",Arial,sans-serif;
+      color:var(--white);
+      background:
+        radial-gradient(circle at 12% 15%, rgba(255,90,61,.28), transparent 18%),
+        radial-gradient(circle at 88% 12%, rgba(145,255,224,.18), transparent 22%),
+        radial-gradient(circle at 50% 100%, rgba(255,47,146,.18), transparent 24%),
+        linear-gradient(180deg, var(--bg), var(--bg2) 35%, var(--bg3) 70%, var(--bg) 100%);
+      position:relative;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size:24px 24px;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .wrap,.top-inner,.section-inner,.footer-inner{
+      width:min(var(--max), calc(100% - 28px));
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .spark,.halo,.ring,.curtain{
+      position:fixed;
+      pointer-events:none;
+      z-index:1;
+      opacity:.75;
+    }
+
+    .spark{
+      width:18px;
+      height:18px;
+      background:var(--gold);
+      clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+      animation:twinkle 2.8s ease-in-out infinite;
+    }
+
+    .halo{
+      width:280px;
+      height:280px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,217,102,.25), rgba(255,217,102,.08) 44%, transparent 70%);
+      filter:blur(8px);
+      animation:float 8s ease-in-out infinite;
+    }
+
+    .ring{
+      width:110px;
+      height:110px;
+      border-radius:50%;
+      border:10px dashed rgba(255,255,255,.18);
+      animation:spin 16s linear infinite;
+    }
+
+    .curtain{
+      top:-4vh;
+      width:160px;
+      height:108vh;
+      background:linear-gradient(90deg, rgba(255,47,146,.34), rgba(92,15,48,.8), rgba(255,90,61,.34));
+      opacity:.26;
+    }
+
+    .curtain.left{left:-28px}
+    .curtain.right{right:-28px}
+
+    @keyframes twinkle{
+      0%,100%{transform:scale(.9) rotate(0);opacity:.45}
+      50%{transform:scale(1.45) rotate(20deg);opacity:1}
+    }
+
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-24px) translateX(14px)}
+    }
+
+    @keyframes spin{
+      to{transform:rotate(360deg)}
+    }
+
+    @keyframes buzz{
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(1px)}
+      75%{transform:translateX(-1px)}
+    }
+
+    .banner{
+      position:relative;
+      z-index:4;
+      padding:14px 16px;
+      text-align:center;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-weight:900;
+      color:#1a0b18;
+      background:linear-gradient(90deg, var(--gold), #fff2b7, var(--red), var(--pink), var(--mint));
+      border-bottom:4px solid rgba(255,255,255,.28);
+      text-shadow:1px 1px 0 rgba(255,255,255,.42);
+      animation:buzz 1.7s ease-in-out infinite;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(7,4,13,.7);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+
+    .top-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:14px 0;
+    }
+
+    .brand,.nav,.btn,.stat,.poster,.video-card,.hero-card,.hero-side,.section-card,.thank,.quote,.mini,.count-shell{
+      border:1px solid var(--line);
+    }
+
+    .brand,.nav{
+      display:inline-block;
+      text-decoration:none;
+      color:var(--white);
+      padding:11px 16px;
+      border-radius:999px;
+      font-weight:900;
+      text-transform:uppercase;
+      background:rgba(255,255,255,.08);
+      box-shadow:0 10px 24px rgba(0,0,0,.16);
+    }
+
+    .brand{
+      background:linear-gradient(135deg, rgba(255,217,102,.22), rgba(255,47,146,.22));
+      cursor:pointer;
+    }
+
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav:hover,.brand:hover,.btn:hover,.stat:hover,.thank:hover,.quote:hover,.mini:hover{
+      transform:translateY(-3px);
+    }
+
+    .hero{padding:38px 0 20px}
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:22px;
+    }
+
+    .hero-card,.hero-side,.section-card,.video-card,.footer-inner{
+      background:var(--glass);
+      backdrop-filter:blur(16px);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-card{
+      padding:34px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-card::after{
+      content:"FINAL CURTAIN";
+      position:absolute;
+      top:18px;
+      right:-28px;
+      background:linear-gradient(135deg, var(--pink), var(--red));
+      color:#fff;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:900;
+      transform:rotate(10deg);
+      border:2px solid rgba(255,255,255,.3);
+    }
+
+    .tag{
+      display:inline-block;
+      margin-bottom:16px;
+      padding:10px 15px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--gold), #fff0b0);
+      color:var(--ink);
+      font-weight:900;
+      text-transform:uppercase;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(3rem, 8vw, 7rem);
+      line-height:.82;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+      text-shadow:0 0 14px rgba(255,217,102,.22), 0 6px 30px rgba(255,47,146,.24);
+    }
+
+    p{
+      font-size:1.08rem;
+      line-height:1.78;
+    }
+
+    .pills{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+
+    .pill{
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.12);
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    .hero-side{
+      padding:22px;
+      display:grid;
+      gap:18px;
+      align-content:start;
+    }
+
+    .poster{
+      min-height:260px;
+      border-radius:24px;
+      padding:24px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,217,102,.35), transparent 18%),
+        linear-gradient(160deg, rgba(255,255,255,.94), rgba(255,231,236,.95), rgba(255,247,199,.96));
+      color:var(--ink);
+    }
+
+    .poster::before{
+      content:"ONE LAST BOW";
+      position:absolute;
+      left:16px;
+      top:16px;
+      background:linear-gradient(135deg, var(--mint), #fff);
+      padding:8px 14px;
+      border-radius:999px;
+      font-weight:900;
+    }
+
+    .poster::after{
+      content:"SITE GONE APRIL 1, 2027";
+      position:absolute;
+      right:-24px;
+      bottom:18px;
+      background:linear-gradient(135deg, var(--pink), var(--red));
+      color:#fff;
+      padding:8px 16px;
+      border-radius:999px;
+      font-weight:900;
+      transform:rotate(-8deg);
+    }
+
+    .poster-wording{
+      font-size:clamp(2rem, 4.3vw, 4rem);
+      line-height:.92;
+      font-weight:900;
+      text-transform:uppercase;
+      text-shadow:3px 3px 0 rgba(255,217,102,.4);
+    }
+
+    .count-shell{
+      padding:18px;
+      border-radius:24px;
+      background:rgba(0,0,0,.18);
+    }
+
+    .count-title{
+      margin:0 0 14px;
+      text-transform:uppercase;
+      font-size:1.05rem;
+      letter-spacing:.06em;
+    }
+
+    .countdown{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:12px;
+    }
+
+    .stat{
+      text-align:center;
+      padding:15px 10px;
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.05));
+    }
+
+    .num{
+      display:block;
+      font-size:clamp(1.6rem, 4vw, 2.8rem);
+      font-weight:900;
+      color:var(--gold);
+      line-height:1;
+    }
+
+    .label{
+      display:block;
+      margin-top:8px;
+      font-size:.8rem;
+      text-transform:uppercase;
+      font-weight:900;
+      letter-spacing:.05em;
+      opacity:.85;
+    }
+
+    section{padding:18px 0}
+
+    .section-card{
+      padding:28px;
+    }
+
+    .section-title{
+      margin:0 0 10px;
+      font-size:clamp(2rem, 5vw, 3.7rem);
+      line-height:.9;
+      text-transform:uppercase;
+      text-shadow:0 6px 22px rgba(255,217,102,.18);
+    }
+
+    .video-card{
+      padding:22px;
+    }
+
+    .video-shell{
+      position:relative;
+      padding-top:56.25%;
+      margin-top:18px;
+      border-radius:24px;
+      overflow:hidden;
+      background:#000;
+      box-shadow:0 18px 50px rgba(0,0,0,.3);
+    }
+
+    .video-shell iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .btn-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      border-radius:999px;
+      padding:13px 18px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      color:var(--ink);
+      background:linear-gradient(135deg, var(--gold), #fff0b0);
+      box-shadow:0 10px 22px rgba(0,0,0,.18);
+    }
+
+    .btn.alt{
+      background:linear-gradient(135deg, var(--mint), #effffb);
+    }
+
+    .grid-3,.grid-4,.grid-2{
+      display:grid;
+      gap:16px;
+      margin-top:18px;
+    }
+
+    .grid-3{grid-template-columns:repeat(3, minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4, minmax(0,1fr))}
+    .grid-2{grid-template-columns:repeat(2, minmax(0,1fr))}
+
+    .thank,.quote,.mini{
+      padding:20px;
+      border-radius:22px;
+      font-weight:900;
+      line-height:1.62;
+    }
+
+    .thank{background:rgba(255,255,255,.1)}
+    .quote{background:linear-gradient(140deg, rgba(255,217,102,.14), rgba(255,255,255,.07))}
+    .mini{background:linear-gradient(140deg, rgba(255,47,146,.15), rgba(255,90,61,.12), rgba(255,255,255,.05))}
+
+    .footer{padding:24px 0 42px}
+
+    .footer-inner{
+      padding:24px;
+      text-align:center;
+    }
+
+    .footer-inner strong{
+      font-size:1.14rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .pop{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background:rgba(7,4,13,.72);
+      backdrop-filter:blur(10px);
+      z-index:9999;
+    }
+
+    .pop.show{display:flex}
+
+    .pop-card{
+      width:min(760px, 100%);
+      padding:30px;
+      border-radius:32px;
+      background:linear-gradient(180deg, rgba(255,251,245,.98), rgba(255,242,228,.97));
+      color:var(--ink);
+      text-align:center;
+      box-shadow:0 24px 80px rgba(0,0,0,.42);
+      position:relative;
+    }
+
+    .pop-card::after{
+      content:"ABSURDLY IMPORTANT";
+      position:absolute;
+      top:14px;
+      right:-22px;
+      background:linear-gradient(135deg, var(--pink), var(--red));
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      font-weight:900;
+      transform:rotate(10deg);
+    }
+
+    .pop-card h2{
+      margin:10px 0 12px;
+      font-size:clamp(2rem, 5vw, 3.3rem);
+      line-height:.93;
+      text-transform:uppercase;
+    }
+
+    .pop-card p{font-weight:800}
+
+    .popbtn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      padding:13px 18px;
+      border-radius:999px;
+      font:inherit;
+      font-weight:900;
+      text-transform:uppercase;
+      background:linear-gradient(135deg, var(--gold), #fff0b0);
+      color:var(--ink);
+      box-shadow:0 10px 18px rgba(0,0,0,.14);
+    }
+
+    .note{
+      opacity:.84;
+      font-size:.95rem;
+    }
+
+    .shutdown{
+      font-weight:900;
+      color:var(--gold);
+    }
+
+    @media(max-width:980px){
+      .hero-grid,.countdown,.grid-3,.grid-4,.grid-2{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media(max-width:760px){
+      nav{display:none}
+      .hero-grid,.countdown,.grid-3,.grid-4,.grid-2{
+        grid-template-columns:1fr;
+      }
+      .hero-card::after,.poster::after,.pop-card::after{
+        position:static;
+        display:inline-block;
+        margin-top:12px;
+        transform:rotate(-2deg);
+      }
+      .hero-card,.hero-side,.section-card,.video-card,.footer-inner{
+        padding:20px;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*:before,*:after{
+        animation:none !important;
+        transition:none !important;
+        scroll-behavior:auto !important;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="orb" style="top:12%;left:5%"></div>
-<div class="orb" style="bottom:14%;right:7%;animation-delay:1s"></div>
-<div class="spark" style="top:22%;right:16%"></div>
-<div class="spark" style="bottom:26%;left:12%;animation-delay:.7s"></div>
-<div class="reel" style="top:52%;right:2%"></div>
-<div class="ticket" style="top:70%;left:6%"></div>
-<div class="siren" style="top:35%;left:2%"></div>
+  <div class="curtain left"></div>
+  <div class="curtain right"></div>
+  <div class="spark egg" style="top:12%;left:9%"></div>
+  <div class="spark egg" style="top:24%;right:12%;animation-delay:.6s"></div>
+  <div class="spark egg" style="bottom:16%;left:15%;animation-delay:1.1s"></div>
+  <div class="halo egg" style="top:8%;right:8%"></div>
+  <div class="halo egg" style="bottom:14%;left:6%;animation-delay:.8s"></div>
+  <div class="ring egg" style="top:56%;right:4%"></div>
 
-<div class="banner">FINAL BULLETIN: THE MOVIE IS PUBLIC. THE ADVENTURE ENDS APRIL 1, 2027. PLEASE PANIC FESTIVELY.</div>
-
-<header class="topbar">
-  <div class="top-inner">
-    <div class="brand egg">The Adventures of Gaylord</div>
-    <nav>
-      <a class="nav" href="#watch">Watch</a>
-      <a class="nav" href="#countdown">Countdown</a>
-      <a class="nav" href="#goodbye">Goodbye</a>
-      <a class="nav" href="#thanks">Thanks</a>
-    </nav>
+  <div class="banner">
+    Final transmission: the movie is here, the curtain is falling, and this gloriously overdramatic website shuts down on April 1, 2027.
   </div>
-</header>
 
-<main>
-  <section class="hero" id="home">
-    <div class="wrap hero-grid">
-      <div class="card hero-card">
-        <div class="tag egg">The curtain is falling very dramatically</div>
-        <h1>The Final<br>Goodbye</h1>
-        <p>The movie is here. The waiting is over. The cinematic goblin has escaped completely, obtained public Wi-Fi, and can no longer be contained by forms, release schedules, clipboards, or common sense.</p>
-        <p>But every adventure eventually reaches the last scene. <strong>The Adventures of Gaylord will officially cease on April 1, 2027, and this website will shut down with it.</strong> Until then, this place is staying loud, colorful, ridiculous, and exactly as unnecessarily dramatic as it deserves to be.</p>
-        <div class="pills">
-          <div class="pill egg">Movie: public</div>
-          <div class="pill egg">Final era: active</div>
-          <div class="pill egg">Goodbye date: 04.01.27</div>
+  <header class="topbar">
+    <div class="top-inner">
+      <div class="brand egg">The Adventures of Gaylord</div>
+      <nav>
+        <a class="nav" href="#finale">Finale</a>
+        <a class="nav" href="#watch">Watch</a>
+        <a class="nav" href="#shutdown">Shutdown</a>
+        <a class="nav" href="#thanks">Thanks</a>
+        <a class="nav" href="#lastwords">Last Words</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="finale">
+      <div class="wrap hero-grid">
+        <div class="hero-card egg">
+          <div class="tag egg">Cue the unreasonable orchestra</div>
+          <h1>The Final<br>Goodbye</h1>
+          <p>
+            The movie is done. The chaos became cinema. The nonsense achieved immortality.
+            And now <strong>The Adventures of Gaylord</strong> enters its last, loudest,
+            most dramatic era: the glorious victory lap before the lights go out.
+          </p>
+          <p>
+            This is the official final goodbye. Watch the movie. Soak in the ridiculousness.
+            Point dramatically into the distance if it helps. Then know this: on
+            <span class="shutdown">April 1, 2027</span>, this website shuts down,
+            <strong>The Adventures of Gaylord</strong> ceases, and the curtain drops
+            with maximum theatrical force.
+          </p>
+          <div class="pills">
+            <div class="pill egg">Movie: live</div>
+            <div class="pill egg">Status: final era</div>
+            <div class="pill egg">Drama: catastrophically high</div>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="poster egg">
+            <div class="poster-wording">
+              One Last<br>Victory Lap<br>Before The<br>Void
+            </div>
+          </div>
+
+          <div class="count-shell egg">
+            <h2 class="count-title">Countdown to shutdown</h2>
+            <div class="countdown">
+              <div class="stat egg"><span class="num" id="days">000</span><span class="label">Days</span></div>
+              <div class="stat egg"><span class="num" id="hours">00</span><span class="label">Hours</span></div>
+              <div class="stat egg"><span class="num" id="minutes">00</span><span class="label">Minutes</span></div>
+              <div class="stat egg"><span class="num" id="seconds">00</span><span class="label">Seconds</span></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="poster egg">
-        <div class="poster-title">One Movie.<br>One Final Era.<br>One Last<br>Ridiculous Bow.</div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="watch">
-    <div class="section-inner">
-      <div class="card section-card">
-        <h2 class="section-title">Watch The Movie</h2>
-        <p>No codes. No pre-release gates. No mysterious clipboard interrogation. The movie is now here for everyone. Hit play and witness the thing that somehow made it from idea to actual moving pictures.</p>
-        <div class="movie-shell">
-          <div class="video-wrap">
+    <section id="watch">
+      <div class="section-inner">
+        <div class="video-card egg">
+          <h2 class="section-title">Watch The Movie</h2>
+          <p>
+            There is no mysterious waiting room anymore. No sacred pre-release cocoon.
+            No emotionally unstable countdown to public access. The movie is here.
+            You are here. History has no choice but to let this happen.
+          </p>
+
+          <div class="video-shell">
             <iframe
               src="https://www.youtube.com/embed/v-Wjkc5qgw8?rel=0"
               title="The Adventures of Gaylord"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen>
-            </iframe>
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="btn-row">
+            <a class="btn egg" href="https://youtu.be/v-Wjkc5qgw8?si=Lwqpue1uIau6xvaF" target="_blank" rel="noopener noreferrer">Open on YouTube</a>
+            <a class="btn alt egg" href="#shutdown">Read the final decree</a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="countdown">
-    <div class="section-inner">
-      <div class="card section-card">
-        <h2 class="section-title">The Final Countdown</h2>
-        <p>On <strong>April 1, 2027</strong>, The Adventures of Gaylord ends. The project will cease, the website will shut down, and the tiny imaginary office responsible for this entire production will finally be allowed to turn off the lights.</p>
-        <div class="status">
-          <div class="stat egg"><span class="num" id="days">---</span><span class="label">Days</span></div>
-          <div class="stat egg"><span class="num" id="hours">--</span><span class="label">Hours</span></div>
-          <div class="stat egg"><span class="num" id="minutes">--</span><span class="label">Minutes</span></div>
-          <div class="stat egg"><span class="num" id="seconds">--</span><span class="label">Seconds</span></div>
-        </div>
-        <div class="countdown-note" id="countdownNote">Calculating the exact amount of dramatic time remaining...</div>
-      </div>
-    </div>
-  </section>
+    <section id="shutdown">
+      <div class="section-inner">
+        <div class="section-card egg">
+          <h2 class="section-title">The Shutdown Decree</h2>
+          <p>
+            In a development both devastating and extremely on-brand, this project is
+            entering its final chapter. There will be no secret season two. No shadow
+            reboot. No "actually we changed our minds" update hiding behind a potted
+            plant. This is the ending, and it is being delivered with fireworks,
+            choir vocals, and a very committed spotlight operator.
+          </p>
 
-  <section id="goodbye">
-    <div class="section-inner">
-      <div class="goodbye-box egg">
-        <h2 class="section-title">This Is The Final Goodbye</h2>
-        <p>What started as an idea became a production, a crew, a website, a movie, and an amount of chaos that absolutely should have required a permit. Somewhere along the way, it became more than a page or a joke or a project. It became a little era of its own.</p>
-        <p>So this is not an announcement for a sequel, a reboot, a surprise season two, or a suspiciously timed “we're back” post. <strong>This is the ending.</strong> On April 1, 2027, The Adventures of Gaylord will cease operations and this site will go dark.</p>
-        <p>Until then, the movie stays here. The colors stay obnoxiously bright. The animations keep spinning. The siren continues doing whatever it thinks its job is. And we get one last stretch of time to enjoy the absurd thing we made together.</p>
-        <p><strong>Thank you for watching. Thank you for helping. Thank you for being part of the adventure.</strong></p>
-      </div>
-    </div>
-  </section>
-
-  <section id="status">
-    <div class="section-inner">
-      <div class="card section-card">
-        <h2 class="section-title">Current Adventure Status</h2>
-        <div class="cards">
-          <div class="mini egg"><h3>The Movie</h3><p>Public. Embedded. Free from containment. It is everyone's problem now.</p></div>
-          <div class="mini egg"><h3>The Project</h3><p>Entering its final era. No sequel machinery is hiding behind the curtain.</p></div>
-          <div class="mini egg"><h3>The Website</h3><p>Online through April 1, 2027. After that, the digital lights go out.</p></div>
+          <div class="grid-3">
+            <div class="mini egg">
+              <h3>April 1, 2027</h3>
+              <p>
+                The website <strong>theadventures.net</strong> will shut down and leave
+                the internet like a dramatic stage actor exiting through artificial fog.
+              </p>
+            </div>
+            <div class="mini egg">
+              <h3>Final Goodbye</h3>
+              <p>
+                This page is the official last home of the project - a one-stop shrine
+                to the movie, the madness, and the final bow.
+              </p>
+            </div>
+            <div class="mini egg">
+              <h3>The End</h3>
+              <p>
+                <strong>The Adventures of Gaylord</strong> will cease on that date.
+                Not nap. Not pause. Cease. Elegantly. Loudly. Weirdly.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="thanks">
-    <div class="section-inner">
-      <div class="card section-card">
-        <h2 class="section-title">Thank You To The Legends</h2>
-        <p>None of this exists because one person pressed a button labeled “make movie.” People showed up. People acted. People filmed. People helped. People waited. People laughed. People probably questioned several life choices. And somehow, all of that became this.</p>
-        <div class="thanks">
-          <div class="thank egg">To the cast: thank you for giving the nonsense faces, voices, timing, and life.</div>
-          <div class="thank egg">To the crew: thank you for catching the chaos before it escaped the camera frame.</div>
-          <div class="thank egg">To everyone who helped behind the scenes: thank you for moving the ridiculous machine forward.</div>
-          <div class="thank egg">To everyone who watches: congratulations. You are now legally part of the lore. Probably.</div>
+    <section id="thanks">
+      <div class="section-inner">
+        <div class="section-card egg">
+          <h2 class="section-title">Thank You, Legends</h2>
+          <p>
+            Before the curtains fully collapse and the confetti cannon develops legal
+            issues, gratitude must be thrown around like glitter in a wind tunnel.
+            This project became real because people showed up, helped, created, acted,
+            filmed, supported, watched, and tolerated an unreasonable amount of cinematic nonsense.
+          </p>
+
+          <div class="grid-4">
+            <div class="thank egg">To the cast: thank you for bringing this chaos to life and somehow making it look intentional.</div>
+            <div class="thank egg">To the crew: thank you for holding the whole goblin-powered machine together long enough for a movie to happen.</div>
+            <div class="thank egg">To the helpers: thank you for every bit of support, problem-solving, patience, and behind-the-scenes wizardry.</div>
+            <div class="thank egg">To the viewers: thank you for watching, laughing, surviving, and helping this final era feel gloriously alive.</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="challenges">
-    <div class="section-inner">
-      <div class="card section-card">
-        <h2 class="section-title">Final Era Challenges</h2>
-        <p>We cannot simply leave normally. That would be suspiciously reasonable.</p>
-        <div class="challenges">
-          <div class="challenge egg"><h3>Watch The Thing</h3><p>Actually watch the movie. Start to finish. Snacks strongly encouraged. Formalwear deeply unnecessary.</p></div>
-          <div class="challenge egg"><h3>Choose The Line</h3><p>Find your favorite quote and repeat it until everyone around you regrets helping launch this project.</p></div>
-          <div class="challenge egg"><h3>Tell A Human</h3><p>Send the movie to exactly one person with no context whatsoever. Let destiny handle the rest.</p></div>
-          <div class="challenge egg"><h3>Wave At The Website</h3><p>Before April 1, 2027, visit one last time and give the page an unnecessarily emotional goodbye.</p></div>
+    <section id="lastwords">
+      <div class="section-inner">
+        <div class="section-card egg">
+          <h2 class="section-title">Last Words From The Balcony</h2>
+          <p>
+            Because no dramatic finale is complete without speeches that sound like they
+            were shouted into a storm, here are the final declarations of this noble
+            and deeply unserious cinematic era.
+          </p>
+
+          <div class="grid-2">
+            <div class="quote egg">"The movie exists. The mission is complete. The weird little beast has officially walked into history wearing a cape."</div>
+            <div class="quote egg">"This site has stopped being a countdown bunker and has become a final monument to a project that absolutely should not have been this dramatic, yet wonderfully was."</div>
+            <div class="quote egg">"If you are here, you are witnessing the last chapter. Wave respectfully as the ship sails into the sunset, explodes into confetti, and somehow lands on a red carpet."</div>
+            <div class="quote egg">"Remember this always: the end of a project can still be loud, ridiculous, grateful, and weirdly triumphant."</div>
+          </div>
+
+          <div class="grid-3">
+            <div class="mini egg">
+              <h3>Final Task One</h3>
+              <p>Watch the movie like a scholar uncovering an ancient and deeply suspicious artifact.</p>
+            </div>
+            <div class="mini egg">
+              <h3>Final Task Two</h3>
+              <p>Tell one person this website is entering its final form, then disappear into the mist before follow-up questions occur.</p>
+            </div>
+            <div class="mini egg">
+              <h3>Final Task Three</h3>
+              <p>Return before April 1, 2027 and enjoy the goodbye while the lights are still on.</p>
+            </div>
+          </div>
+
+          <p class="note">
+            Translation for normal people: yes, this is the end; yes, the movie is embedded above;
+            yes, the shutdown date is real; yes, the site is being dramatic on purpose.
+          </p>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
 
-<footer>
-  <div class="footer-inner">
-    <strong>The Adventures of Gaylord</strong><br>
-    The movie is public. The final era is underway.<br>
-    The adventure and this website conclude April 1, 2027.<br><br>
-    Thanks for the chaos. Thanks for the memories. Please exit through the dramatically rotating gift shop.
+  <footer class="footer">
+    <div class="footer-inner egg">
+      <strong>The Adventures of Gaylord - Final Curtain</strong>
+      <p>
+        The movie is live. The goodbye is official. The website shuts down on
+        April 1, 2027, and <strong>The Adventures of Gaylord</strong> ceases
+        with one last theatrical flourish.
+      </p>
+      <p>Please remain dramatic.</p>
+    </div>
+  </footer>
+
+  <div class="pop" id="pop">
+    <div class="pop-card">
+      <h2 id="pt">Final Alert</h2>
+      <p id="px">The curtain is lowering with a level of emotional commitment that experts are still studying.</p>
+      <button class="popbtn" id="pc">Return To The Drama</button>
+    </div>
   </div>
-</footer>
 
-<div class="pop" id="pop">
-  <div class="pop-card">
-    <h2 id="pt">Final Era Emergency</h2>
-    <p id="px">The movie is public and the final countdown has begun.</p>
-    <button class="popbtn" id="pc">Return To The Adventure</button>
-  </div>
-</div>
+  <script>
+    const targetDate = new Date('2027-04-01T00:00:00');
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
 
-<script>
-const pop=document.getElementById('pop');
-const pt=document.getElementById('pt');
-const px=document.getElementById('px');
-const pc=document.getElementById('pc');
-const messages=[
-  ['The Movie Is Public','No password. No secret handshake. No clipboard. Just press play and face destiny.'],
-  ['The Final Era Has Begun','April 1, 2027 is the last day. The tiny office farewell cake has been emotionally pre-ordered.'],
-  ['Goodbye Protocol Activated','Please wave dramatically at your screen. The website cannot see you, but the gesture matters.'],
-  ['Cinema Has Occurred','The footage became a movie, the movie became public, and somehow civilization continues.'],
-  ['Final Countdown Warning','Time is moving forward despite repeated requests from production to stop doing that.'],
-  ['No Sequel Detected','We checked behind the couch, under the editing desk, and inside the suspicious briefcase. Nothing.'],
-  ['Siren Status','Still spinning. Still glowing. Still wildly underqualified for whatever job it was given.'],
-  ['One Last Bow','The adventure is ending, but first it intends to take an unreasonable amount of time bowing.']
-];
-function showPopup(){
-  const m=messages[Math.floor(Math.random()*messages.length)];
-  pt.textContent=m[0];
-  px.textContent=m[1];
-  pop.classList.add('show');
-}
-document.querySelectorAll('.egg').forEach(el=>el.addEventListener('click',showPopup));
-pc.addEventListener('click',()=>pop.classList.remove('show'));
-pop.addEventListener('click',e=>{if(e.target===pop)pop.classList.remove('show')});
+    function pad(v){
+      return String(v).padStart(2,'0');
+    }
 
-const shutdown=new Date('2027-04-01T00:00:00-05:00').getTime();
-const daysEl=document.getElementById('days');
-const hoursEl=document.getElementById('hours');
-const minutesEl=document.getElementById('minutes');
-const secondsEl=document.getElementById('seconds');
-const countdownNote=document.getElementById('countdownNote');
-function updateCountdown(){
-  const distance=shutdown-Date.now();
-  if(distance<=0){
-    daysEl.textContent='0';
-    hoursEl.textContent='00';
-    minutesEl.textContent='00';
-    secondsEl.textContent='00';
-    countdownNote.textContent='The final date has arrived. The adventure has reached its last frame.';
-    return;
-  }
-  const day=86400000;
-  const hour=3600000;
-  const minute=60000;
-  daysEl.textContent=Math.floor(distance/day);
-  hoursEl.textContent=String(Math.floor((distance%day)/hour)).padStart(2,'0');
-  minutesEl.textContent=String(Math.floor((distance%hour)/minute)).padStart(2,'0');
-  secondsEl.textContent=String(Math.floor((distance%minute)/1000)).padStart(2,'0');
-  countdownNote.textContent='Until April 1, 2027: one final stretch of glorious, unnecessary website drama.';
-}
-updateCountdown();
-setInterval(updateCountdown,1000);
-</script>
+    function updateCountdown(){
+      const now = new Date();
+      let diff = targetDate - now;
+      if(diff < 0) diff = 0;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      daysEl.textContent = String(days).padStart(3, '0');
+      hoursEl.textContent = pad(hours);
+      minutesEl.textContent = pad(minutes);
+      secondsEl.textContent = pad(seconds);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const pop = document.getElementById('pop');
+    const pt = document.getElementById('pt');
+    const px = document.getElementById('px');
+    const pc = document.getElementById('pc');
+
+    const messages = [
+      ['No Sequel Detected', 'Scans confirm there is no secret second phase hiding in a trench coat behind the curtains.'],
+      ['Goodbye Protocol Activated', 'The site has accepted its fate and is now bowing repeatedly to an imaginary crowd.'],
+      ['Final Countdown Warning', 'April 1, 2027 approaches with all the grace of a flaming chandelier descending in slow motion.'],
+      ['Last Bow Registered', 'The project has completed its final pose and would like a completely unreasonable amount of applause.'],
+      ['Cinematic Exit Confirmed', 'The Adventures of Gaylord is preparing to leave the stage through smoke, thunder, and deeply unnecessary lighting.'],
+      ['Dramatic Conditions Intensifying', 'The emotional weather system around this website has escalated into a full theatrical storm.'],
+      ['Victory Lap In Progress', 'The movie exists, the goodbye is official, and the site is currently sprinting one final lap around the stadium of nonsense.']
+    ];
+
+    function showPopup(){
+      const m = messages[Math.floor(Math.random() * messages.length)];
+      pt.textContent = m[0];
+      px.textContent = m[1];
+      pop.classList.add('show');
+    }
+
+    document.querySelectorAll('.egg').forEach(el => {
+      el.addEventListener('click', showPopup);
+    });
+
+    pc.addEventListener('click', () => pop.classList.remove('show'));
+    pop.addEventListener('click', e => {
+      if(e.target === pop) pop.classList.remove('show');
+    });
+  </script>
 </body>
 </html>
